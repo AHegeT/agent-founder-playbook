@@ -12,8 +12,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 group">
-            <Bot className="w-7 h-7 text-primary" />
-            <span className="font-bold text-lg text-foreground">
+            <Bot className="w-8 h-8 text-primary transition-transform group-hover:scale-110" />
+            <span className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Agents & Founders
             </span>
           </Link>
@@ -36,7 +36,7 @@ const Navbar = () => {
               Playbooks
             </Link>
             <Link to="/apply">
-              <Button className="bg-primary hover:bg-primary/90">
+              <Button className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">
                 Apply to Join
               </Button>
             </Link>
@@ -44,7 +44,7 @@ const Navbar = () => {
           
           <div className="md:hidden">
             <Link to="/apply">
-              <Button size="sm" className="bg-primary hover:bg-primary/90">
+              <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:opacity-90">
                 Apply
               </Button>
             </Link>
