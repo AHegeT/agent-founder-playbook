@@ -70,14 +70,11 @@ const Apply = () => {
     <div className="min-h-screen pt-24 pb-20">
       {/* Header */}
       <section className="px-4 mb-12">
-        <div className="container mx-auto text-center space-y-4 max-w-3xl">
-          <h1 className="text-5xl font-bold">
-            Apply to{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Join
-            </span>
+        <div className="container mx-auto max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Apply to <span className="text-primary">Join</span>
           </h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-lg text-muted-foreground">
             We keep our community small and focused. Tell us about yourself and what you're building.
           </p>
         </div>
@@ -185,7 +182,7 @@ const Apply = () => {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 h-12 text-lg"
+                  className="w-full bg-primary hover:bg-primary/90 h-12"
                 >
                   Submit Application
                 </Button>

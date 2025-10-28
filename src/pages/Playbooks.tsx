@@ -72,14 +72,11 @@ const Playbooks = () => {
     <div className="min-h-screen pt-24 pb-20">
       {/* Header */}
       <section className="px-4 mb-16">
-        <div className="container mx-auto text-center space-y-6 max-w-3xl">
-          <h1 className="text-5xl font-bold">
-            Real Playbooks.{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Real Results.
-            </span>
+        <div className="container mx-auto max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            Real Playbooks. <span className="text-primary">Real Results.</span>
           </h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-lg text-muted-foreground">
             Step-by-step workflows from founders who've automated their way to growth. 
             Full playbooks are available to community members only.
           </p>
@@ -91,43 +88,43 @@ const Playbooks = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {playbooks.map((playbook) => (
-              <Card key={playbook.id} className="relative overflow-hidden group hover:shadow-xl transition-all border-2 hover:border-primary">
+              <Card key={playbook.id} className="relative overflow-hidden group hover:border-primary/50 transition-colors border border-border">
                 <div className="absolute top-4 right-4">
-                  <Badge variant={playbook.locked ? "secondary" : "default"}>
+                  <Badge variant={playbook.locked ? "secondary" : "default"} className="text-xs">
                     {playbook.locked ? <><Lock className="w-3 h-3 mr-1" /> Members Only</> : "Free"}
                   </Badge>
                 </div>
                 
                 <CardHeader>
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+                  <div className={`w-10 h-10 rounded flex items-center justify-center mb-3 ${
                     playbook.category === "Marketing" ? "bg-accent/10" : "bg-primary/10"
                   }`}>
-                    <playbook.icon className={`w-6 h-6 ${
+                    <playbook.icon className={`w-5 h-5 ${
                       playbook.category === "Marketing" ? "text-accent" : "text-primary"
                     }`} />
                   </div>
-                  <Badge variant="outline" className="w-fit mb-2">
+                  <Badge variant="outline" className="w-fit mb-2 text-xs">
                     {playbook.category}
                   </Badge>
-                  <CardTitle className="text-xl leading-tight">{playbook.title}</CardTitle>
+                  <CardTitle className="text-lg leading-tight">{playbook.title}</CardTitle>
                   <CardDescription className="text-sm text-muted-foreground">
                     by {playbook.author}
                   </CardDescription>
                 </CardHeader>
                 
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     {playbook.summary}
                   </p>
-                  <div className="pt-4 border-t border-border">
-                    <p className="text-sm font-semibold text-primary">
+                  <div className="pt-3 border-t border-border">
+                    <p className="text-xs font-semibold text-primary">
                       {playbook.metrics}
                     </p>
                   </div>
                   {playbook.locked && (
                     <div className="pt-2">
                       <Link to="/apply">
-                        <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                        <Button variant="outline" className="w-full text-sm h-9">
                           Unlock Full Playbook
                         </Button>
                       </Link>
@@ -143,15 +140,15 @@ const Playbooks = () => {
       {/* CTA Section */}
       <section className="px-4 mt-20">
         <div className="container mx-auto">
-          <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20">
-            <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-3xl font-bold">Want access to all playbooks?</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <Card className="bg-muted/30 border border-border">
+            <CardContent className="p-8 md:p-12 text-center space-y-4">
+              <h2 className="text-2xl md:text-3xl font-bold">Want access to all playbooks?</h2>
+              <p className="text-base text-muted-foreground max-w-2xl mx-auto">
                 Join our private community and get instant access to every playbook, 
                 plus new case studies added weekly from real founders.
               </p>
               <Link to="/apply">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-lg h-14 px-8">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 h-12 px-8">
                   Apply to Join the Community
                 </Button>
               </Link>
