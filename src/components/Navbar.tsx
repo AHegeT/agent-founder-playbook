@@ -1,0 +1,58 @@
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Bot } from "lucide-react";
+
+const Navbar = () => {
+  const location = useLocation();
+  
+  const isActive = (path: string) => location.pathname === path;
+  
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <Link to="/" className="flex items-center gap-2 group">
+            <Bot className="w-8 h-8 text-primary transition-transform group-hover:scale-110" />
+            <span className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Agents & Founders
+            </span>
+          </Link>
+          
+          <div className="hidden md:flex items-center gap-8">
+            <Link 
+              to="/" 
+              className={`font-medium transition-colors hover:text-primary ${
+                isActive("/") ? "text-primary" : "text-muted-foreground"
+              }`}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/playbooks" 
+              className={`font-medium transition-colors hover:text-primary ${
+                isActive("/playbooks") ? "text-primary" : "text-muted-foreground"
+              }`}
+            >
+              Playbooks
+            </Link>
+            <Link to="/apply">
+              <Button className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">
+                Apply to Join
+              </Button>
+            </Link>
+          </div>
+          
+          <div className="md:hidden">
+            <Link to="/apply">
+              <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:opacity-90">
+                Apply
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
