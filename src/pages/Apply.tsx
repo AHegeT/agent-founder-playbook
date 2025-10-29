@@ -72,10 +72,7 @@ const Apply = () => {
       <section className="px-4 mb-12">
         <div className="container mx-auto text-center space-y-4 max-w-3xl">
           <h1 className="text-5xl font-bold">
-            Apply to{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Join
-            </span>
+            Apply Now
           </h1>
           <p className="text-xl text-muted-foreground">
             We keep our community small and focused. Tell us about yourself and what you're building.

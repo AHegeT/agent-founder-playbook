@@ -139,7 +139,7 @@ const Masterminds = () => {
           </p>
           <Link to="/apply">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
-              Apply to Join
+              Apply Now
               <Lightbulb className="ml-2 w-5 h-5" />
             </Button>
           </Link>

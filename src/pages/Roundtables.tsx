@@ -114,11 +114,11 @@ const Roundtables = () => {
         <div className="container mx-auto text-center space-y-8 max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-bold">Join the Next Roundtable</h2>
           <p className="text-xl opacity-90">
-            Members get access to all roundtables. Apply to join the community.
+            Members get access to all roundtables. Apply now to join the community.
           </p>
           <Link to="/apply">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
-              Apply to Join
+              Apply Now
               <Calendar className="ml-2 w-5 h-5" />
             </Button>
           </Link>

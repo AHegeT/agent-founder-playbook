@@ -17,7 +17,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 20 6% 10%;
 
-    --primary: 217 91% 54%;
+    --primary: 27 96% 61%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96%;
@@ -26,24 +26,24 @@ All colors MUST be HSL.
     --muted: 210 20% 90%;
     --muted-foreground: 20 6% 40%;
 
-    --accent: 27 96% 61%;
-    --accent-foreground: 20 6% 10%;
+    --accent: 0 84% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 210 20% 88%;
     --input: 210 20% 88%;
-    --ring: 217 91% 54%;
+    --ring: 27 96% 61%;
 
     --radius: 0.75rem;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(217 91% 54%) 0%, hsl(27 96% 61%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(27 96% 61%) 0%, hsl(0 84% 60%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(210 40% 98%) 0%, hsl(210 40% 96%) 100%);
 
     /* Shadows */
-    --shadow-glow: 0 0 40px hsl(217 91% 54% / 0.2);
+    --shadow-glow: 0 0 40px hsl(27 96% 61% / 0.2);
     --shadow-card: 0 4px 24px hsl(20 6% 10% / 0.08);
     
     /* Animations */
@@ -76,7 +76,7 @@ All colors MUST be HSL.
     --popover: 20 6% 15%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 54%;
+    --primary: 27 96% 61%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 20 6% 20%;
@@ -85,17 +85,17 @@ All colors MUST be HSL.
     --muted: 20 6% 20%;
     --muted-foreground: 210 20% 65%;
 
-    --accent: 27 96% 61%;
-    --accent-foreground: 20 6% 10%;
+    --accent: 0 84% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 20 6% 20%;
     --input: 20 6% 20%;
-    --ring: 217 91% 54%;
+    --ring: 27 96% 61%;
 
-    --shadow-glow: 0 0 40px hsl(217 91% 54% / 0.3);
+    --shadow-glow: 0 0 40px hsl(27 96% 61% / 0.3);
     --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.4);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;

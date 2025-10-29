@@ -152,7 +152,7 @@ const Playbooks = () => {
               </p>
               <Link to="/apply">
                 <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-lg h-14 px-8">
-                  Apply to Join the Community
+                  Apply Now to Join the Community
                 </Button>
               </Link>
             </CardContent>

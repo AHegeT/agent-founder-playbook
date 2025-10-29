@@ -86,7 +86,7 @@ const Navbar = () => {
             </Link>
             <Link to="/apply">
               <Button className="bg-primary hover:bg-primary/90 transition-opacity">
-                Apply to Join
+                Apply Now
               </Button>
             </Link>
           </div>

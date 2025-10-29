@@ -13,7 +13,7 @@ import {
   Database,
   MessageSquare
 } from "lucide-react";
-import agentKMascot from "@/assets/agent-k-mascot.png";
+import agentKMascot from "@/assets/coffee_square.png";
 import "./Home.css";
 
 const Home = () => {
@@ -31,20 +31,20 @@ const Home = () => {
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Agents and Founders is the private community for entrepreneurs leveraging AI to scale their business.
+                Agents and Founders is a private community for entrepreneurs leveraging AI to scale their business.
               </p>
               <Link to="/apply">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 transition-all hover:scale-105 text-lg h-14 px-8">
-                  Apply to Join
+                  Apply Now
                   <Zap className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
             </div>
             <div className="flex justify-center">
-              <img 
-                src={agentKMascot} 
-                alt="Agent K Mascot" 
-                className="w-full max-w-md animate-float"
+              <img
+                src={agentKMascot}
+                alt="Agent K Mascot"
+                className="w-full max-w-md rounded-2xl"
               />
             </div>
           </div>
@@ -161,9 +161,9 @@ const Home = () => {
             <div className="space-y-4">
               <h2 className="text-3xl font-bold">Meet Agent K</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Agent K is your community's friendly AI strategist. He curates the best tools and tactics 
-                so you don't have to. Think of him as your personal guide through the chaos of AI automation—
-                always one step ahead, never overwhelming.
+                Agent K is the community's friendly AI strategist. He curates the best tools and tactics 
+                so you don't have to. Think of him as the community guide through the chaos of building a business with AI automation—
+                always one step ahead.
               </p>
             </div>
           </div>
