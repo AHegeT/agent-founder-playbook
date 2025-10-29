@@ -1,19 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { 
-  Zap, 
-  Users, 
-  BookOpen, 
-  Lightbulb, 
-  TrendingUp, 
-  Building2, 
+import {
+  Zap,
+  Users,
+  BookOpen,
+  Lightbulb,
+  TrendingUp,
+  Building2,
   Rocket,
-  Bot,
   Database,
   MessageSquare
 } from "lucide-react";
 import agentKMascot from "@/assets/coffee_square.png";
+import agentKFace from "@/assets/face.png";
 import "./Home.css";
 
 const Home = () => {
@@ -119,7 +119,7 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  A private Slack/Discord with 100+ vetted founders sharing wins, fails, and everything in between.
+                  A private Whatsapp group with vetted founders sharing wins, fails, and everything in between.
                 </p>
               </CardContent>
             </Card>
@@ -155,13 +155,17 @@ const Home = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <div className="flex flex-col md:flex-row items-center gap-12 bg-card p-8 rounded-2xl shadow-xl">
-            <div className="w-48 h-48 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
-              <Bot className="w-24 h-24 text-primary" />
+            <div className="w-48 h-48 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img
+                src={agentKFace}
+                alt="Agent K"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="space-y-4">
               <h2 className="text-3xl font-bold">Meet Agent K</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Agent K is the community's friendly AI strategist. He curates the best tools and tactics 
+                Agent K is the community's friendly AI strategist. He curates the best tools and tactics
                 so you don't have to. Think of him as the community guide through the chaos of building a business with AI automation—
                 always one step ahead.
               </p>
@@ -175,7 +179,7 @@ const Home = () => {
         <div className="container mx-auto text-center space-y-8">
           <h2 className="text-4xl md:text-5xl font-bold">Ready to automate your growth?</h2>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Join 100+ founders who are already building the future with AI.
+            Join 80+ founders who are already building the future with AI.
           </p>
           <Link to="/apply">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
