@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Lock, TrendingUp, Users, Zap, Target, Mail, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
+import comingSoon from "@/assets/coming_soon.png";
 
 const playbooks = [
   {
@@ -86,75 +87,31 @@ const Playbooks = () => {
         </div>
       </section>
 
-      {/* Playbooks Grid */}
+      {/* Coming Soon Section */}
       <section className="px-4">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {playbooks.map((playbook) => (
-              <Card key={playbook.id} className="relative overflow-hidden group hover:shadow-xl transition-all border-2 hover:border-primary">
-                <div className="absolute top-4 right-4">
-                  <Badge variant={playbook.locked ? "secondary" : "default"}>
-                    {playbook.locked ? <><Lock className="w-3 h-3 mr-1" /> Members Only</> : "Free"}
-                  </Badge>
-                </div>
-                
-                <CardHeader>
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
-                    playbook.category === "Marketing" ? "bg-accent/10" : "bg-primary/10"
-                  }`}>
-                    <playbook.icon className={`w-6 h-6 ${
-                      playbook.category === "Marketing" ? "text-accent" : "text-primary"
-                    }`} />
+        <div className="container mx-auto max-w-4xl">
+          <Card className="bg-card/50 backdrop-blur border-2 border-primary/20">
+            <CardContent className="p-12 md:p-16">
+              <div className="flex flex-col items-center text-center space-y-8">
+                <img
+                  src={comingSoon}
+                  alt="Coming Soon"
+                  className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-2xl shadow-lg"
+                />
+                <div className="space-y-4">
+                  <div className="inline-block px-8 py-3 bg-primary/10 rounded-full">
+                    <span className="text-primary font-bold text-2xl">Coming Soon</span>
                   </div>
-                  <Badge variant="outline" className="w-fit mb-2">
-                    {playbook.category}
-                  </Badge>
-                  <CardTitle className="text-xl leading-tight">{playbook.title}</CardTitle>
-                  <CardDescription className="text-sm text-muted-foreground">
-                    by {playbook.author}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">
-                    {playbook.summary}
+                  <h2 className="text-3xl md:text-4xl font-bold">
+                    Playbooks are brewing...
+                  </h2>
+                  <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                    We're curating incredible workflows and step-by-step guides from founders
+                    who've automated their way to growth. Check back soon for real playbooks
+                    with real results!
                   </p>
-                  <div className="pt-4 border-t border-border">
-                    <p className="text-sm font-semibold text-primary">
-                      {playbook.metrics}
-                    </p>
-                  </div>
-                  {playbook.locked && (
-                    <div className="pt-2">
-                      <Link to="/apply">
-                        <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                          Unlock Full Playbook
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="px-4 mt-20">
-        <div className="container mx-auto">
-          <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20">
-            <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-3xl font-bold">Want access to all playbooks?</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Join our private community and get instant access to every playbook, 
-                plus new case studies added weekly from real founders.
-              </p>
-              <Link to="/apply">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-lg h-14 px-8">
-                  Apply Now to Join the Community
-                </Button>
-              </Link>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>

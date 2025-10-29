@@ -24,7 +24,7 @@ const IntelligentNetworking = () => {
         <div className="container mx-auto max-w-5xl space-y-12">
           {/* Topic Breakdown */}
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold">Session Overview</h2>
+            <h2 id="session-overview" className="text-4xl font-bold">Session Overview</h2>
             <Card className="bg-card/50 backdrop-blur">
               <CardHeader>
                 <CardTitle className="text-2xl">What We'll Discuss</CardTitle>
@@ -57,9 +57,29 @@ const IntelligentNetworking = () => {
             </Card>
           </div>
 
+          {/* Session Playbook */}
+          <div className="space-y-6">
+            <h2 id="session-playbook" className="text-4xl font-bold">Session Playbook</h2>
+            <Card className="bg-card/50 backdrop-blur">
+              <CardHeader>
+                <CardTitle className="text-2xl">Networking Strategies & Resources</CardTitle>
+              </CardHeader>
+              <CardContent className="py-12">
+                <div className="text-center space-y-4">
+                  <div className="inline-block px-6 py-2 bg-primary/10 rounded-full">
+                    <span className="text-primary font-semibold text-lg">Coming Soon</span>
+                  </div>
+                  <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                    A comprehensive guide with tools, templates, and actionable strategies from our intelligent networking sessions.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* RSVP Section */}
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold">Join the Session</h2>
+            <h2 id="join-the-session" className="text-4xl font-bold">Join the Session</h2>
             <Card className="border-2 border-primary">
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -96,7 +116,7 @@ const IntelligentNetworking = () => {
 
           {/* Slido Interactive Session */}
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold">Join the Conversation</h2>
+            <h2 id="join-the-conversation" className="text-4xl font-bold">Join the Conversation</h2>
             <Card className="border-2 border-accent">
               <CardHeader>
                 <CardTitle>Live Q&A and Polls via Slido</CardTitle>
@@ -138,7 +158,7 @@ const IntelligentNetworking = () => {
 
           {/* Connect with the Community */}
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold">Connect with the Community</h2>
+            <h2 id="connect-with-the-community" className="text-4xl font-bold">Connect with the Community</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Join Our Founder Community</CardTitle>
