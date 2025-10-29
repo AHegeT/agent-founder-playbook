@@ -36,22 +36,22 @@ const Navbar = () => {
               Home
             </Link>
 
-            <NavigationMenu>
+            <NavigationMenu delayDuration={0}>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="font-medium transition-colors hover:text-primary text-muted-foreground">
+                  <NavigationMenuTrigger className="font-medium transition-colors hover:text-primary text-muted-foreground bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent h-auto px-0 py-0 text-base">
                     Events
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[200px] gap-3 p-4">
+                    <ul className="grid w-[240px] gap-4 p-4">
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
                             to="/events/roundtables"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
-                            <div className="text-sm font-medium leading-none">Roundtables</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            <div className="text-base font-semibold leading-none">Roundtables</div>
+                            <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
                               Small group discussions
                             </p>
                           </Link>
@@ -61,10 +61,10 @@ const Navbar = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to="/events/masterminds"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
-                            <div className="text-sm font-medium leading-none">Masterminds</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            <div className="text-base font-semibold leading-none">Masterminds</div>
+                            <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
                               Monthly deep-dives
                             </p>
                           </Link>
