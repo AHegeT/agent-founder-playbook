@@ -27,13 +27,13 @@ const IntelligentNetworking = () => {
             <h2 className="text-4xl font-bold">Session Overview</h2>
             <Card className="bg-card/50 backdrop-blur">
               <CardHeader>
-                <CardTitle className="text-2xl">What We'll Cover</CardTitle>
+                <CardTitle className="text-2xl">What We'll Discuss</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground leading-relaxed">
                   In this roundtable session, we'll explore how to leverage AI tools and strategies to build
                   more meaningful professional connections. We'll discuss practical approaches to networking
-                  that go beyond traditional methods.
+                  that go beyond traditional methods, like:
                 </p>
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start gap-2">
@@ -116,7 +116,7 @@ const IntelligentNetworking = () => {
           </div>
 
           {/* Pre-Event Poll */}
-          <div className="space-y-6">
+          {/* <div className="space-y-6">
             <h2 className="text-4xl font-bold">Pre-Event Poll</h2>
             <Card>
               <CardHeader>
@@ -134,7 +134,7 @@ const IntelligentNetworking = () => {
                 </a>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
 
           {/* Connect with the Community */}
           <div className="space-y-6">

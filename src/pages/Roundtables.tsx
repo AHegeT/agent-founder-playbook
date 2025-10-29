@@ -152,33 +152,29 @@ const Roundtables = () => {
           {/* Topics */}
           <div className="space-y-12">
             <h2 className="text-4xl font-bold text-center">Recent Topics</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="border-2 hover:border-primary transition-all hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle>AI for Customer Support</CardTitle>
-                  <CardDescription>
-                    Building automated support workflows that actually help customers
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+            <div className="grid md:grid-cols-2 gap-8">
+              <a href="https://www.meetup.com/agents-and-founders/events/310471914/" target="_blank" rel="noopener noreferrer" className="block">
+                <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
+                  <CardHeader>
+                    <CardTitle>Building a business while keeping up with AI</CardTitle>
+                    <CardDescription>
+                      What tools have the most impact? How do choose which new tools to adopt?
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </a>
 
-              <Card className="border-2 hover:border-primary transition-all hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle>Content Automation</CardTitle>
-                  <CardDescription>
-                    Scaling your content creation without losing your brand voice
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <a href="https://www.meetup.com/agents-and-founders/events/310947495" target="_blank" rel="noopener noreferrer" className="block">
+                <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
+                  <CardHeader>
+                    <CardTitle>Your AI-Powered Customer Engine</CardTitle>
+                    <CardDescription>
+                      What does your customer acquisition funnel actually look like, and which parts are ripe for AI-powered automation?
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </a>
 
-              <Card className="border-2 hover:border-primary transition-all hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle>Sales Automation</CardTitle>
-                  <CardDescription>
-                    Using AI to qualify leads and accelerate your sales cycle
-                  </CardDescription>
-                </CardHeader>
-              </Card>
             </div>
           </div>
         </div>
