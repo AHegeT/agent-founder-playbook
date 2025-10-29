@@ -95,7 +95,7 @@ const IntelligentNetworking = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <Users className="w-4 h-4" />
-                        <span>Limited to 4-6 founders</span>
+                        <span>Limited to 20-30 founders</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4" />
