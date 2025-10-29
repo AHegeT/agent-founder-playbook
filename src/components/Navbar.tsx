@@ -1,5 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import { Bot } from "lucide-react";
 
 const Navbar = () => {
@@ -19,16 +27,57 @@ const Navbar = () => {
           </Link>
           
           <div className="hidden md:flex items-center gap-8">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className={`font-medium transition-colors hover:text-primary ${
                 isActive("/") ? "text-primary" : "text-muted-foreground"
               }`}
             >
               Home
             </Link>
-            <Link 
-              to="/playbooks" 
+
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="font-medium transition-colors hover:text-primary text-muted-foreground">
+                    Events
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[200px] gap-3 p-4">
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/events/roundtables"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">Roundtables</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              Small group discussions
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/events/masterminds"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">Masterminds</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              Monthly deep-dives
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+
+            <Link
+              to="/playbooks"
               className={`font-medium transition-colors hover:text-primary ${
                 isActive("/playbooks") ? "text-primary" : "text-muted-foreground"
               }`}
@@ -36,7 +85,7 @@ const Navbar = () => {
               Playbooks
             </Link>
             <Link to="/apply">
-              <Button className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">
+              <Button className="bg-primary hover:bg-primary/90 transition-opacity">
                 Apply to Join
               </Button>
             </Link>
@@ -44,7 +93,7 @@ const Navbar = () => {
           
           <div className="md:hidden">
             <Link to="/apply">
-              <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:opacity-90">
+              <Button size="sm" className="bg-primary hover:bg-primary/90">
                 Apply
               </Button>
             </Link>

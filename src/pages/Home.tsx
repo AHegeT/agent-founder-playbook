@@ -14,6 +14,7 @@ import {
   MessageSquare
 } from "lucide-react";
 import agentKMascot from "@/assets/agent-k-mascot.png";
+import "./Home.css";
 
 const Home = () => {
   return (
@@ -33,7 +34,7 @@ const Home = () => {
                 Agents and Founders is the private community for entrepreneurs leveraging AI to scale their business.
               </p>
               <Link to="/apply">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-all hover:scale-105 text-lg h-14 px-8">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 transition-all hover:scale-105 text-lg h-14 px-8">
                   Apply to Join
                   <Zap className="ml-2 w-5 h-5" />
                 </Button>
@@ -170,7 +171,7 @@ const Home = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-primary to-accent text-white">
+      <section className="py-20 px-4 bg-primary text-white">
         <div className="container mx-auto text-center space-y-8">
           <h2 className="text-4xl md:text-5xl font-bold">Ready to automate your growth?</h2>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
@@ -184,21 +185,6 @@ const Home = () => {
           </Link>
         </div>
       </section>
-
-      <style>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };
