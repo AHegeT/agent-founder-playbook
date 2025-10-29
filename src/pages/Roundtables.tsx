@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar, Users, Video, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Users, Pizza, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import altataImage from "@/assets/altata.png";
 import sirocoImage from "@/assets/siroco.png";
@@ -28,7 +28,7 @@ const Roundtables = () => {
             <div className="space-y-6">
               <h2 className="text-4xl font-bold">What are Roundtables?</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Roundtables are small-group video sessions where 4-6 founders come together
+                Roundtables are sessions where groups of 4-6 founders come together
                 to discuss specific challenges, share what's working, and provide actionable
                 feedback to each other.
               </p>
@@ -55,20 +55,20 @@ const Roundtables = () => {
                     <Users className="w-6 h-6 text-accent" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">4-6 Founders</h3>
+                    <h3 className="font-semibold mb-1">20-30 Founders, in Groups of 4-6</h3>
                     <p className="text-sm text-muted-foreground">
-                      Small groups for meaningful conversation
+                      Focused groups for meaningful conversation
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Video className="w-6 h-6 text-primary" />
+                    <Pizza className="w-6 h-6 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Live & Interactive</h3>
                     <p className="text-sm text-muted-foreground">
-                      Real-time collaboration via video
+                      In-person collaboration
                     </p>
                   </div>
                 </div>
