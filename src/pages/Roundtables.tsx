@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar, Users, Video, Clock } from "lucide-react";
+import { Calendar, Users, Video, Clock, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import altataImage from "@/assets/altata.png";
 import sirocoImage from "@/assets/siroco.png";
 
@@ -73,6 +74,41 @@ const Roundtables = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Current Session */}
+          <div className="space-y-8 mb-20">
+            <h2 className="text-4xl font-bold text-center">Current Session</h2>
+            <Card className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="space-y-2">
+                    <CardTitle className="text-3xl">Intelligent Networking</CardTitle>
+                    <CardDescription className="text-lg">
+                      Master the art of building meaningful connections using AI-powered strategies
+                    </CardDescription>
+                  </div>
+                  <Link to="/events/roundtables/intelligent-networking">
+                    <Button className="bg-primary hover:bg-primary/90">
+                      View Details
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>Next session: Oct 29th, 2025</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>90 minutes</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Locations */}
