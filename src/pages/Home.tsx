@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 import {
   Zap,
   Users,
-  BookOpen,
   Lightbulb,
   TrendingUp,
   Building2,
@@ -33,12 +31,12 @@ const Home = () => {
               <p className="text-xl text-muted-foreground leading-relaxed">
                 Agents and Founders is a private community for entrepreneurs leveraging AI to scale their business.
               </p>
-              <Link to="/apply">
+              <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 transition-all hover:scale-105 text-lg h-14 px-8">
                   Apply Now
                   <Zap className="ml-2 w-5 h-5" />
                 </Button>
-              </Link>
+              </a>
             </div>
             <div className="flex justify-center">
               <img
@@ -181,12 +179,12 @@ const Home = () => {
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
             Join 80+ founders who are already building the future with AI.
           </p>
-          <Link to="/apply">
+          <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
               Apply Now
               <MessageSquare className="ml-2 w-5 h-5" />
             </Button>
-          </Link>
+          </a>
         </div>
       </section>
     </div>

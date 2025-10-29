@@ -84,19 +84,19 @@ const Navbar = () => {
             >
               Playbooks
             </Link>
-            <Link to="/apply">
+            <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
               <Button className="bg-primary hover:bg-primary/90 transition-opacity">
                 Apply Now
               </Button>
-            </Link>
+            </a>
           </div>
-          
+
           <div className="md:hidden">
-            <Link to="/apply">
+            <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
               <Button size="sm" className="bg-primary hover:bg-primary/90">
                 Apply
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

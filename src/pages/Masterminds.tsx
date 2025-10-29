@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 import { Lightbulb, Users, TrendingUp, Target, MessageSquare } from "lucide-react";
 
 const Masterminds = () => {
@@ -137,12 +136,12 @@ const Masterminds = () => {
           <p className="text-xl opacity-90">
             Get exclusive access to member case studies and collective founder wisdom.
           </p>
-          <Link to="/apply">
+          <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
               Apply Now
               <Lightbulb className="ml-2 w-5 h-5" />
             </Button>
-          </Link>
+          </a>
         </div>
       </section>
     </div>

@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 import { Calendar, Users, Video, Clock } from "lucide-react";
 
 const Roundtables = () => {
@@ -26,7 +25,7 @@ const Roundtables = () => {
             <div className="space-y-6">
               <h2 className="text-4xl font-bold">What are Roundtables?</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Roundtables are small-group video sessions where 6-8 founders come together
+                Roundtables are small-group video sessions where 4-6 founders come together
                 to discuss specific challenges, share what's working, and provide actionable
                 feedback to each other.
               </p>
@@ -116,12 +115,12 @@ const Roundtables = () => {
           <p className="text-xl opacity-90">
             Members get access to all roundtables. Apply now to join the community.
           </p>
-          <Link to="/apply">
+          <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
               Apply Now
               <Calendar className="ml-2 w-5 h-5" />
             </Button>
-          </Link>
+          </a>
         </div>
       </section>
     </div>
