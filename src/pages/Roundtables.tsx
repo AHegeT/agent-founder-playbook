@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Users, Video, Clock } from "lucide-react";
+import altataImage from "@/assets/altata.png";
+import sirocoImage from "@/assets/siroco.png";
 
 const Roundtables = () => {
   return (
@@ -52,7 +54,7 @@ const Roundtables = () => {
                     <Users className="w-6 h-6 text-accent" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">6-8 Founders</h3>
+                    <h3 className="font-semibold mb-1">4-6 Founders</h3>
                     <p className="text-sm text-muted-foreground">
                       Small groups for meaningful conversation
                     </p>
@@ -70,6 +72,44 @@ const Roundtables = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Locations */}
+          <div className="space-y-12 mb-20">
+            <h2 className="text-4xl font-bold text-center">Locations</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="border-2 hover:border-primary transition-all hover:shadow-lg overflow-hidden">
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={altataImage}
+                    alt="Altata Café"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle>Altata Café</CardTitle>
+                  <CardDescription className="text-base">
+                    A sophisticated café in a hotel with an intimate vibe, perfect for deep conversations in Mexico City
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-2 hover:border-primary transition-all hover:shadow-lg overflow-hidden">
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={sirocoImage}
+                    alt="Siroco Pizza"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle>Siroco Pizza</CardTitle>
+                  <CardDescription className="text-base">
+                    A delicious pizzeria owned by one of our members - the perfect place to share ideas and come together
+                  </CardDescription>
+                </CardHeader>
+              </Card>
             </div>
           </div>
 
