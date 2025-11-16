@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Playbooks from "./pages/Playbooks";
+import PlaybookDetail from "./pages/PlaybookDetail";
 import Apply from "./pages/Apply";
 import Roundtables from "./pages/Roundtables";
 import Masterminds from "./pages/Masterminds";
@@ -24,6 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/playbooks" element={<Playbooks />} />
+          <Route path="/playbooks/:slug" element={<PlaybookDetail />} />
           <Route path="/events/roundtables" element={<Roundtables />} />
           <Route path="/events/roundtables/intelligent-networking" element={<IntelligentNetworking />} />
           <Route path="/events/masterminds" element={<Masterminds />} />

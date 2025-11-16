@@ -1,77 +1,32 @@
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Lock, TrendingUp, Users, Zap, Target, Mail, MessageSquare } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import comingSoon from "@/assets/coming_soon.png";
 import { useTranslation } from "@/hooks/useTranslation";
+import { getPublishedPlaybooks, type Playbook } from "@/lib/playbooks";
+import { getIconByName } from "@/lib/playbookIcons";
 
 const Playbooks = () => {
   const { t } = useTranslation();
+  const [playbooks, setPlaybooks] = useState<Playbook[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Playbook examples data
-  const playbooks = [
-    {
-      id: 1,
-      title: t.playbooks.examples.clientOnboarding.title,
-      category: t.playbooks.examples.clientOnboarding.category,
-      author: t.playbooks.examples.clientOnboarding.author,
-      summary: t.playbooks.examples.clientOnboarding.summary,
-      metrics: t.playbooks.examples.clientOnboarding.metrics,
-      icon: Users,
-      locked: true
-    },
-    {
-      id: 2,
-      title: t.playbooks.examples.contentOutput.title,
-      category: t.playbooks.examples.contentOutput.category,
-      author: t.playbooks.examples.contentOutput.author,
-      summary: t.playbooks.examples.contentOutput.summary,
-      metrics: t.playbooks.examples.contentOutput.metrics,
-      icon: TrendingUp,
-      locked: true
-    },
-    {
-      id: 3,
-      title: t.playbooks.examples.leadGen.title,
-      category: t.playbooks.examples.leadGen.category,
-      author: t.playbooks.examples.leadGen.author,
-      summary: t.playbooks.examples.leadGen.summary,
-      metrics: t.playbooks.examples.leadGen.metrics,
-      icon: Target,
-      locked: true
-    },
-    {
-      id: 4,
-      title: t.playbooks.examples.customerSupport.title,
-      category: t.playbooks.examples.customerSupport.category,
-      author: t.playbooks.examples.customerSupport.author,
-      summary: t.playbooks.examples.customerSupport.summary,
-      metrics: t.playbooks.examples.customerSupport.metrics,
-      icon: MessageSquare,
-      locked: true
-    },
-    {
-      id: 5,
-      title: t.playbooks.examples.emailSequences.title,
-      category: t.playbooks.examples.emailSequences.category,
-      author: t.playbooks.examples.emailSequences.author,
-      summary: t.playbooks.examples.emailSequences.summary,
-      metrics: t.playbooks.examples.emailSequences.metrics,
-      icon: Mail,
-      locked: true
-    },
-    {
-      id: 6,
-      title: t.playbooks.examples.competitiveIntelligence.title,
-      category: t.playbooks.examples.competitiveIntelligence.category,
-      author: t.playbooks.examples.competitiveIntelligence.author,
-      summary: t.playbooks.examples.competitiveIntelligence.summary,
-      metrics: t.playbooks.examples.competitiveIntelligence.metrics,
-      icon: Zap,
-      locked: true
-    }
-  ];
+  useEffect(() => {
+    const loadPlaybooks = async () => {
+      try {
+        const publishedPlaybooks = await getPublishedPlaybooks();
+        setPlaybooks(publishedPlaybooks);
+      } catch (error) {
+        console.error('Error loading playbooks:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPlaybooks();
+  }, []);
   return (
     <div className="min-h-screen pt-24 pb-20">
       {/* Header */}
@@ -89,31 +44,81 @@ const Playbooks = () => {
         </div>
       </section>
 
-      {/* Coming Soon Section */}
+      {/* Playbooks Grid */}
       <section className="px-4">
-        <div className="container mx-auto max-w-4xl">
-          <Card className="bg-card/50 backdrop-blur border-2 border-primary/20">
-            <CardContent className="p-12 md:p-16">
-              <div className="flex flex-col items-center text-center space-y-8">
-                <img
-                  src={comingSoon}
-                  alt={t.common.comingSoon}
-                  className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-2xl shadow-lg"
-                />
-                <div className="space-y-4">
-                  <div className="inline-block px-8 py-3 bg-primary/10 rounded-full">
-                    <span className="text-primary font-bold text-2xl">{t.playbooks.comingSoon.badge}</span>
+        <div className="container mx-auto max-w-6xl">
+          {loading ? (
+            <div className="text-center py-20">
+              <p className="text-muted-foreground">Loading playbooks...</p>
+            </div>
+          ) : playbooks.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {playbooks.map((playbook) => {
+                const IconComponent = getIconByName(playbook.icon);
+                return (
+                  <Link
+                    key={playbook.id}
+                    to={`/playbooks/${playbook.slug}`}
+                    className="block group"
+                  >
+                    <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
+                      <CardHeader>
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <IconComponent className="w-6 h-6 text-primary" />
+                          </div>
+                          <Badge variant="secondary">{playbook.category}</Badge>
+                        </div>
+                        <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                          {playbook.title}
+                        </CardTitle>
+                        <CardDescription className="text-sm text-muted-foreground mt-2">
+                          By {playbook.author}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {playbook.summary}
+                        </p>
+                        <div className="pt-4 border-t">
+                          <p className="text-xs font-semibold text-primary">
+                            {playbook.metrics}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-primary font-medium">
+                          Read playbook
+                          <ExternalLink className="w-4 h-4" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <Card className="bg-card/50 backdrop-blur border-2 border-primary/20">
+              <CardContent className="p-12 md:p-16">
+                <div className="flex flex-col items-center text-center space-y-8">
+                  <img
+                    src={comingSoon}
+                    alt={t.common.comingSoon}
+                    className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-2xl shadow-lg"
+                  />
+                  <div className="space-y-4">
+                    <div className="inline-block px-8 py-3 bg-primary/10 rounded-full">
+                      <span className="text-primary font-bold text-2xl">{t.playbooks.comingSoon.badge}</span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold">
+                      {t.playbooks.comingSoon.heading}
+                    </h2>
+                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                      {t.playbooks.comingSoon.description}
+                    </p>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold">
-                    {t.playbooks.comingSoon.heading}
-                  </h2>
-                  <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                    {t.playbooks.comingSoon.description}
-                  </p>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </section>
     </div>

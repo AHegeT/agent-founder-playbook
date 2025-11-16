@@ -39,7 +39,7 @@ const Navbar = () => {
             <NavigationMenu delayDuration={0}>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="font-medium transition-colors hover:text-primary text-muted-foreground bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent h-auto px-0 py-0 text-base">
+                  <NavigationMenuTrigger className="font-medium text-muted-foreground hover:text-primary data-[state=open]:text-primary bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent h-auto px-0 py-0 text-base transition-colors">
                     Events
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
