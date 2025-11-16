@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Calendar, User } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { getPlaybookBySlug, type Playbook } from "@/lib/playbooks";
 import { getIconByName } from "@/lib/playbookIcons";
+import { PlaybookContent } from "@/components/PlaybookContent";
 
 const PlaybookDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -122,10 +121,8 @@ const PlaybookDetail = () => {
       {/* Content */}
       <section className="px-4">
         <div className="container mx-auto max-w-4xl">
-          <article className="prose prose-lg prose-slate dark:prose-invert max-w-none">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {playbook.content}
-            </ReactMarkdown>
+          <article>
+            <PlaybookContent content={playbook.content} />
           </article>
         </div>
       </section>

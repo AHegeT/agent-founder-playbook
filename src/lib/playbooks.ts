@@ -27,8 +27,8 @@ export interface Playbook extends PlaybookMetadata {
  * Dynamically import all markdown files from the playbooks directory
  */
 const playbookModules = import.meta.glob('/src/content/playbooks/*.md', {
-  query: '?raw',
-  import: 'default',
+  eager: false,
+  as: 'raw',
 });
 
 /**
@@ -37,12 +37,20 @@ const playbookModules = import.meta.glob('/src/content/playbooks/*.md', {
 export async function getAllPlaybooks(): Promise<Playbook[]> {
   const playbooks: Playbook[] = [];
 
+  console.log('Playbook modules found:', Object.keys(playbookModules));
+
   for (const path in playbookModules) {
+    // Skip README.md
+    if (path.includes('README.md')) continue;
+
+    console.log('Loading playbook from:', path);
     const rawContent = await playbookModules[path]() as string;
     const { data, content } = matter(rawContent);
 
     // Extract slug from file path
     const slug = path.split('/').pop()?.replace('.md', '') || '';
+
+    console.log('Parsed playbook:', { slug, data });
 
     playbooks.push({
       ...(data as PlaybookMetadata),
@@ -50,6 +58,8 @@ export async function getAllPlaybooks(): Promise<Playbook[]> {
       slug,
     });
   }
+
+  console.log('Total playbooks loaded:', playbooks.length);
 
   // Sort by date (newest first)
   return playbooks.sort((a, b) =>
