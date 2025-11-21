@@ -1,0 +1,289 @@
+{
+    "common": {
+        "applyNow": "Aplica Ahora",
+        "apply": "Aplicar",
+        "comingSoon": "Próximamente",
+        "viewDetails": "Ver Detalles",
+        "learnMore": "Aprende Más"
+    },
+    "navbar": {
+        "brandName": "Agentes y Fundadores",
+        "home": "Inicio",
+        "events": "Eventos",
+        "roundtables": "Mesas Redondas",
+        "roundtablesDescription": "Discusiones en grupos pequeños",
+        "masterminds": "Masterminds",
+        "mastermindsDescription": "Inmersiones profundas mensuales",
+        "playbooks": "Playbooks"
+    },
+    "home": {
+        "hero": {
+            "title": "Deja de Hacerlo Todo.",
+            "titleHighlight": "Empieza a Automatizar.",
+            "subtitle": "Agents and Founders es una comunidad privada para emprendedores que aprovechan la IA para escalar sus negocios."
+        },
+        "whatIsThis": {
+            "heading": "¿Qué es esto?",
+            "description": "Somos {{founders}} actuando como agentes de cambio. Construimos {{agents}} (flujos de trabajo impulsados por IA) para hacer crecer nuestras empresas. Aquí es donde compartimos el manual de juego.",
+            "foundersLabel": "Fundadores",
+            "agentsLabel": "Agentes"
+        },
+        "whoIsThisFor": {
+            "heading": "¿Para quién es esto?",
+            "bootstrappers": {
+                "title": "Para Bootstrappers",
+                "description": "Construye ligero, automatiza inteligentemente y escala sin quemar capital."
+            },
+            "agencyOwners": {
+                "title": "Para Dueños de Agencias",
+                "description": "Ofrece más valor con flujos de trabajo de IA que sorprenden a los clientes y ahorran tiempo."
+            },
+            "productFounders": {
+                "title": "Para Fundadores de Producto",
+                "description": "Envía más rápido automatizando operaciones, marketing y éxito del cliente."
+            }
+        },
+        "whatsInside": {
+            "heading": "¿Qué hay dentro?",
+            "community": {
+                "title": "Comunidad",
+                "description": "Un grupo privado de Whatsapp con fundadores examinados compartiendo victorias, fracasos y todo lo demás."
+            },
+            "playbooks": {
+                "title": "Playbooks",
+                "description": "Una base de datos privada de flujos de trabajo de IA del mundo real para marketing, ventas y operaciones que realmente funcionan."
+            },
+            "masterminds": {
+                "title": "Masterminds",
+                "description": "Inmersiones profundas mensuales donde los miembros comparten sus experimentos ganadores (y perdedores)."
+            }
+        },
+        "meetYourGuide": {
+            "heading": "Conoce al Agente K",
+            "description": "El Agente K es el estratega de IA amigable de la comunidad. Él cura las mejores herramientas y tácticas para que tú no tengas que hacerlo. Piénsalo como el guía de la comunidad a través del caos de construir un negocio con automatización de IA, siempre un paso adelante."
+        },
+        "finalCta": {
+            "heading": "¿Listo para automatizar tu crecimiento?",
+            "subtitle": "Únete a más de 80 fundadores que ya están construyendo el futuro con IA."
+        }
+    },
+    "roundtables": {
+        "hero": {
+            "title": "Mesas Redondas",
+            "subtitle": "Únete a discusiones íntimas con otros fundadores para abordar desafíos reales, compartir ideas y acelerar tu viaje de automatización de IA."
+        },
+        "whatAreRoundtables": {
+            "heading": "¿Qué son las Mesas Redondas?",
+            "description1": "Las mesas redondas son sesiones donde grupos de 4-6 fundadores se reúnen para discutir desafíos específicos, compartir lo que funciona y proporcionar retroalimentación procesable entre ellos.",
+            "description2": "A diferencia del networking tradicional, estas son sesiones de trabajo enfocadas diseñadas para ayudarte a resolver problemas reales e implementar soluciones de IA más rápido.",
+            "sessionDuration": {
+                "title": "Sesiones de 90 Minutos",
+                "description": "Tiempo enfocado para profundizar en temas específicos"
+            },
+            "groupSize": {
+                "title": "20-30 Fundadores, en Grupos de 4-6",
+                "description": "Grupos enfocados para conversaciones significativas"
+            },
+            "liveInteractive": {
+                "title": "En Vivo e Interactivo",
+                "description": "Colaboración en persona"
+            }
+        },
+        "currentSession": {
+            "heading": "Sesión Actual",
+            "intelligentNetworking": {
+                "title": "Networking Inteligente",
+                "description": "Domina el arte de construir conexiones significativas usando estrategias impulsadas por IA",
+                "nextSession": "Próxima sesión: 29 de Octubre, 2025",
+                "duration": "90 minutos"
+            }
+        },
+        "locations": {
+            "heading": "Ubicaciones",
+            "altata": {
+                "name": "Café Altata",
+                "description": "Un café sofisticado en un hotel con un ambiente íntimo, perfecto para conversaciones profundas en la Ciudad de México"
+            },
+            "siroco": {
+                "name": "Siroco Pizza",
+                "description": "Una deliciosa pizzería propiedad de uno de nuestros miembros: el lugar perfecto para compartir ideas y reunirse"
+            }
+        },
+        "recentTopics": {
+            "heading": "Temas Recientes",
+            "aiTools": {
+                "title": "Construyendo un negocio mientras te mantienes al día con la IA",
+                "description": "¿Qué herramientas tienen más impacto? ¿Cómo elegir qué nuevas herramientas adoptar?"
+            },
+            "customerEngine": {
+                "title": "Tu Motor de Clientes Impulsado por IA",
+                "description": "¿Cómo se ve realmente tu embudo de adquisición de clientes y qué partes están listas para la automatización impulsada por IA?"
+            }
+        },
+        "cta": {
+            "heading": "Únete a la Próxima Mesa Redonda",
+            "subtitle": "Los miembros obtienen acceso a todas las mesas redondas. Aplica ahora para unirte a la comunidad."
+        }
+    },
+    "masterminds": {
+        "hero": {
+            "title": "Masterminds",
+            "subtitle": "Sesiones mensuales de inmersión profunda donde los miembros comparten sus experimentos ganadores (y perdedores) con la automatización de IA."
+        },
+        "whatAreMasterminds": {
+            "heading": "¿Qué son los Masterminds?",
+            "description1": "Los Masterminds son reuniones mensuales donde los miembros presentan estudios de caso de sus proyectos de automatización de IA. Estas no son charlas pulidas, son desgloses crudos y honestos de lo que funcionó, lo que no, y lo que aprendieron en el camino.",
+            "description2": "Cada sesión presenta 2-3 presentaciones de miembros seguidas de discusión grupal, preguntas y respuestas, y resolución colaborativa de problemas.",
+            "realExperiments": {
+                "title": "Experimentos Reales",
+                "description": "Aprende de implementaciones reales, no de teoría"
+            },
+            "resultsMetrics": {
+                "title": "Resultados y Métricas",
+                "description": "Mira el ROI real y el impacto de los flujos de trabajo de IA"
+            },
+            "communityLearning": {
+                "title": "Aprendizaje Comunitario",
+                "description": "Sabiduría colectiva de diversas experiencias de fundadores"
+            }
+        },
+        "whatYoullLearn": {
+            "heading": "Lo Que Aprenderás",
+            "implementation": {
+                "title": "Estrategias de Implementación",
+                "description": "Desgloses paso a paso de cómo los miembros construyeron y desplegaron sus flujos de trabajo de IA"
+            },
+            "roi": {
+                "title": "ROI e Impacto Comercial",
+                "description": "Números reales sobre tiempo ahorrado, ingresos generados y costos reducidos"
+            },
+            "failures": {
+                "title": "Lecciones de los Fracasos",
+                "description": "Discusiones honestas sobre lo que no funcionó y por qué, para que puedas evitar los mismos errores"
+            },
+            "tools": {
+                "title": "Recomendaciones de Herramientas",
+                "description": "Recomendaciones examinadas para plataformas de IA, herramientas de automatización e integraciones"
+            }
+        },
+        "cta": {
+            "heading": "Únete al Próximo Mastermind",
+            "subtitle": "Obtén acceso exclusivo a estudios de caso de miembros y sabiduría colectiva de fundadores."
+        }
+    },
+    "playbooks": {
+        "hero": {
+            "title": "Playbooks Reales.",
+            "titleHighlight": "Resultados Reales.",
+            "subtitle": "Flujos de trabajo paso a paso de fundadores que han automatizado su camino hacia el crecimiento. Los playbooks completos están disponibles solo para miembros de la comunidad."
+        },
+        "comingSoon": {
+            "badge": "Próximamente",
+            "heading": "Los Playbooks se están preparando...",
+            "description": "Estamos curando flujos de trabajo increíbles y guías paso a paso de fundadores que han automatizado su camino hacia el crecimiento. ¡Vuelve pronto para ver playbooks reales con resultados reales!"
+        },
+        "examples": {
+            "clientOnboarding": {
+                "title": "Cómo Sarah automatizó toda su incorporación de clientes",
+                "category": "Operaciones",
+                "author": "Sarah Chen",
+                "summary": "Desde el cliente potencial hasta el contrato firmado en 24 horas, completamente automatizado. Aprende la pila de 5 herramientas que maneja propuestas, contratos y reuniones de inicio.",
+                "metrics": "Incorporación 3x más rápida, 90% menos trabajo manual",
+                "icon": "Users"
+            },
+            "contentOutput": {
+                "title": "La pila de 3 herramientas que triplicó la producción de contenido",
+                "category": "Marketing",
+                "author": "Marcus Rivera",
+                "summary": "De 2 publicaciones de blog a la semana a 6, sin contratar a un solo escritor. Descubre la tubería de contenido de IA que mantiene la calidad a escala.",
+                "metrics": "Aumento del 300% en contenido, mismo tamaño de equipo",
+                "icon": "TrendingUp"
+            },
+            "leadGen": {
+                "title": "Automatizando Ventas: El agente de generación de leads de un fundador",
+                "category": "Ventas",
+                "author": "Jessica Park",
+                "summary": "Construyó un agente de IA que encuentra, califica y contacta a más de 100 prospectos diariamente. El plan completo desde la configuración hasta la primera venta.",
+                "metrics": "250+ leads calificados/mes, 15% tasa de conversión",
+                "icon": "Target"
+            },
+            "customerSupport": {
+                "title": "Automatización de soporte al cliente sin código",
+                "category": "Soporte",
+                "author": "Alex Thompson",
+                "summary": "Maneja el 80% de las consultas de los clientes automáticamente con una configuración simple de chatbot. No se necesitan desarrolladores, funciona con tus herramientas existentes.",
+                "metrics": "80% respuestas automatizadas, configuración de 2 horas",
+                "icon": "MessageSquare"
+            },
+            "emailSequences": {
+                "title": "Secuencias de correo electrónico que se escriben solas",
+                "category": "Marketing",
+                "author": "David Kumar",
+                "summary": "Campañas de correo electrónico personalizadas generadas por IA, optimizadas en tiempo real. Mira los prompts exactos y flujos de trabajo que triplicaron las tasas de apertura.",
+                "metrics": "3x tasas de apertura, 5x tasas de respuesta",
+                "icon": "Mail"
+            },
+            "competitiveIntelligence": {
+                "title": "Inteligencia competitiva impulsada por IA",
+                "category": "Estrategia",
+                "author": "Emily Watson",
+                "summary": "Rastrea competidores, analiza tendencias y obtén información semanal, todo automatizado. El sistema de monitoreo que te mantiene por delante del mercado.",
+                "metrics": "Actualizaciones diarias de competidores, 10 horas ahorradas/semana",
+                "icon": "Zap"
+            }
+        }
+    },
+    "intelligentNetworking": {
+        "hero": {
+            "title": "Networking Inteligente",
+            "subtitle": "Domina el arte de construir conexiones significativas usando estrategias impulsadas por IA"
+        },
+        "sessionOverview": {
+            "heading": "Resumen de la Sesión",
+            "cardTitle": "Lo Que Discutiremos",
+            "description": "En esta sesión de mesa redonda, exploraremos cómo aprovechar las herramientas y estrategias de IA para construir conexiones profesionales más significativas. Discutiremos enfoques prácticos para el networking que van más allá de los métodos tradicionales, como:",
+            "topics": {
+                "research": "Usando IA para investigar y personalizar el alcance",
+                "followups": "Automatizando seguimientos mientras se mantiene la autenticidad",
+                "relationships": "Construyendo sistemas para nutrir relaciones a largo plazo",
+                "tools": "Herramientas y flujos de trabajo que realmente funcionan"
+            }
+        },
+        "sessionPlaybook": {
+            "heading": "Playbook de la Sesión",
+            "cardTitle": "Estrategias y Recursos de Networking",
+            "comingSoon": "Próximamente",
+            "description": "Una guía completa con herramientas, plantillas y estrategias accionables de nuestras sesiones de networking inteligente."
+        },
+        "joinSession": {
+            "heading": "Únete a la Sesión",
+            "cardTitle": "RSVP en Meetup",
+            "description": "Reserva tu lugar para esta sesión de mesa redonda",
+            "date": "Fecha: 29 de Octubre, 2025",
+            "attendance": "Limitado a 20-30 fundadores",
+            "location": "Ubicación: Siroco Pizza",
+            "button": "RSVP en Meetup"
+        },
+        "liveQA": {
+            "heading": "Únete a la Conversación",
+            "cardTitle": "Preguntas y Respuestas en Vivo y Encuestas vía Slido",
+            "description": "Únete a nuestra sesión interactiva para hacer preguntas, participar en encuestas e interactuar con otros fundadores en tiempo real.",
+            "button": "Únete a la Sesión de Slido"
+        },
+        "community": {
+            "heading": "Conecta con la Comunidad",
+            "cardTitle": "Únete a Nuestra Comunidad de Fundadores",
+            "description": "Mantente conectado con otros fundadores, comparte ideas y continúa la conversación más allá de las sesiones de mesa redonda.",
+            "button": "Conecta con la Comunidad"
+        }
+    },
+    "notFound": {
+        "title": "Página No Encontrada",
+        "description": "La página que estás buscando no existe.",
+        "button": "Ir a Inicio"
+    },
+    "index": {
+        "title": "Bienvenido a Tu App en Blanco",
+        "subtitle": "¡Empieza a construir tu increíble proyecto aquí!"
+    }
+}

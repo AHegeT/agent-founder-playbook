@@ -13,8 +13,10 @@ import {
 import agentKMascot from "@/assets/coffee_square.png";
 import agentKFace from "@/assets/face.png";
 import "./Home.css";
+import { useTranslation, Trans } from "react-i18next";
 
 const Home = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -23,17 +25,17 @@ const Home = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Stop Doing It All.{" "}
+                {t('home.hero.title')}{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Start Automating.
+                  {t('home.hero.titleHighlight')}
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Agents and Founders is a private community for entrepreneurs leveraging AI to scale their business.
+                {t('home.hero.subtitle')}
               </p>
               <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 transition-all hover:scale-105 text-lg h-14 px-8">
-                  Apply Now
+                  {t('common.applyNow')}
                   <Zap className="ml-2 w-5 h-5" />
                 </Button>
               </a>
@@ -52,11 +54,19 @@ const Home = () => {
       {/* What is this Section */}
       <section className="py-20 px-4 bg-card">
         <div className="container mx-auto max-w-4xl text-center space-y-6">
-          <h2 className="text-4xl font-bold">What is this?</h2>
+          <h2 className="text-4xl font-bold">{t('home.whatIsThis.heading')}</h2>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            We're <span className="text-primary font-semibold">Founders</span> acting as agents of change. 
-            We build <span className="text-accent font-semibold">Agents</span> (AI-powered workflows) to grow our companies. 
-            This is where we share the playbook.
+            <Trans
+              i18nKey="home.whatIsThis.description"
+              values={{
+                founders: t('home.whatIsThis.foundersLabel'),
+                agents: t('home.whatIsThis.agentsLabel')
+              }}
+              components={{
+                founders: <span className="text-primary font-semibold" />,
+                agents: <span className="text-accent font-semibold" />
+              }}
+            />
           </p>
         </div>
       </section>
@@ -64,16 +74,16 @@ const Home = () => {
       {/* Who is this for Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">Who is this for?</h2>
+          <h2 className="text-4xl font-bold text-center mb-16">{t('home.whoIsThisFor.heading')}</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="border-2 hover:border-primary transition-all hover:shadow-lg">
               <CardHeader>
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <Rocket className="w-6 h-6 text-primary" />
                 </div>
-                <CardTitle>For Bootstrappers</CardTitle>
+                <CardTitle>{t('home.whoIsThisFor.bootstrappers.title')}</CardTitle>
                 <CardDescription className="text-base">
-                  Build lean, automate smart, and scale without burning capital.
+                  {t('home.whoIsThisFor.bootstrappers.description')}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -83,9 +93,9 @@ const Home = () => {
                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                   <Building2 className="w-6 h-6 text-accent" />
                 </div>
-                <CardTitle>For Agency Owners</CardTitle>
+                <CardTitle>{t('home.whoIsThisFor.agencyOwners.title')}</CardTitle>
                 <CardDescription className="text-base">
-                  Deliver more value with AI workflows that wow clients and save time.
+                  {t('home.whoIsThisFor.agencyOwners.description')}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -95,9 +105,9 @@ const Home = () => {
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <TrendingUp className="w-6 h-6 text-primary" />
                 </div>
-                <CardTitle>For Product Founders</CardTitle>
+                <CardTitle>{t('home.whoIsThisFor.productFounders.title')}</CardTitle>
                 <CardDescription className="text-base">
-                  Ship faster by automating ops, marketing, and customer success.
+                  {t('home.whoIsThisFor.productFounders.description')}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -108,16 +118,16 @@ const Home = () => {
       {/* What's Inside Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-primary/5 to-accent/5">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">What's Inside?</h2>
+          <h2 className="text-4xl font-bold text-center mb-16">{t('home.whatsInside.heading')}</h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Card className="bg-card/50 backdrop-blur">
               <CardHeader>
                 <Users className="w-12 h-12 text-primary mb-4" />
-                <CardTitle className="text-2xl">Community</CardTitle>
+                <CardTitle className="text-2xl">{t('home.whatsInside.community.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  A private Whatsapp group with vetted founders sharing wins, fails, and everything in between.
+                  {t('home.whatsInside.community.description')}
                 </p>
               </CardContent>
             </Card>
@@ -125,11 +135,11 @@ const Home = () => {
             <Card className="bg-card/50 backdrop-blur">
               <CardHeader>
                 <Database className="w-12 h-12 text-accent mb-4" />
-                <CardTitle className="text-2xl">Playbooks</CardTitle>
+                <CardTitle className="text-2xl">{t('home.whatsInside.playbooks.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  A private database of real-world AI workflows for marketing, sales, and ops that actually work.
+                  {t('home.whatsInside.playbooks.description')}
                 </p>
               </CardContent>
             </Card>
@@ -137,11 +147,11 @@ const Home = () => {
             <Card className="bg-card/50 backdrop-blur">
               <CardHeader>
                 <Lightbulb className="w-12 h-12 text-primary mb-4" />
-                <CardTitle className="text-2xl">Masterminds</CardTitle>
+                <CardTitle className="text-2xl">{t('home.whatsInside.masterminds.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Monthly deep-dives where members share their winning (and losing) experiments.
+                  {t('home.whatsInside.masterminds.description')}
                 </p>
               </CardContent>
             </Card>
@@ -161,11 +171,9 @@ const Home = () => {
               />
             </div>
             <div className="space-y-4">
-              <h2 className="text-3xl font-bold">Meet Agent K</h2>
+              <h2 className="text-3xl font-bold">{t('home.meetYourGuide.heading')}</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Agent K is the community's friendly AI strategist. He curates the best tools and tactics
-                so you don't have to. Think of him as the community guide through the chaos of building a business with AI automation—
-                always one step ahead.
+                {t('home.meetYourGuide.description')}
               </p>
             </div>
           </div>
@@ -175,13 +183,13 @@ const Home = () => {
       {/* Final CTA Section */}
       <section className="py-20 px-4 bg-primary text-white">
         <div className="container mx-auto text-center space-y-8">
-          <h2 className="text-4xl md:text-5xl font-bold">Ready to automate your growth?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold">{t('home.finalCta.heading')}</h2>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Join 80+ founders who are already building the future with AI.
+            {t('home.finalCta.subtitle')}
           </p>
           <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
-              Apply Now
+              {t('common.applyNow')}
               <MessageSquare className="ml-2 w-5 h-5" />
             </Button>
           </a>

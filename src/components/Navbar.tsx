@@ -9,12 +9,15 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Bot } from "lucide-react";
+import LanguageToggle from "./LanguageToggle";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const location = useLocation();
-  
+
   const isActive = (path: string) => location.pathname === path;
-  
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
@@ -22,25 +25,25 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-2 group">
             <Bot className="w-8 h-8 text-primary transition-transform group-hover:scale-110" />
             <span className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Agents & Founders
+              {t('navbar.brandName')}
             </span>
           </Link>
-          
+
           <div className="hidden md:flex items-center gap-8">
             <Link
               to="/"
-              className={`font-medium transition-colors hover:text-primary ${
-                isActive("/") ? "text-primary" : "text-muted-foreground"
-              }`}
+              className={`font-medium transition-colors hover:text-primary ${isActive("/") ? "text-primary" : "text-muted-foreground"
+                }`}
             >
-              Home
+
+              {t('navbar.home')}
             </Link>
 
             <NavigationMenu delayDuration={0}>
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="font-medium text-muted-foreground hover:text-primary data-[state=open]:text-primary bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent h-auto px-0 py-0 text-base transition-colors">
-                    Events
+                    {t('navbar.events')}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[240px] gap-4 p-4">
@@ -50,9 +53,9 @@ const Navbar = () => {
                             to="/events/roundtables"
                             className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
-                            <div className="text-base font-semibold leading-none">Roundtables</div>
+                            <div className="text-base font-semibold leading-none">{t('navbar.roundtables')}</div>
                             <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                              Small group discussions
+                              {t('navbar.roundtablesDescription')}
                             </p>
                           </Link>
                         </NavigationMenuLink>
@@ -63,9 +66,9 @@ const Navbar = () => {
                             to="/events/masterminds"
                             className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
-                            <div className="text-base font-semibold leading-none">Masterminds</div>
+                            <div className="text-base font-semibold leading-none">{t('navbar.masterminds')}</div>
                             <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                              Monthly deep-dives
+                              {t('navbar.mastermindsDescription')}
                             </p>
                           </Link>
                         </NavigationMenuLink>
@@ -78,15 +81,16 @@ const Navbar = () => {
 
             <Link
               to="/playbooks"
-              className={`font-medium transition-colors hover:text-primary ${
-                isActive("/playbooks") ? "text-primary" : "text-muted-foreground"
-              }`}
+              className={`font-medium transition-colors hover:text-primary ${isActive("/playbooks") ? "text-primary" : "text-muted-foreground"
+                }`}
             >
-              Playbooks
+
+              {t('navbar.playbooks')}
             </Link>
+            <LanguageToggle />
             <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
               <Button className="bg-primary hover:bg-primary/90 transition-opacity">
-                Apply Now
+                {t('common.applyNow')}
               </Button>
             </a>
           </div>
@@ -94,13 +98,17 @@ const Navbar = () => {
           <div className="md:hidden">
             <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
               <Button size="sm" className="bg-primary hover:bg-primary/90">
-                Apply
+                {t('common.apply')}
               </Button>
             </a>
-          </div>
+            <div className="ml-2">
+              <LanguageToggle />
+            </div>
+          </a>
         </div>
       </div>
-    </nav>
+    </div>
+    </nav >
   );
 };
 

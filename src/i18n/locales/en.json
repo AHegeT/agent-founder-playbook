@@ -1,0 +1,289 @@
+{
+    "common": {
+        "applyNow": "Apply Now",
+        "apply": "Apply",
+        "comingSoon": "Coming Soon",
+        "viewDetails": "View Details",
+        "learnMore": "Learn More"
+    },
+    "navbar": {
+        "brandName": "Agents & Founders",
+        "home": "Home",
+        "events": "Events",
+        "roundtables": "Roundtables",
+        "roundtablesDescription": "Small group discussions",
+        "masterminds": "Masterminds",
+        "mastermindsDescription": "Monthly deep-dives",
+        "playbooks": "Playbooks"
+    },
+    "home": {
+        "hero": {
+            "title": "Stop Doing It All.",
+            "titleHighlight": "Start Automating.",
+            "subtitle": "Agents and Founders is a private community for entrepreneurs leveraging AI to scale their business."
+        },
+        "whatIsThis": {
+            "heading": "What is this?",
+            "description": "We're {{founders}} acting as agents of change. We build {{agents}} (AI-powered workflows) to grow our companies. This is where we share the playbook.",
+            "foundersLabel": "Founders",
+            "agentsLabel": "Agents"
+        },
+        "whoIsThisFor": {
+            "heading": "Who is this for?",
+            "bootstrappers": {
+                "title": "For Bootstrappers",
+                "description": "Build lean, automate smart, and scale without burning capital."
+            },
+            "agencyOwners": {
+                "title": "For Agency Owners",
+                "description": "Deliver more value with AI workflows that wow clients and save time."
+            },
+            "productFounders": {
+                "title": "For Product Founders",
+                "description": "Ship faster by automating ops, marketing, and customer success."
+            }
+        },
+        "whatsInside": {
+            "heading": "What's Inside?",
+            "community": {
+                "title": "Community",
+                "description": "A private Whatsapp group with vetted founders sharing wins, fails, and everything in between."
+            },
+            "playbooks": {
+                "title": "Playbooks",
+                "description": "A private database of real-world AI workflows for marketing, sales, and ops that actually work."
+            },
+            "masterminds": {
+                "title": "Masterminds",
+                "description": "Monthly deep-dives where members share their winning (and losing) experiments."
+            }
+        },
+        "meetYourGuide": {
+            "heading": "Meet Agent K",
+            "description": "Agent K is the community's friendly AI strategist. He curates the best tools and tactics so you don't have to. Think of him as the community guide through the chaos of building a business with AI automation—always one step ahead."
+        },
+        "finalCta": {
+            "heading": "Ready to automate your growth?",
+            "subtitle": "Join 80+ founders who are already building the future with AI."
+        }
+    },
+    "roundtables": {
+        "hero": {
+            "title": "Roundtables",
+            "subtitle": "Join intimate discussions with fellow founders to tackle real challenges, share insights, and accelerate your AI automation journey."
+        },
+        "whatAreRoundtables": {
+            "heading": "What are Roundtables?",
+            "description1": "Roundtables are sessions where groups of 4-6 founders come together to discuss specific challenges, share what's working, and provide actionable feedback to each other.",
+            "description2": "Unlike traditional networking, these are focused working sessions designed to help you solve real problems and implement AI solutions faster.",
+            "sessionDuration": {
+                "title": "90-Minute Sessions",
+                "description": "Focused time to dive deep into specific topics"
+            },
+            "groupSize": {
+                "title": "20-30 Founders, in Groups of 4-6",
+                "description": "Focused groups for meaningful conversation"
+            },
+            "liveInteractive": {
+                "title": "Live & Interactive",
+                "description": "In-person collaboration"
+            }
+        },
+        "currentSession": {
+            "heading": "Current Session",
+            "intelligentNetworking": {
+                "title": "Intelligent Networking",
+                "description": "Master the art of building meaningful connections using AI-powered strategies",
+                "nextSession": "Next session: Oct 29th, 2025",
+                "duration": "90 minutes"
+            }
+        },
+        "locations": {
+            "heading": "Locations",
+            "altata": {
+                "name": "Altata Café",
+                "description": "A sophisticated café in a hotel with an intimate vibe, perfect for deep conversations in Mexico City"
+            },
+            "siroco": {
+                "name": "Siroco Pizza",
+                "description": "A delicious pizzeria owned by one of our members - the perfect place to share ideas and come together"
+            }
+        },
+        "recentTopics": {
+            "heading": "Recent Topics",
+            "aiTools": {
+                "title": "Building a business while keeping up with AI",
+                "description": "What tools have the most impact? How do choose which new tools to adopt?"
+            },
+            "customerEngine": {
+                "title": "Your AI-Powered Customer Engine",
+                "description": "What does your customer acquisition funnel actually look like, and which parts are ripe for AI-powered automation?"
+            }
+        },
+        "cta": {
+            "heading": "Join the Next Roundtable",
+            "subtitle": "Members get access to all roundtables. Apply now to join the community."
+        }
+    },
+    "masterminds": {
+        "hero": {
+            "title": "Masterminds",
+            "subtitle": "Monthly deep-dive sessions where members share their winning (and losing) experiments with AI automation."
+        },
+        "whatAreMasterminds": {
+            "heading": "What are Masterminds?",
+            "description1": "Masterminds are monthly gatherings where members present case studies of their AI automation projects. These aren't polished talks—they're raw, honest breakdowns of what worked, what didn't, and what they learned along the way.",
+            "description2": "Each session features 2-3 member presentations followed by group discussion, Q&A, and collaborative problem-solving.",
+            "realExperiments": {
+                "title": "Real Experiments",
+                "description": "Learn from actual implementations, not theory"
+            },
+            "resultsMetrics": {
+                "title": "Results & Metrics",
+                "description": "See the actual ROI and impact of AI workflows"
+            },
+            "communityLearning": {
+                "title": "Community Learning",
+                "description": "Collective wisdom from diverse founder experiences"
+            }
+        },
+        "whatYoullLearn": {
+            "heading": "What You'll Learn",
+            "implementation": {
+                "title": "Implementation Strategies",
+                "description": "Step-by-step breakdowns of how members built and deployed their AI workflows"
+            },
+            "roi": {
+                "title": "ROI & Business Impact",
+                "description": "Real numbers on time saved, revenue generated, and costs reduced"
+            },
+            "failures": {
+                "title": "Lessons from Failures",
+                "description": "Honest discussions about what didn't work and why, so you can avoid the same mistakes"
+            },
+            "tools": {
+                "title": "Tool Recommendations",
+                "description": "Vetted recommendations for AI platforms, automation tools, and integrations"
+            }
+        },
+        "cta": {
+            "heading": "Join the Next Mastermind",
+            "subtitle": "Get exclusive access to member case studies and collective founder wisdom."
+        }
+    },
+    "playbooks": {
+        "hero": {
+            "title": "Real Playbooks.",
+            "titleHighlight": "Real Results.",
+            "subtitle": "Step-by-step workflows from founders who've automated their way to growth. Full playbooks are available to community members only."
+        },
+        "comingSoon": {
+            "badge": "Coming Soon",
+            "heading": "Playbooks are brewing...",
+            "description": "We're curating incredible workflows and step-by-step guides from founders who've automated their way to growth. Check back soon for real playbooks with real results!"
+        },
+        "examples": {
+            "clientOnboarding": {
+                "title": "How Sarah automated her entire client onboarding",
+                "category": "Operations",
+                "author": "Sarah Chen",
+                "summary": "From lead to signed contract in 24 hours—completely automated. Learn the 5-tool stack that handles proposals, contracts, and kick-off meetings.",
+                "metrics": "3x faster onboarding, 90% less manual work",
+                "icon": "Users"
+            },
+            "contentOutput": {
+                "title": "The 3-tool stack that tripled content output",
+                "category": "Marketing",
+                "author": "Marcus Rivera",
+                "summary": "From 2 blog posts a week to 6—without hiring a single writer. Discover the AI content pipeline that maintains quality at scale.",
+                "metrics": "300% increase in content, same team size",
+                "icon": "TrendingUp"
+            },
+            "leadGen": {
+                "title": "Automating Sales: A founder's lead-gen agent",
+                "category": "Sales",
+                "author": "Jessica Park",
+                "summary": "Built an AI agent that finds, qualifies, and reaches out to 100+ prospects daily. The complete blueprint from setup to first sale.",
+                "metrics": "250+ qualified leads/month, 15% conversion rate",
+                "icon": "Target"
+            },
+            "customerSupport": {
+                "title": "Zero-code customer support automation",
+                "category": "Support",
+                "author": "Alex Thompson",
+                "summary": "Handle 80% of customer inquiries automatically with a simple chatbot setup. No developers needed, works with your existing tools.",
+                "metrics": "80% automated responses, 2-hour setup",
+                "icon": "MessageSquare"
+            },
+            "emailSequences": {
+                "title": "Email sequences that write themselves",
+                "category": "Marketing",
+                "author": "David Kumar",
+                "summary": "Personalized email campaigns generated by AI, optimized in real-time. See the exact prompts and workflows that 3x'ed open rates.",
+                "metrics": "3x open rates, 5x reply rates",
+                "icon": "Mail"
+            },
+            "competitiveIntelligence": {
+                "title": "AI-powered competitive intelligence",
+                "category": "Strategy",
+                "author": "Emily Watson",
+                "summary": "Track competitors, analyze trends, and get weekly insights—all automated. The monitoring system that keeps you ahead of the market.",
+                "metrics": "Daily competitor updates, 10 hours saved/week",
+                "icon": "Zap"
+            }
+        }
+    },
+    "intelligentNetworking": {
+        "hero": {
+            "title": "Intelligent Networking",
+            "subtitle": "Master the art of building meaningful connections using AI-powered strategies"
+        },
+        "sessionOverview": {
+            "heading": "Session Overview",
+            "cardTitle": "What We'll Discuss",
+            "description": "In this roundtable session, we'll explore how to leverage AI tools and strategies to build more meaningful professional connections. We'll discuss practical approaches to networking that go beyond traditional methods, like:",
+            "topics": {
+                "research": "Using AI to research and personalize outreach",
+                "followups": "Automating follow-ups while maintaining authenticity",
+                "relationships": "Building systems to nurture long-term relationships",
+                "tools": "Tools and workflows that actually work"
+            }
+        },
+        "sessionPlaybook": {
+            "heading": "Session Playbook",
+            "cardTitle": "Networking Strategies & Resources",
+            "comingSoon": "Coming Soon",
+            "description": "A comprehensive guide with tools, templates, and actionable strategies from our intelligent networking sessions."
+        },
+        "joinSession": {
+            "heading": "Join the Session",
+            "cardTitle": "RSVP on Meetup",
+            "description": "Reserve your spot for this roundtable session",
+            "date": "Date: Oct 29th, 2025",
+            "attendance": "Limited to 20-30 founders",
+            "location": "Location: Siroco Pizza",
+            "button": "RSVP on Meetup"
+        },
+        "liveQA": {
+            "heading": "Join the Conversation",
+            "cardTitle": "Live Q&A and Polls via Slido",
+            "description": "Join our interactive session to ask questions, participate in polls, and engage with other founders in real-time.",
+            "button": "Join Slido Session"
+        },
+        "community": {
+            "heading": "Connect with the Community",
+            "cardTitle": "Join Our Founder Community",
+            "description": "Stay connected with fellow founders, share insights, and continue the conversation beyond the roundtable sessions.",
+            "button": "Connect with the Community"
+        }
+    },
+    "notFound": {
+        "title": "Page Not Found",
+        "description": "The page you're looking for doesn't exist.",
+        "button": "Go Home"
+    },
+    "index": {
+        "title": "Welcome to Your Blank App",
+        "subtitle": "Start building your amazing project here!"
+    }
+}

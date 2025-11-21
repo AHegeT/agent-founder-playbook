@@ -5,18 +5,20 @@ import { Link } from "react-router-dom";
 import altataImage from "@/assets/altata.png";
 import sirocoImage from "@/assets/siroco.png";
 
+import { useTranslation } from "react-i18next";
+
 const Roundtables = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-background via-background to-primary/5">
         <div className="container mx-auto max-w-4xl text-center space-y-6">
           <h1 className="text-5xl md:text-6xl font-bold">
-            <span className="text-primary">Roundtables</span>
+            <span className="text-primary">{t('roundtables.hero.title')}</span>
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Join intimate discussions with fellow founders to tackle real challenges,
-            share insights, and accelerate your AI automation journey.
+            {t('roundtables.hero.subtitle')}
           </p>
         </div>
       </section>
@@ -26,15 +28,12 @@ const Roundtables = () => {
         <div className="container mx-auto max-w-5xl">
           <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
             <div className="space-y-6">
-              <h2 className="text-4xl font-bold">What are Roundtables?</h2>
+              <h2 className="text-4xl font-bold">{t('roundtables.whatAreRoundtables.heading')}</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Roundtables are sessions where groups of 4-6 founders come together
-                to discuss specific challenges, share what's working, and provide actionable
-                feedback to each other.
+                {t('roundtables.whatAreRoundtables.description1')}
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Unlike traditional networking, these are focused working sessions designed
-                to help you solve real problems and implement AI solutions faster.
+                {t('roundtables.whatAreRoundtables.description2')}
               </p>
             </div>
             <div className="bg-card p-8 rounded-2xl shadow-lg">
@@ -44,9 +43,9 @@ const Roundtables = () => {
                     <Clock className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">90-Minute Sessions</h3>
+                    <h3 className="font-semibold mb-1">{t('roundtables.whatAreRoundtables.sessionDuration.title')}</h3>
                     <p className="text-sm text-muted-foreground">
-                      Focused time to dive deep into specific topics
+                      {t('roundtables.whatAreRoundtables.sessionDuration.description')}
                     </p>
                   </div>
                 </div>
@@ -55,9 +54,9 @@ const Roundtables = () => {
                     <Users className="w-6 h-6 text-accent" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">20-30 Founders, in Groups of 4-6</h3>
+                    <h3 className="font-semibold mb-1">{t('roundtables.whatAreRoundtables.groupSize.title')}</h3>
                     <p className="text-sm text-muted-foreground">
-                      Focused groups for meaningful conversation
+                      {t('roundtables.whatAreRoundtables.groupSize.description')}
                     </p>
                   </div>
                 </div>
@@ -66,9 +65,9 @@ const Roundtables = () => {
                     <Pizza className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Live & Interactive</h3>
+                    <h3 className="font-semibold mb-1">{t('roundtables.whatAreRoundtables.liveInteractive.title')}</h3>
                     <p className="text-sm text-muted-foreground">
-                      In-person collaboration
+                      {t('roundtables.whatAreRoundtables.liveInteractive.description')}
                     </p>
                   </div>
                 </div>
@@ -78,19 +77,19 @@ const Roundtables = () => {
 
           {/* Current Session */}
           <div className="space-y-8 mb-20">
-            <h2 className="text-4xl font-bold text-center">Current Session</h2>
+            <h2 className="text-4xl font-bold text-center">{t('roundtables.currentSession.heading')}</h2>
             <Card className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
-                    <CardTitle className="text-3xl">Intelligent Networking</CardTitle>
+                    <CardTitle className="text-3xl">{t('roundtables.currentSession.intelligentNetworking.title')}</CardTitle>
                     <CardDescription className="text-lg">
-                      Master the art of building meaningful connections using AI-powered strategies
+                      {t('roundtables.currentSession.intelligentNetworking.description')}
                     </CardDescription>
                   </div>
                   <Link to="/events/roundtables/intelligent-networking">
                     <Button className="bg-primary hover:bg-primary/90">
-                      View Details
+                      {t('common.viewDetails')}
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
@@ -100,11 +99,11 @@ const Roundtables = () => {
                 <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span>Next session: Oct 29th, 2025</span>
+                    <span>{t('roundtables.currentSession.intelligentNetworking.nextSession')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
-                    <span>90 minutes</span>
+                    <span>{t('roundtables.currentSession.intelligentNetworking.duration')}</span>
                   </div>
                 </div>
               </CardContent>
@@ -113,7 +112,7 @@ const Roundtables = () => {
 
           {/* Locations */}
           <div className="space-y-12 mb-20">
-            <h2 className="text-4xl font-bold text-center">Locations</h2>
+            <h2 className="text-4xl font-bold text-center">{t('roundtables.locations.heading')}</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="border-2 hover:border-primary transition-all hover:shadow-lg overflow-hidden">
                 <div className="aspect-video overflow-hidden">
@@ -124,9 +123,9 @@ const Roundtables = () => {
                   />
                 </div>
                 <CardHeader>
-                  <CardTitle>Altata Café</CardTitle>
+                  <CardTitle>{t('roundtables.locations.altata.name')}</CardTitle>
                   <CardDescription className="text-base">
-                    A sophisticated café in a hotel with an intimate vibe, perfect for deep conversations in Mexico City
+                    {t('roundtables.locations.altata.description')}
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -140,9 +139,9 @@ const Roundtables = () => {
                   />
                 </div>
                 <CardHeader>
-                  <CardTitle>Siroco Pizza</CardTitle>
+                  <CardTitle>{t('roundtables.locations.siroco.name')}</CardTitle>
                   <CardDescription className="text-base">
-                    A delicious pizzeria owned by one of our members - the perfect place to share ideas and come together
+                    {t('roundtables.locations.siroco.description')}
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -151,14 +150,14 @@ const Roundtables = () => {
 
           {/* Topics */}
           <div className="space-y-12">
-            <h2 className="text-4xl font-bold text-center">Recent Topics</h2>
+            <h2 className="text-4xl font-bold text-center">{t('roundtables.recentTopics.heading')}</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <a href="https://www.meetup.com/agents-and-founders/events/310471914/" target="_blank" rel="noopener noreferrer" className="block">
                 <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
                   <CardHeader>
-                    <CardTitle>Building a business while keeping up with AI</CardTitle>
+                    <CardTitle>{t('roundtables.recentTopics.aiTools.title')}</CardTitle>
                     <CardDescription>
-                      What tools have the most impact? How do choose which new tools to adopt?
+                      {t('roundtables.recentTopics.aiTools.description')}
                     </CardDescription>
                   </CardHeader>
                 </Card>
@@ -167,9 +166,9 @@ const Roundtables = () => {
               <a href="https://www.meetup.com/agents-and-founders/events/310947495" target="_blank" rel="noopener noreferrer" className="block">
                 <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
                   <CardHeader>
-                    <CardTitle>Your AI-Powered Customer Engine</CardTitle>
+                    <CardTitle>{t('roundtables.recentTopics.customerEngine.title')}</CardTitle>
                     <CardDescription>
-                      What does your customer acquisition funnel actually look like, and which parts are ripe for AI-powered automation?
+                      {t('roundtables.recentTopics.customerEngine.description')}
                     </CardDescription>
                   </CardHeader>
                 </Card>
@@ -183,13 +182,13 @@ const Roundtables = () => {
       {/* CTA Section */}
       <section className="py-20 px-4 bg-primary text-white">
         <div className="container mx-auto text-center space-y-8 max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-bold">Join the Next Roundtable</h2>
+          <h2 className="text-4xl md:text-5xl font-bold">{t('roundtables.cta.heading')}</h2>
           <p className="text-xl opacity-90">
-            Members get access to all roundtables. Apply now to join the community.
+            {t('roundtables.cta.subtitle')}
           </p>
           <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
-              Apply Now
+              {t('common.applyNow')}
               <Calendar className="ml-2 w-5 h-5" />
             </Button>
           </a>
