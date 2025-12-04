@@ -1,6 +1,6 @@
 ---
 id: intelligent-networking
-title: intelligent-networking
+title: Intelligent Networking
 category: Marketing & Sales
 author: Alan Hegewisch
 summary: A 3-phase system for turning event contacts into a valuable network. This playbook is focused on building and nurturing long-term, high-trust relationships—not just collecting business cards.

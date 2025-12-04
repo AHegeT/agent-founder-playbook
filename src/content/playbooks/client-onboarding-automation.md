@@ -6,7 +6,7 @@ author: Sarah Chen
 summary: From lead to signed contract in 24 hours—completely automated. Learn the 5-tool stack that handles proposals, contracts, and kick-off meetings.
 metrics: 3x faster onboarding, 90% less manual work
 icon: Users
-published: true
+published: false
 date: 2024-01-15
 ---
 
