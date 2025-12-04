@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Users, Pizza, Clock, ArrowRight } from "lucide-react";
@@ -6,9 +7,28 @@ import altataImage from "@/assets/altata.png";
 import sirocoImage from "@/assets/siroco.png";
 
 import { useTranslation } from "react-i18next";
+import { getLatestRoundtable, type Roundtable } from "@/lib/roundtables";
 
 const Roundtables = () => {
   const { t } = useTranslation();
+  const [latestSession, setLatestSession] = useState<Roundtable | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadLatestSession = async () => {
+      try {
+        const session = await getLatestRoundtable();
+        console.log('Loaded latest roundtable session:', session);
+        setLatestSession(session);
+      } catch (error) {
+        console.error('Error loading latest roundtable session:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadLatestSession();
+  }, []);
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -78,36 +98,48 @@ const Roundtables = () => {
           {/* Current Session */}
           <div className="space-y-8 mb-20">
             <h2 className="text-4xl font-bold text-center">{t('roundtables.currentSession.heading')}</h2>
-            <Card className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2">
-                    <CardTitle className="text-3xl">{t('roundtables.currentSession.intelligentNetworking.title')}</CardTitle>
-                    <CardDescription className="text-lg">
-                      {t('roundtables.currentSession.intelligentNetworking.description')}
-                    </CardDescription>
+            {loading ? (
+              <div className="text-center py-10">
+                <p className="text-muted-foreground">Loading latest session...</p>
+              </div>
+            ) : latestSession ? (
+              <Card className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-2">
+                      <CardTitle className="text-3xl">{latestSession.title}</CardTitle>
+                      <CardDescription className="text-lg">
+                        {latestSession.description}
+                      </CardDescription>
+                    </div>
+                    <Link to={`/events/roundtables/${latestSession.slug}`}>
+                      <Button className="bg-primary hover:bg-primary/90">
+                        {t('common.viewDetails')}
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </Link>
                   </div>
-                  <Link to="/events/roundtables/intelligent-networking">
-                    <Button className="bg-primary hover:bg-primary/90">
-                      {t('common.viewDetails')}
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>{t('roundtables.currentSession.intelligentNetworking.nextSession')}</span>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      <span>{latestSession.nextSession}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4" />
+                      <span>{latestSession.duration}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    <span>{t('roundtables.currentSession.intelligentNetworking.duration')}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="border-2 bg-card/50">
+                <CardContent className="p-12 text-center">
+                  <p className="text-muted-foreground">{t('roundtables.currentSession.heading')}</p>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           {/* Locations */}
