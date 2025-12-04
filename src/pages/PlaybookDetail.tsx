@@ -66,7 +66,7 @@ const PlaybookDetail = () => {
     <div className="min-h-screen pt-24 pb-20">
       {/* Back Button */}
       <section className="px-4 py-6">
-        <div className="container mx-auto max-w-7xl">
+        <div className="container mx-auto max-w-[1400px]">
           <Link to="/playbooks">
             <Button variant="ghost" className="gap-2">
               <ArrowLeft className="w-4 h-4" />
@@ -78,8 +78,8 @@ const PlaybookDetail = () => {
 
       {/* Header */}
       <section className="px-4 pb-12">
-        <div className="container mx-auto max-w-7xl">
-          <div className="max-w-4xl space-y-6">
+        <div className="container mx-auto max-w-[1400px]">
+          <div className="space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
               <IconComponent className="w-8 h-8 text-primary" />
@@ -123,9 +123,9 @@ const PlaybookDetail = () => {
 
       {/* Content */}
       <section className="px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8">
-            <article className="max-w-4xl">
+        <div className="container mx-auto max-w-[1400px]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12">
+            <article className="min-w-0">
               <PlaybookContent content={playbook.content} />
             </article>
             <aside>
@@ -137,8 +137,7 @@ const PlaybookDetail = () => {
 
       {/* Footer CTA */}
       <section className="px-4 mt-20">
-        <div className="container mx-auto max-w-7xl">
-          <div className="max-w-4xl">
+        <div className="container mx-auto max-w-[1400px]">
           <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-primary/20">
             <CardContent className="p-8 text-center space-y-4">
               <h3 className="text-2xl font-bold">Want More Playbooks Like This?</h3>
@@ -152,7 +151,6 @@ const PlaybookDetail = () => {
               </a>
             </CardContent>
           </Card>
-          </div>
         </div>
       </section>
     </div>
