@@ -10,6 +10,8 @@ export interface RoundtableMetadata {
   nextSession: string;
   duration: string;
   location?: string;
+  meetupUrl?: string;
+  slidoUrl?: string;
   published: boolean;
   date: string;
 }
@@ -80,6 +82,38 @@ export async function getPublishedRoundtables(): Promise<Roundtable[]> {
 export async function getLatestRoundtable(): Promise<Roundtable | null> {
   const publishedRoundtables = await getPublishedRoundtables();
   return publishedRoundtables[0] || null;
+}
+
+/**
+ * Get the latest past roundtable session (most recent session that has already occurred)
+ */
+export async function getLatestPastRoundtable(): Promise<Roundtable | null> {
+  const publishedRoundtables = await getPublishedRoundtables();
+  const now = new Date();
+
+  // Filter sessions that are in the past
+  const pastSessions = publishedRoundtables.filter(session =>
+    new Date(session.date) < now
+  );
+
+  // Return the most recent past session (already sorted by date desc)
+  return pastSessions[0] || null;
+}
+
+/**
+ * Get the next upcoming roundtable session (next session that hasn't occurred yet)
+ */
+export async function getNextUpcomingRoundtable(): Promise<Roundtable | null> {
+  const publishedRoundtables = await getPublishedRoundtables();
+  const now = new Date();
+
+  // Filter sessions that are in the future
+  const futureSessions = publishedRoundtables.filter(session =>
+    new Date(session.date) >= now
+  );
+
+  // Return the closest upcoming session (reverse to get oldest future session)
+  return futureSessions.reverse()[0] || null;
 }
 
 /**

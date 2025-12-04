@@ -9,8 +9,8 @@ import Playbooks from "./pages/Playbooks";
 import PlaybookDetail from "./pages/PlaybookDetail";
 import Apply from "./pages/Apply";
 import Roundtables from "./pages/Roundtables";
+import RoundtableDetail from "./pages/RoundtableDetail";
 import Masterminds from "./pages/Masterminds";
-import IntelligentNetworking from "./pages/IntelligentNetworking";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,7 +27,7 @@ const App = () => (
           <Route path="/playbooks" element={<Playbooks />} />
           <Route path="/playbooks/:slug" element={<PlaybookDetail />} />
           <Route path="/events/roundtables" element={<Roundtables />} />
-          <Route path="/events/roundtables/intelligent-networking" element={<IntelligentNetworking />} />
+          <Route path="/events/roundtables/:slug" element={<RoundtableDetail />} />
           <Route path="/events/masterminds" element={<Masterminds />} />
           <Route path="/apply" element={<Apply />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
