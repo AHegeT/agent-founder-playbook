@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 import {
   Accordion,
   AccordionContent,
@@ -89,7 +90,7 @@ export const PlaybookContent = ({ content }: PlaybookContentProps) => {
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="prose prose-lg prose-slate dark:prose-invert max-w-none pt-4">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]}>
                       {section.content}
                     </ReactMarkdown>
                   </div>
@@ -102,7 +103,7 @@ export const PlaybookContent = ({ content }: PlaybookContentProps) => {
         // Normal section - render as regular markdown
         return (
           <div key={index} className="prose prose-lg prose-slate dark:prose-invert max-w-none">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]}>
               {section.content}
             </ReactMarkdown>
           </div>
