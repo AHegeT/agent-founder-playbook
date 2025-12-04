@@ -104,11 +104,10 @@ const Navbar = () => {
             <div className="ml-2">
               <LanguageToggle />
             </div>
-          </a>
+          </div>
         </div>
       </div>
-    </div>
-    </nav >
+    </nav>
   );
 };
 
