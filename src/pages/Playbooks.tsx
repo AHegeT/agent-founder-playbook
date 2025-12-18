@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Lock } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
-import comingSoon from "@/assets/coming_soon.png";
 import { useTranslation } from "@/hooks/useTranslation";
 import { getPublishedPlaybooks, type Playbook } from "@/lib/playbooks";
 import { getIconByName } from "@/lib/playbookIcons";
@@ -53,9 +52,7 @@ const Playbooks = () => {
               <p className="text-muted-foreground">Loading playbooks...</p>
             </div>
           ) : playbooks.length > 0 ? (
-            <>
-              <h2 className="text-3xl font-bold mb-8">Available Now</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {playbooks.map((playbook) => {
                   const IconComponent = getIconByName(playbook.icon);
                   return (
@@ -97,8 +94,7 @@ const Playbooks = () => {
                     </Link>
                   );
                 })}
-              </div>
-            </>
+            </div>
           ) : null}
         </div>
       </section>
