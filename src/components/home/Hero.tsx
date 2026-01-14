@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroBanner from "@/assets/agfou_banner.png";
+import heroBanner from "@/assets/agfou_banner3.png";
+import heroBannerK from "@/assets/agfou_banner_k.png";
 
 export const Hero = () => {
     return (
-        <section className="relative w-full min-h-[65vh] flex flex-col items-center justify-center overflow-visible bg-orange-50/30">
+        <section className="relative w-full min-h-[65vh] flex flex-col items-center justify-center overflow-hidden bg-orange-50/30 pb-12">
             {/* Background Image Container */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center opacity-20"
@@ -33,16 +34,12 @@ export const Hero = () => {
                 </div>
             </div>
 
-            {/* Mascot positioned at bottom, overlapping slightly */}
-            <div className="relative z-20 -mt-12">
+            {/* Banner at bottom of hero */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10">
                 <img
-                    src="/images/hero-mascot-main.png"
-                    alt="Community mascot"
-                    className="w-56 md:w-64 h-auto drop-shadow-2xl"
-                    onError={(e) => {
-                        // Fallback to hide if image doesn't exist yet
-                        e.currentTarget.style.display = 'none';
-                    }}
+                    src={heroBannerK}
+                    alt="AI Founders banner"
+                    className="w-32 md:w-40 h-auto opacity-80"
                 />
             </div>
         </section>
