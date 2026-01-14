@@ -1,38 +1,48 @@
 import { Button } from "@/components/ui/button";
-import agentKHero from "@/assets/agent_k_hero.png";
 import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
     return (
-        <section className="relative w-full min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+        <section className="relative w-full min-h-[75vh] flex flex-col items-center justify-center overflow-visible bg-orange-50/30">
             {/* Background Image Container */}
-            <div className="absolute inset-0 z-0">
-                <img
-                    src={agentKHero}
-                    alt="Agent K and founders collaborating"
-                    className="w-full h-full object-cover"
-                />
-                {/* Overlay for readability - adjusting opacity to show image but keep text legible */}
-                <div className="absolute inset-0 bg-background/90 z-10" />
-            </div>
+            <div
+                className="absolute inset-0 z-0 bg-cover bg-center opacity-20"
+                style={{ backgroundImage: "url(/images/hero-background-scene.png)" }}
+            />
 
-            {/* Content Content source */}
-            <div className="container relative z-20 mx-auto max-w-5xl px-4 text-center">
-                <h1 className="text-5xl md:text-8xl font-bold tracking-tight mb-8 text-foreground drop-shadow-sm">
-                    The Heart of <span className="text-primary">AI Innovation</span>.
+            {/* Content */}
+            <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center pt-16 pb-20">
+                <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-foreground">
+                    The Heart of <span className="text-orange-500">AI Innovation</span>
                 </h1>
-                <p className="text-xl md:text-3xl text-muted-foreground font-medium max-w-3xl mx-auto mb-12 leading-relaxed">
+                <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
                     Connect with fellow founders, share insights, and build the next generation of AI businesses together.
                 </p>
 
-                <div>
+                <div className="mb-12">
                     <a href="/events/roundtables">
-                        <Button size="lg" className="text-lg md:text-xl px-10 py-8 rounded-full shadow-xl hover:scale-105 transition-all duration-300 bg-gradient-to-r from-primary to-primary/90 ring-4 ring-primary/20">
+                        <Button
+                            size="lg"
+                            className="text-base md:text-lg px-10 py-6 rounded-3xl shadow-xl hover:scale-105 transition-all duration-300 bg-orange-500 hover:bg-orange-600 text-white"
+                        >
                             See Upcoming Events
-                            <ArrowRight className="ml-3 w-6 h-6" />
+                            <ArrowRight className="ml-3 w-5 h-5" />
                         </Button>
                     </a>
                 </div>
+            </div>
+
+            {/* Mascot positioned at bottom, overlapping slightly */}
+            <div className="relative z-20 -mt-12">
+                <img
+                    src="/images/hero-mascot-main.png"
+                    alt="Community mascot"
+                    className="w-56 md:w-64 h-auto drop-shadow-2xl"
+                    onError={(e) => {
+                        // Fallback to hide if image doesn't exist yet
+                        e.currentTarget.style.display = 'none';
+                    }}
+                />
             </div>
         </section>
     );
