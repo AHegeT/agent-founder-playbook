@@ -39,7 +39,7 @@ export const Hero = () => {
                 <img
                     src={heroBannerK}
                     alt="AI Founders banner"
-                    className="w-32 md:w-40 h-auto opacity-80"
+                    className="w-32 md:w-48 h-auto"
                 />
             </div>
         </section>
