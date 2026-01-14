@@ -44,14 +44,6 @@ export const Footer = () => {
                         <p className="font-bold text-orange-500">See you at the next meetup!</p>
                     </div>
                 </div>
-
-                <div className="pt-8 border-t border-orange-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-                    <p>&copy; 2024 Agents and Founders. All rights reserved.</p>
-                    <div className="flex gap-8">
-                        <a href="#" className="hover:text-orange-500 transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-orange-500 transition-colors">Terms of Service</a>
-                    </div>
-                </div>
             </div>
         </footer>
     );

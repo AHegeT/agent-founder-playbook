@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import heroBanner from "@/assets/agfou_banner.png";
 
 export const Hero = () => {
     return (
@@ -7,7 +8,7 @@ export const Hero = () => {
             {/* Background Image Container */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center opacity-20"
-                style={{ backgroundImage: "url(/images/hero-background-scene.png)" }}
+                style={{ backgroundImage: `url(${heroBanner})` }}
             />
 
             {/* Content */}
