@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
     return (
-        <section className="relative w-full min-h-[75vh] flex flex-col items-center justify-center overflow-visible bg-orange-50/30">
+        <section className="relative w-full min-h-[65vh] flex flex-col items-center justify-center overflow-visible bg-orange-50/30">
             {/* Background Image Container */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center opacity-20"
