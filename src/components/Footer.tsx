@@ -40,7 +40,7 @@ export const Footer = () => {
                     </div>
 
                     <div className="flex flex-col items-center md:items-end text-center md:text-right relative">
-                        <img src={agentKWave} alt="Agent K Waving" className="w-32 mb-4 drop-shadow-lg transform hover:rotate-12 transition-transform duration-300" />
+                        {/*<img src={agentKWave} alt="Agent K Waving" className="w-32 mb-4 drop-shadow-lg transform hover:rotate-12 transition-transform duration-300" />*/}
                         <p className="font-bold text-orange-500">See you at the next meetup!</p>
                     </div>
                 </div>

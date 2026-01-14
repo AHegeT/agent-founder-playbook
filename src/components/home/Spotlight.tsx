@@ -11,26 +11,22 @@ export const Spotlight = () => {
                     {/* Left: Photo */}
                     <div className="flex-shrink-0">
                         <img
-                            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300"
-                            alt="Sarah, Community Member"
+                            src="https://api.dicebear.com/9.x/micah/svg?seed=Aidnn?auto=format&fit=crop&q=80&w=300"
+                            alt="Community Member"
                             className="w-full md:w-32 h-48 md:h-32 object-cover rounded-2xl"
                         />
                     </div>
 
                     {/* Middle: Content */}
                     <div className="flex-grow flex flex-col justify-center">
-                        <div className="flex items-center gap-2 text-orange-500 font-semibold mb-2">
-                            <Trophy className="w-4 h-4" />
-                            <span className="text-sm">Founder of the Month</span>
-                        </div>
-                        <h3 className="text-2xl font-bold mb-1">Sarah Jenkins</h3>
-                        <p className="text-base text-muted-foreground mb-4">Founder of ScaleAI</p>
+                        <h3 className="text-2xl font-bold mb-1">Erik R.</h3>
+                        {/*<p className="text-base text-muted-foreground mb-4">Founder of ScaleAI</p>*/}
                         <blockquote className="text-sm italic border-l-4 border-orange-300 pl-3 mb-4">
-                            "The community feedback was crucial for my launch!"
+                            Erik is not a developrt, but he saw the outdated processes in his trading company and decided to use Claude Code to build them back from the ground up. From a Telegram bot that sends restocking requests to providers to scripts that integrate with his ERP, he's found he can reduce manual work by automating the repeatable steps.
                         </blockquote>
-                        <Button variant="outline" className="self-start text-sm rounded-2xl border-orange-200 hover:bg-orange-50">
+                        {/*<Button variant="outline" className="self-start text-sm rounded-2xl border-orange-200 hover:bg-orange-50">
                             Read Her Story
-                        </Button>
+                        </Button>*/}
                     </div>
 
                     {/* Right: Mascot with speech bubble */}
