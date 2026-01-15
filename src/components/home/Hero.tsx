@@ -18,7 +18,7 @@ export const Hero = () => {
                     The Heart of <span className="text-orange-500">AI Innovation</span>
                 </h1>
                 <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Connect with fellow founders, share insights, and build the next generation of AI businesses together.
+                    Connect with fellow founders, share insights, and build your business leveraging AI together.
                 </p>
 
                 <div className="mb-12">
