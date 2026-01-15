@@ -13,7 +13,7 @@ export const Hero = () => {
             />
 
             {/* Content */}
-            <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center pt-16 pb-20">
+            <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center pt-32 md:pt-16 pb-20">
                 <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-foreground">
                     The Heart of <span className="text-orange-500">AI Innovation</span>
                 </h1>
