@@ -1,6 +1,6 @@
 ---
 id: target-acquisition
-title: Target Acquisition: Automating Research & The Perfect Briefing
+title: Target Acquisition - Automating Research & The Perfect Briefing
 description: Learn how to use AI to build a "dossier" on your target in 5 minutes instead of 5 hours.
 nextSession: "Next session: Jan 27th, 2026"
 duration: 90 minutes

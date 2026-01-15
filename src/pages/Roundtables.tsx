@@ -18,16 +18,10 @@ const Roundtables = () => {
   useEffect(() => {
     const loadSessions = async () => {
       try {
-        console.log('Starting to load roundtable sessions...');
         const [latest, next] = await Promise.all([
           getLatestPastRoundtable(),
           getNextUpcomingRoundtable()
         ]);
-        console.log('=== ROUNDTABLE DEBUG ===');
-        console.log('Latest past session:', latest);
-        console.log('Next upcoming session:', next);
-        console.log('Today:', new Date());
-        console.log('=======================');
         setLatestSession(latest);
         setNextSession(next);
       } catch (error) {

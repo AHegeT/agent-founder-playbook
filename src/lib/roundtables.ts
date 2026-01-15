@@ -38,20 +38,13 @@ const roundtableModules = import.meta.glob('/src/content/roundtables/*.md', {
 export async function getAllRoundtables(): Promise<Roundtable[]> {
   const roundtables: Roundtable[] = [];
 
-  console.log('Roundtable modules found:', Object.keys(roundtableModules));
-
   for (const path in roundtableModules) {
-    // Skip README.md
     if (path.includes('README.md')) continue;
 
-    console.log('Loading roundtable from:', path);
     const rawContent = await roundtableModules[path]() as string;
     const { data, content } = matter(rawContent);
 
-    // Extract slug from file path
     const slug = path.split('/').pop()?.replace('.md', '') || '';
-
-    console.log('Parsed roundtable:', { slug, data });
 
     roundtables.push({
       ...(data as RoundtableMetadata),
@@ -59,8 +52,6 @@ export async function getAllRoundtables(): Promise<Roundtable[]> {
       slug,
     });
   }
-
-  console.log('Total roundtables loaded:', roundtables.length);
 
   // Sort by date (newest first)
   return roundtables.sort((a, b) =>
