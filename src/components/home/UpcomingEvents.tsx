@@ -79,11 +79,11 @@ export const UpcomingEvents = () => {
                 )}
             </div>
 
-            <div className="pt-4 text-right">
+            {/*<div className="pt-4 text-right">
                 <Button variant="link" className="text-orange-500 p-0 h-auto font-semibold hover:text-orange-600">
                     View Full Calendar <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
-            </div>
+            </div>*/}
         </div>
     );
 };
