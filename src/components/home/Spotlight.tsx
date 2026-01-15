@@ -22,7 +22,7 @@ export const Spotlight = () => {
                         <h3 className="text-2xl font-bold mb-1">Erik R.</h3>
                         {/*<p className="text-base text-muted-foreground mb-4">Founder of ScaleAI</p>*/}
                         <blockquote className="text-sm italic border-l-4 border-orange-300 pl-3 mb-4">
-                            Erik is not a developrt, but he saw the outdated processes in his trading company and decided to use Claude Code to build them back from the ground up. From a Telegram bot that sends restocking requests to providers to scripts that integrate with his ERP, he's found he can reduce manual work by automating the repeatable steps.
+                            Erik proves you don't need a software engineering background to overhaul legacy systems. Seeing his trading company slowed down by outdated processes, he used Claude Code to rebuild operations from the ground up. He has since deployed a Telegram bot for vendor restocking and scripts that integrate directly with his ERP, successfully automating the manual grunt work that used to slow him down.
                         </blockquote>
                         {/*<Button variant="outline" className="self-start text-sm rounded-2xl border-orange-200 hover:bg-orange-50">
                             Read Her Story
