@@ -5,12 +5,17 @@ import heroBannerK from "@/assets/agfou_banner_k.png";
 
 export const Hero = () => {
     return (
-        <section className="relative w-full min-h-[65vh] flex flex-col items-center justify-center overflow-hidden bg-orange-50/30 pb-12">
-            {/* Background Image Container */}
-            <div
-                className="absolute inset-0 z-0 bg-cover bg-center opacity-20"
-                style={{ backgroundImage: `url(${heroBanner})` }}
-            />
+        <section className="relative w-full min-h-[65vh] flex flex-col items-center justify-center overflow-hidden pb-12">
+            {/* Mobile gradient background */}
+            <div className="absolute inset-0 z-0 bg-gradient-to-br from-red-100 via-orange-50 to-amber-50 md:hidden" />
+
+            {/* Desktop background with image */}
+            <div className="absolute inset-0 z-0 hidden md:block bg-orange-50/30">
+                <div
+                    className="absolute inset-0 bg-cover bg-center opacity-20"
+                    style={{ backgroundImage: `url(${heroBanner})` }}
+                />
+            </div>
 
             {/* Content */}
             <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center pt-32 md:pt-28 pb-20">
