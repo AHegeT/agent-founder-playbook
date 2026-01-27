@@ -14,35 +14,28 @@ interface TeamMember {
   company: string;
   groupRole: string;
   image: string;
-  linkedin: string;
+  linkedin?: string;
+  bio?: string;
 }
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Team Member Name",
-    role: "Job Title",
-    company: "Company Name",
-    groupRole: "Role in the Group",
-    image: "https://api.dicebear.com/9.x/micah/svg?seed=founder1",
-    linkedin: "https://linkedin.com/in/username",
+    name: "Alan Hegewisch",
+    role: "Founder",
+    company: "Sidekick Flow",
+    groupRole: "Founder and Lead Orchestrator",
+    image: "https://api.dicebear.com/9.x/micah/svg?seed=alan-hegewisch",
+    linkedin: "https://linkedin.com/in/alanhegewisch",
+    bio: "Software engineer turned founder. I bridge the gap between complex code and business fundamentals, helping founders build systems that actually work.",
   },
-  // Add more team members here as the team grows
-  // {
-  //   name: "Second Member",
-  //   role: "Job Title",
-  //   company: "Company Name",
-  //   groupRole: "Role in the Group",
-  //   image: "https://api.dicebear.com/9.x/micah/svg?seed=founder2",
-  //   linkedin: "https://linkedin.com/in/username",
-  // },
-  // {
-  //   name: "Third Member",
-  //   role: "Job Title",
-  //   company: "Company Name",
-  //   groupRole: "Role in the Group",
-  //   image: "https://api.dicebear.com/9.x/micah/svg?seed=founder3",
-  //   linkedin: "https://linkedin.com/in/username",
-  // },
+  {
+    name: "Agent K",
+    role: "Chief Vibe Officer",
+    company: "Agents & Founders",
+    groupRole: "Community Guardian",
+    image: "https://api.dicebear.com/9.x/bottts-neutral/svg?seed=agent-k&backgroundColor=f97316",
+    bio: "Ensuring the community stays friendly and the code stays clean.",
+  },
 ];
 
 interface FAQ {
@@ -53,23 +46,23 @@ interface FAQ {
 const faqs: FAQ[] = [
   {
     question: "What is Agents & Founders?",
-    answer: "Stub: Description of the community and its purpose.",
+    answer: "A community group based in Mexico City focused on the intersection of entrepreneurship and AI automation. We are builders, developers, and founders.",
   },
   {
     question: "Who can join the community?",
-    answer: "Stub: Information about membership eligibility and target audience.",
-  },
-  {
-    question: "How do I get started?",
-    answer: "Stub: Steps to join and get involved with the community.",
+    answer: "Anyone interested in business fundamentals and AI. Whether you are an accountant with a business idea, a furniture rental business, or an engineer looking for a partner, you are welcome.",
   },
   {
     question: "What events do you host?",
-    answer: "Stub: Overview of roundtables, masterminds, and other community events.",
+    answer: "We host strategic workshops like our '2026 Launchpad' and technical sessions on topics like 'Automating Research for Sales and Interviews'.",
+  },
+  {
+    question: "How do I get started?",
+    answer: "Join our next meetup or connect with us on social. We value organic growth and meaningful conversations over rapid networking.",
   },
   {
     question: "Is there a cost to join?",
-    answer: "Stub: Information about membership fees or free access.",
+    answer: "Currently, our community events are open to dedicated builders. Some workshops may have specific requirements.",
   },
 ];
 
@@ -83,7 +76,7 @@ const About = () => {
             About <span className="text-primary">Us</span>
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Building a community where founders and AI agents work together to scale businesses.
+            A practical community for builders and entrepreneurs. We combine business fundamentals with AI automation to create sustainable growth.
           </p>
         </div>
       </section>
@@ -95,10 +88,10 @@ const About = () => {
             <div className="space-y-6">
               <h2 className="text-4xl font-bold">Our Mission</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Stub: Description of the community's mission and purpose.
+                Our mission is to help each other leverage AI to either start or grow your business. We share tools, resources, best practices and challenges.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Stub: Additional context about what drives the community forward.
+                We believe in community, sharing our skills with each other and action. We bring together founders who want to build real systems, not just talk about them.
               </p>
             </div>
             <div className="bg-card p-8 rounded-2xl shadow-lg">
@@ -110,7 +103,7 @@ const About = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Community First</h3>
                     <p className="text-sm text-muted-foreground">
-                      Stub: Description of community value.
+                      Networking that respects your time. We believe in genuine connections, win-win collaboration and creating value over extraction.
                     </p>
                   </div>
                 </div>
@@ -121,7 +114,7 @@ const About = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Practical Results</h3>
                     <p className="text-sm text-muted-foreground">
-                      Stub: Description of practical focus.
+                      We focus on the 'how-to.' From automating sales research to building personal CRMs, we leave every session with actionable workflows.
                     </p>
                   </div>
                 </div>
@@ -132,7 +125,7 @@ const About = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Growth Focused</h3>
                     <p className="text-sm text-muted-foreground">
-                      Stub: Description of growth mindset.
+                      Learning business fundamentals alongside new tech. We use new tools intentionally and focus on results over hype.
                     </p>
                   </div>
                 </div>
@@ -148,11 +141,11 @@ const About = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Meet the Team</h2>
             <p className="text-lg text-muted-foreground">
-              Stub: Brief intro about the team behind the community.
+              The people (and agents) behind the community.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-3xl mx-auto">
             {teamMembers.map((member, index) => (
               <Card
                 key={index}
@@ -166,22 +159,29 @@ const About = () => {
                   />
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                   <p className="text-sm text-muted-foreground mb-1">
-                    {member.role} at {member.company}
+                    {member.role} @ {member.company}
                   </p>
-                  <p className="text-sm font-medium text-primary mb-4">
+                  <p className="text-sm font-medium text-primary mb-3">
                     {member.groupRole}
                   </p>
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                    LinkedIn
-                  </a>
+                  {member.bio && (
+                    <p className="text-sm text-muted-foreground mb-4 italic">
+                      "{member.bio}"
+                    </p>
+                  )}
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                      LinkedIn
+                    </a>
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -191,14 +191,34 @@ const About = () => {
 
       {/* Story Section */}
       <section className="py-20 px-4 bg-background">
-        <div className="container mx-auto max-w-3xl text-center space-y-6">
-          <h2 className="text-4xl font-bold">Our Story</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Stub: The story of how Agents & Founders came to be.
-          </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Stub: The vision for where the community is headed.
-          </p>
+        <div className="container mx-auto max-w-3xl space-y-6">
+          <h2 className="text-4xl font-bold text-center">Our Story</h2>
+
+          <blockquote className="relative bg-card rounded-2xl p-8 shadow-lg border-l-4 border-primary">
+            <div className="absolute -top-4 left-6 text-6xl text-primary/20 font-serif">"</div>
+            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+              <p>
+                I was living in Austin and working for a startup when I noticed most people did not use AI beyond ChatGPT. I had friends in tech with great knowledge but wasted potential and entrepreneur friends who were still spending 3 days each month to do their taxes. If only they could speak to each other...
+              </p>
+              <p>
+                AI and automation tools can make entrepreneurship viable for more people. Before, it meant you needed to "go big or go home" and hype determined who got investors. Now, it's possible to stay lean, build a lifestyle business or for someone with a unique background to use tech to make their vision a reality.
+              </p>
+              <p>
+                We are building a space where a founder can walk in with an idea and walk out with a deployed AI agent. Whether it's a PR workshop or a deep dive into lead automation, our vision is to make the technical accessible.
+              </p>
+            </div>
+            <footer className="mt-6 flex items-center gap-3">
+              <img
+                src="https://api.dicebear.com/9.x/micah/svg?seed=alan-hegewisch"
+                alt="Alan Hegewisch"
+                className="w-12 h-12 rounded-full border-2 border-primary/20"
+              />
+              <div>
+                <p className="font-semibold text-foreground">Alan Hegewisch</p>
+                <p className="text-sm text-muted-foreground">Founder, Agents & Founders</p>
+              </div>
+            </footer>
+          </blockquote>
         </div>
       </section>
 
