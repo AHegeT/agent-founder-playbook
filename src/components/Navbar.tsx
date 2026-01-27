@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,15 +9,22 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Bot, UserPlus } from "lucide-react";
+import { Bot, UserPlus, Menu, X, ChevronDown } from "lucide-react";
 import LanguageToggle from "./LanguageToggle";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [eventsExpanded, setEventsExpanded] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setEventsExpanded(false);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -116,15 +124,96 @@ const Navbar = () => {
             </a>
           </div>
 
-          <div className="md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-2">
             <LanguageToggle />
-            <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
-              <Button size="sm" className="bg-primary hover:bg-primary/90">
-                Join
-              </Button>
-            </a>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-md hover:bg-primary/10 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6 text-foreground" />
+              ) : (
+                <Menu className="w-6 h-6 text-foreground" />
+              )}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+            <div className="flex flex-col py-4 space-y-1">
+              <Link
+                to="/"
+                onClick={closeMobileMenu}
+                className={`px-4 py-3 font-medium transition-colors hover:bg-primary/10 ${isActive("/") ? "text-primary" : "text-foreground"}`}
+              >
+                Community
+              </Link>
+
+              <div>
+                <button
+                  onClick={() => setEventsExpanded(!eventsExpanded)}
+                  className="w-full px-4 py-3 font-medium flex items-center justify-between hover:bg-primary/10 transition-colors"
+                >
+                  <span>Events</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${eventsExpanded ? "rotate-180" : ""}`} />
+                </button>
+                {eventsExpanded && (
+                  <div className="bg-secondary/30 py-2">
+                    <Link
+                      to="/events/roundtables"
+                      onClick={closeMobileMenu}
+                      className="block px-8 py-2 text-sm hover:bg-primary/10 transition-colors"
+                    >
+                      Roundtables
+                    </Link>
+                    <Link
+                      to="/events/webinars"
+                      onClick={closeMobileMenu}
+                      className="block px-8 py-2 text-sm hover:bg-primary/10 transition-colors"
+                    >
+                      Webinars
+                    </Link>
+                    <Link
+                      to="/events/workshops"
+                      onClick={closeMobileMenu}
+                      className="block px-8 py-2 text-sm hover:bg-primary/10 transition-colors"
+                    >
+                      Workshops
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <Link
+                to="/playbooks"
+                onClick={closeMobileMenu}
+                className={`px-4 py-3 font-medium transition-colors hover:bg-primary/10 ${isActive("/playbooks") ? "text-primary" : "text-foreground"}`}
+              >
+                Resources
+              </Link>
+
+              <Link
+                to="/about"
+                onClick={closeMobileMenu}
+                className={`px-4 py-3 font-medium transition-colors hover:bg-primary/10 ${isActive("/about") ? "text-primary" : "text-foreground"}`}
+              >
+                About Us
+              </Link>
+
+              <div className="px-4 pt-4">
+                <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
+                  <Button className="w-full bg-primary hover:bg-primary/90">
+                    Join the Community
+                    <UserPlus className="ml-2 w-4 h-4" />
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Users, Pizza, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import altataImage from "@/assets/altata.png";
@@ -52,7 +52,7 @@ const Roundtables = () => {
         <div className="container mx-auto max-w-5xl">
           <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
             <div className="space-y-6">
-              <h2 className="text-4xl font-bold">{t('roundtables.whatAreRoundtables.heading')}</h2>
+              <h2 className="text-2xl md:text-4xl font-bold">{t('roundtables.whatAreRoundtables.heading')}</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {t('roundtables.whatAreRoundtables.description1')}
               </p>
@@ -107,26 +107,16 @@ const Roundtables = () => {
           ) : (
             <>
               {nextSession && (
-                <div className="space-y-8 mb-20">
-                  <h2 className="text-4xl font-bold text-center">Next Session</h2>
+                <div className="space-y-6 mb-20">
+                  <h2 className="text-2xl md:text-4xl font-bold text-center">Next Session</h2>
                   <Card className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all">
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div className="space-y-2">
-                          <CardTitle className="text-3xl">{nextSession.title}</CardTitle>
-                          <CardDescription className="text-lg">
-                            {nextSession.description}
-                          </CardDescription>
-                        </div>
-                        <Link to={`/events/roundtables/${nextSession.slug}`}>
-                          <Button className="bg-primary hover:bg-primary/90">
-                            {t('common.viewDetails')}
-                            <ArrowRight className="ml-2 w-4 h-4" />
-                          </Button>
-                        </Link>
+                    <CardHeader className="space-y-4">
+                      <div className="space-y-2">
+                        <CardTitle className="text-xl md:text-2xl">{nextSession.title}</CardTitle>
+                        <CardDescription className="text-base">
+                          {nextSession.description}
+                        </CardDescription>
                       </div>
-                    </CardHeader>
-                    <CardContent>
                       <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
@@ -137,32 +127,28 @@ const Roundtables = () => {
                           <span>{nextSession.duration}</span>
                         </div>
                       </div>
-                    </CardContent>
+                      <Link to={`/events/roundtables/${nextSession.slug}`} className="block">
+                        <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90">
+                          {t('common.viewDetails')}
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                      </Link>
+                    </CardHeader>
                   </Card>
                 </div>
               )}
 
               {latestSession && (
-                <div className="space-y-8 mb-20">
-                  <h2 className="text-4xl font-bold text-center">Latest Session</h2>
+                <div className="space-y-6 mb-20">
+                  <h2 className="text-2xl md:text-4xl font-bold text-center">Latest Session</h2>
                   <Card className="border-2 hover:shadow-lg transition-all">
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div className="space-y-2">
-                          <CardTitle className="text-3xl">{latestSession.title}</CardTitle>
-                          <CardDescription className="text-lg">
-                            {latestSession.description}
-                          </CardDescription>
-                        </div>
-                        <Link to={`/events/roundtables/${latestSession.slug}`}>
-                          <Button variant="outline">
-                            {t('common.viewDetails')}
-                            <ArrowRight className="ml-2 w-4 h-4" />
-                          </Button>
-                        </Link>
+                    <CardHeader className="space-y-4">
+                      <div className="space-y-2">
+                        <CardTitle className="text-xl md:text-2xl">{latestSession.title}</CardTitle>
+                        <CardDescription className="text-base">
+                          {latestSession.description}
+                        </CardDescription>
                       </div>
-                    </CardHeader>
-                    <CardContent>
                       <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
@@ -173,7 +159,13 @@ const Roundtables = () => {
                           <span>{latestSession.duration}</span>
                         </div>
                       </div>
-                    </CardContent>
+                      <Link to={`/events/roundtables/${latestSession.slug}`} className="block">
+                        <Button variant="outline" className="w-full sm:w-auto">
+                          {t('common.viewDetails')}
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                      </Link>
+                    </CardHeader>
                   </Card>
                 </div>
               )}
@@ -182,7 +174,7 @@ const Roundtables = () => {
 
           {/* Locations */}
           <div className="space-y-12 mb-20">
-            <h2 className="text-4xl font-bold text-center">{t('roundtables.locations.heading')}</h2>
+            <h2 className="text-2xl md:text-4xl font-bold text-center">{t('roundtables.locations.heading')}</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="border-2 hover:border-primary transition-all hover:shadow-lg overflow-hidden">
                 <div className="aspect-video overflow-hidden">
@@ -220,7 +212,7 @@ const Roundtables = () => {
 
           {/* Topics */}
           <div className="space-y-12">
-            <h2 className="text-4xl font-bold text-center">{t('roundtables.recentTopics.heading')}</h2>
+            <h2 className="text-2xl md:text-4xl font-bold text-center">{t('roundtables.recentTopics.heading')}</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <a href="https://www.meetup.com/agents-and-founders/events/310471914/" target="_blank" rel="noopener noreferrer" className="block">
                 <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
