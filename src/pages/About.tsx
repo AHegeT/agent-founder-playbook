@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Target, Rocket, Linkedin } from "lucide-react";
+import { Users, Target, Rocket, LinkedinIcon } from "lucide-react";
 import { Footer } from "@/components/Footer";
 
 interface TeamMember {
@@ -143,7 +143,7 @@ const About = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
-                    <Linkedin className="w-4 h-4" />
+                    <LinkedinIcon className="w-4 h-4" />
                     LinkedIn
                   </a>
                 </CardContent>
