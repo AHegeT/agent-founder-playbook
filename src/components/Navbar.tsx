@@ -63,12 +63,12 @@ const Navbar = () => {
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
-                            to="/events/masterminds"
+                            to="/events/webinars"
                             className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
                           >
-                            <div className="text-base font-semibold leading-none">Masterminds</div>
+                            <div className="text-base font-semibold leading-none">Webinars</div>
                             <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                              Peer-to-peer growth sessions.
+                              Online sessions and presentations.
                             </p>
                           </Link>
                         </NavigationMenuLink>

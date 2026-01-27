@@ -11,6 +11,7 @@ import Apply from "./pages/Apply";
 import Roundtables from "./pages/Roundtables";
 import RoundtableDetail from "./pages/RoundtableDetail";
 import Masterminds from "./pages/Masterminds";
+import Webinars from "./pages/Webinars";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/events/roundtables" element={<Roundtables />} />
           <Route path="/events/roundtables/:slug" element={<RoundtableDetail />} />
           <Route path="/events/masterminds" element={<Masterminds />} />
+          <Route path="/events/webinars" element={<Webinars />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
