@@ -73,6 +73,19 @@ const Navbar = () => {
                           </Link>
                         </NavigationMenuLink>
                       </li>
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/events/workshops"
+                            className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                          >
+                            <div className="text-base font-semibold leading-none">Workshops</div>
+                            <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                              Hands-on building sessions.
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
