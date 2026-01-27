@@ -68,6 +68,7 @@ const Navbar = () => {
                           </Link>
                         </NavigationMenuLink>
                       </li>
+                      {/* Hidden for now - uncomment when ready
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
@@ -94,6 +95,7 @@ const Navbar = () => {
                           </Link>
                         </NavigationMenuLink>
                       </li>
+                      */}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -169,6 +171,7 @@ const Navbar = () => {
                     >
                       Roundtables
                     </Link>
+                    {/* Hidden for now - uncomment when ready
                     <Link
                       to="/events/webinars"
                       onClick={closeMobileMenu}
@@ -183,6 +186,7 @@ const Navbar = () => {
                     >
                       Workshops
                     </Link>
+                    */}
                   </div>
                 )}
               </div>
