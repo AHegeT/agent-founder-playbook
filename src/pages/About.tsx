@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { Users, Target, Rocket } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import alanImage from "@/assets/members/alan_hegewisch.jpeg";
 
 interface TeamMember {
   name: string;
@@ -24,8 +25,8 @@ const teamMembers: TeamMember[] = [
     role: "Founder",
     company: "Sidekick Flow",
     groupRole: "Founder and Lead Orchestrator",
-    image: "https://api.dicebear.com/9.x/micah/svg?seed=alan-hegewisch",
-    linkedin: "https://linkedin.com/in/alanhegewisch",
+    image: alanImage,
+    linkedin: "https://linkedin.com/in/alan-hegewisch",
     bio: "Software engineer turned founder. I bridge the gap between complex code and business fundamentals, helping founders build systems that actually work.",
   },
   {
@@ -198,7 +199,7 @@ const About = () => {
             <div className="absolute -top-4 left-6 text-6xl text-primary/20 font-serif">"</div>
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                I was living in Austin and working for a startup when I noticed most people did not use AI beyond ChatGPT. I had friends in tech with great knowledge but wasted potential and entrepreneur friends who were still spending 3 days each month to do their taxes. If only they could speak to each other...
+                I was living in Austin and working for a startup when I noticed most people did not use AI beyond ChatGPT. I had friends in tech with great skills but barely tapping their potential and entrepreneur friends who were still spending 3 days each month doing their taxes. If only they could speak to each other...
               </p>
               <p>
                 AI and automation tools can make entrepreneurship viable for more people. Before, it meant you needed to "go big or go home" and hype determined who got investors. Now, it's possible to stay lean, build a lifestyle business or for someone with a unique background to use tech to make their vision a reality.
@@ -209,7 +210,7 @@ const About = () => {
             </div>
             <footer className="mt-6 flex items-center gap-3">
               <img
-                src="https://api.dicebear.com/9.x/micah/svg?seed=alan-hegewisch"
+                src={alanImage}
                 alt="Alan Hegewisch"
                 className="w-12 h-12 rounded-full border-2 border-primary/20"
               />
