@@ -87,8 +87,8 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="#"
-              className={`font-medium transition-colors hover:text-primary text-muted-foreground`}
+              to="/about"
+              className={`font-medium transition-colors hover:text-primary ${isActive("/about") ? "text-primary" : "text-muted-foreground"}`}
             >
               About Us
             </Link>
