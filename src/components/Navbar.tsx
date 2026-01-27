@@ -39,22 +39,22 @@ const Navbar = () => {
               Community
             </Link>
 
-            <NavigationMenu delayDuration={0}>
+            <NavigationMenu delayDuration={0} skipDelayDuration={0}>
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="font-medium text-muted-foreground hover:text-primary bg-transparent text-base">
                     Events
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[240px] gap-4 p-4">
+                    <ul className="grid w-[320px] gap-1 p-2">
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
                             to="/events/roundtables"
-                            className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10"
                           >
-                            <div className="text-base font-semibold leading-none">Roundtables</div>
-                            <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                            <div className="text-sm font-semibold leading-none">Roundtables</div>
+                            <p className="text-sm leading-snug text-muted-foreground">
                               Deep dives into specific topics.
                             </p>
                           </Link>
@@ -64,10 +64,10 @@ const Navbar = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to="/events/webinars"
-                            className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10"
                           >
-                            <div className="text-base font-semibold leading-none">Webinars</div>
-                            <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                            <div className="text-sm font-semibold leading-none">Webinars</div>
+                            <p className="text-sm leading-snug text-muted-foreground">
                               Online sessions and presentations.
                             </p>
                           </Link>
@@ -77,10 +77,10 @@ const Navbar = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to="/events/workshops"
-                            className="block select-none space-y-2 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10"
                           >
-                            <div className="text-base font-semibold leading-none">Workshops</div>
-                            <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                            <div className="text-sm font-semibold leading-none">Workshops</div>
+                            <p className="text-sm leading-snug text-muted-foreground">
                               Hands-on building sessions.
                             </p>
                           </Link>
