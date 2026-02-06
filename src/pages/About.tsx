@@ -8,6 +8,7 @@ import {
 import { Users, Target, Rocket } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import alanImage from "@/assets/members/alan_hegewisch.jpeg";
+import agentKImage from "@/assets/agfou_banner_k.png";
 
 interface TeamMember {
   name: string;
@@ -34,8 +35,16 @@ const teamMembers: TeamMember[] = [
     role: "Chief Vibe Officer",
     company: "Agents & Founders",
     groupRole: "Community Guardian",
-    image: "https://api.dicebear.com/9.x/bottts-neutral/svg?seed=agent-k&backgroundColor=f97316",
+    image: agentKImage,
     bio: "Ensuring the community stays friendly and the code stays clean.",
+  },
+  {
+    name: "Alejandro Rivera",
+    role: "",
+    company: "Agents & Founders",
+    groupRole: "Growth Lead",
+    image: "",
+    linkedin: "https://www.linkedin.com/in/alejandro-rivera-96aba4206/",
   },
 ];
 
@@ -146,7 +155,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center max-w-5xl mx-auto">
             {teamMembers.map((member, index) => (
               <Card
                 key={index}
@@ -159,9 +168,11 @@ const About = () => {
                     className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20"
                   />
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-1">
-                    {member.role} @ {member.company}
-                  </p>
+                  {member.role && (
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {member.role} @ {member.company}
+                    </p>
+                  )}
                   <p className="text-sm font-medium text-primary mb-3">
                     {member.groupRole}
                   </p>
