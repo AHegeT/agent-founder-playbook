@@ -10,7 +10,6 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Bot, UserPlus, Menu, X, ChevronDown } from "lucide-react";
-import LanguageToggle from "./LanguageToggle";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
@@ -116,7 +115,7 @@ const Navbar = () => {
               About Us
             </Link>
 
-            <LanguageToggle />
+            
 
             <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
               <Button className="bg-gradient-to-r from-primary to-primary/90 hover:opacity-90 transition-opacity shadow-lg shadow-primary/25 rounded-full px-6">
@@ -127,7 +126,7 @@ const Navbar = () => {
           </div>
 
           <div className="md:hidden flex items-center gap-2">
-            <LanguageToggle />
+            
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-md hover:bg-primary/10 transition-colors"
