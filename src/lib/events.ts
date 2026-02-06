@@ -6,11 +6,13 @@ import matter from 'gray-matter';
 export interface EventMetadata {
   id: string;
   title: string;
+  type: 'webinar' | 'roundtable' | 'workshop' | 'mastermind';
   date: string | null; // ISO format or null for TBD
   tags: string[];
   rsvpUrl: string;
   location?: string;
   description?: string;
+  image?: string;
   highlight?: boolean;
   published: boolean;
 }
@@ -106,6 +108,30 @@ export async function getPastEvents(): Promise<Event[]> {
 export async function getEventBySlug(slug: string): Promise<Event | null> {
   const allEvents = await getAllEvents();
   return allEvents.find(event => event.slug === slug) || null;
+}
+
+/**
+ * Get events by type
+ */
+export async function getEventsByType(type: EventMetadata['type']): Promise<Event[]> {
+  const publishedEvents = await getPublishedEvents();
+  return publishedEvents.filter(event => event.type === type);
+}
+
+/**
+ * Get upcoming events by type
+ */
+export async function getUpcomingEventsByType(type: EventMetadata['type']): Promise<Event[]> {
+  const upcomingEvents = await getUpcomingEvents();
+  return upcomingEvents.filter(event => event.type === type);
+}
+
+/**
+ * Get past events by type
+ */
+export async function getPastEventsByType(type: EventMetadata['type']): Promise<Event[]> {
+  const pastEvents = await getPastEvents();
+  return pastEvents.filter(event => event.type === type);
 }
 
 /**

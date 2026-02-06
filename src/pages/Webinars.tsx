@@ -1,11 +1,27 @@
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Users, Video, Clock, ArrowRight, Play } from "lucide-react";
+import { getUpcomingEventsByType, getPastEventsByType, formatEventDate, type Event } from "@/lib/events";
 
 import { useTranslation } from "react-i18next";
 
 const Webinars = () => {
   const { t } = useTranslation();
+  const [upcomingWebinars, setUpcomingWebinars] = useState<Event[]>([]);
+  const [pastWebinars, setPastWebinars] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      getUpcomingEventsByType('webinar'),
+      getPastEventsByType('webinar')
+    ]).then(([upcoming, past]) => {
+      setUpcomingWebinars(upcoming);
+      setPastWebinars(past);
+      setLoading(false);
+    });
+  }, []);
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -75,67 +91,109 @@ const Webinars = () => {
           {/* Upcoming Webinars */}
           <div className="space-y-8 mb-20">
             <h2 className="text-4xl font-bold text-center">Upcoming Webinars</h2>
-            <Card className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2">
-                    <CardTitle className="text-3xl">Stub: Webinar Title</CardTitle>
-                    <CardDescription className="text-lg">
-                      Stub: Webinar description and what attendees will learn.
-                    </CardDescription>
-                  </div>
-                  <Button className="bg-primary hover:bg-primary/90">
-                    Register Now
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>Stub: Date TBD</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    <span>Stub: Duration TBD</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            {loading ? (
+              <div className="text-center text-muted-foreground py-12">
+                Loading webinars...
+              </div>
+            ) : upcomingWebinars.length === 0 ? (
+              <Card className="border-2 bg-card/50">
+                <CardContent className="py-12 text-center text-muted-foreground">
+                  No upcoming webinars scheduled yet. Check back soon!
+                </CardContent>
+              </Card>
+            ) : (
+              <div className="space-y-6">
+                {upcomingWebinars.map((webinar) => (
+                  <Card key={webinar.id} className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all">
+                    <div className="flex flex-col md:flex-row gap-6 p-6">
+                      {webinar.image && (
+                        <div className="flex-shrink-0 w-full md:w-48 h-48 overflow-hidden rounded-lg">
+                          <img
+                            src={webinar.image}
+                            alt={webinar.title}
+                            className="w-full h-full object-contain bg-white"
+                          />
+                        </div>
+                      )}
+                      <div className="flex-1 flex flex-col gap-4">
+                        <div className="space-y-2">
+                          <CardTitle className="text-2xl md:text-3xl">{webinar.title}</CardTitle>
+                          <CardDescription className="text-base md:text-lg">
+                            {webinar.description}
+                          </CardDescription>
+                        </div>
+                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" />
+                            <span>{formatEventDate(webinar.date)}</span>
+                          </div>
+                          {webinar.location && (
+                            <div className="flex items-center gap-2">
+                              <Video className="w-4 h-4" />
+                              <span>{webinar.location}</span>
+                            </div>
+                          )}
+                          {webinar.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2 ml-auto">
+                              {webinar.tags.map(tag => (
+                                <span key={tag} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        <div className="mt-auto">
+                          <a href={webinar.rsvpUrl} target="_blank" rel="noopener noreferrer">
+                            <Button className="bg-primary hover:bg-primary/90 w-full md:w-auto">
+                              Register Now
+                              <ArrowRight className="ml-2 w-4 h-4" />
+                            </Button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Past Webinars */}
-          {/*<div className="space-y-12">
-            <h2 className="text-4xl font-bold text-center">Past Webinars</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
-                <CardHeader>
-                  <div className="flex items-center gap-2 text-primary mb-2">
-                    <Play className="w-4 h-4" />
-                    <span className="text-sm font-medium">Recording Available</span>
-                  </div>
-                  <CardTitle>Stub: Past Webinar Title 1</CardTitle>
-                  <CardDescription>
-                    Stub: Brief description of the past webinar topic.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-
-              <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
-                <CardHeader>
-                  <div className="flex items-center gap-2 text-primary mb-2">
-                    <Play className="w-4 h-4" />
-                    <span className="text-sm font-medium">Recording Available</span>
-                  </div>
-                  <CardTitle>Stub: Past Webinar Title 2</CardTitle>
-                  <CardDescription>
-                    Stub: Brief description of the past webinar topic.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+          {!loading && pastWebinars.length > 0 && (
+            <div className="space-y-8">
+              <h2 className="text-4xl font-bold text-center">Past Webinars</h2>
+              <div className="grid md:grid-cols-2 gap-8">
+                {pastWebinars.map((webinar) => (
+                  <Card key={webinar.id} className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
+                    <CardHeader className="space-y-4">
+                      {webinar.image && (
+                        <div className="w-full h-32 overflow-hidden rounded-lg">
+                          <img
+                            src={webinar.image}
+                            alt={webinar.title}
+                            className="w-full h-full object-contain bg-white"
+                          />
+                        </div>
+                      )}
+                      <div className="flex items-center gap-2 text-primary">
+                        <Play className="w-4 h-4" />
+                        <span className="text-sm font-medium">Recording Available</span>
+                      </div>
+                      <CardTitle>{webinar.title}</CardTitle>
+                      <CardDescription>
+                        {webinar.description}
+                      </CardDescription>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>{formatEventDate(webinar.date)}</span>
+                      </div>
+                    </CardHeader>
+                  </Card>
+                ))}
+              </div>
             </div>
-          </div>*/}
+          )}
         </div>
       </section>
 

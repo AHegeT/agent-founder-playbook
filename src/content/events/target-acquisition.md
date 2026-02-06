@@ -1,6 +1,7 @@
 ---
 id: target-acquisition
 title: "Target Acquisition: Automating Research & The Perfect Briefing"
+type: roundtable
 date: "2026-01-27T18:00:00"
 tags: ["#Research", "#AI", "#Sales"]
 rsvpUrl: "https://www.meetup.com/agents-and-founders"
