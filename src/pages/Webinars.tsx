@@ -12,10 +12,10 @@ const Webinars = () => {
       <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-background via-background to-primary/5">
         <div className="container mx-auto max-w-4xl text-center space-y-6">
           <h1 className="text-5xl md:text-6xl font-bold">
-            <span className="text-primary">Webinars</span>
+            <span className="text-primary">Master the Agentic Era</span>
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Stub: Online sessions bringing AI insights directly to you.
+            High-signal sessions designed to help founders and builders navigate the frontier of autonomous AI.
           </p>
         </div>
       </section>
@@ -27,10 +27,10 @@ const Webinars = () => {
             <div className="space-y-6">
               <h2 className="text-4xl font-bold">What are Webinars?</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Stub: Description of webinars and their purpose.
+                Our webinars are more than just slide decks. They are tactical deep dives into the intersection of AI agents and business growth. We bridge the gap between "cool tech" and "scalable revenue".
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Stub: Additional context about webinar format and value.
+                Whether we’re live-coding a new multi-agent swarm or interviewing a founder who just automated their entire SDR pipeline, the goal is the same: providing you with a repeatable blueprint for success.
               </p>
             </div>
             <div className="bg-card p-8 rounded-2xl shadow-lg">
@@ -42,7 +42,7 @@ const Webinars = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Live & Recorded</h3>
                     <p className="text-sm text-muted-foreground">
-                      Stub: Information about live sessions and recordings.
+                      Join the live Q&A to get your specific questions answered, or catch the high-def replay in our archive at your own pace.
                     </p>
                   </div>
                 </div>
@@ -53,7 +53,7 @@ const Webinars = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Expert Speakers</h3>
                     <p className="text-sm text-muted-foreground">
-                      Stub: Information about webinar presenters.
+                      We bring in the founders and people who are actually building tools that move the needle and generate more revenue.
                     </p>
                   </div>
                 </div>
@@ -64,7 +64,7 @@ const Webinars = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Flexible Schedule</h3>
                     <p className="text-sm text-muted-foreground">
-                      Stub: Information about timing and accessibility.
+                      We respect your deep-work hours. Sessions are kept concise, high-impact, and scheduled to accommodate our global community.
                     </p>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ const Webinars = () => {
           </div>
 
           {/* Past Webinars */}
-          <div className="space-y-12">
+          {/*<div className="space-y-12">
             <h2 className="text-4xl font-bold text-center">Past Webinars</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="border-2 hover:border-primary transition-all hover:shadow-lg h-full">
@@ -135,16 +135,16 @@ const Webinars = () => {
                 </CardHeader>
               </Card>
             </div>
-          </div>
+          </div>*/}
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 px-4 bg-primary text-white">
         <div className="container mx-auto text-center space-y-8 max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-bold">Never Miss a Webinar</h2>
+          <h2 className="text-4xl md:text-5xl font-bold">Don't Build in the Dark</h2>
           <p className="text-xl opacity-90">
-            Stub: Join our community to get notified about upcoming webinars.
+            The AI landscape moves fast. Join 50+ founders and agents to get notified when we go live.
           </p>
           <a href="https://www.meetup.com/agents-and-founders/" target="_blank" rel="noopener noreferrer">
             <Button size="lg" variant="secondary" className="text-lg h-14 px-8 hover:scale-105 transition-transform">
