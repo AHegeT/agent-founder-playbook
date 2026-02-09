@@ -41,7 +41,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Alejandro Rivera",
-    role: "Operations & Automation Strategist",
+    role: "Operations & Automation Consultant",
     company: "Agents & Founders",
     groupRole: "Growth Lead",
     image: alejandroImage,
