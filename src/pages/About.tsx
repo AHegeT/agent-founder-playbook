@@ -29,7 +29,7 @@ const teamMembers: TeamMember[] = [
     groupRole: "Founder and Lead Orchestrator",
     image: alanImage,
     linkedin: "https://linkedin.com/in/alan-hegewisch",
-    bio: "Software engineer turned founder. I bridge the gap between complex code and business fundamentals, helping founders build systems that actually work.",
+    bio: "Software Engineer turned founder. I bridge the gap between complex code and business fundamentals, helping founders build systems that actually work.",
   },
   {
     name: "Agent K",
