@@ -8,6 +8,7 @@ import {
 import { Users, Target, Rocket } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import alanImage from "@/assets/members/alan_hegewisch.jpeg";
+import alejandroImage from "@/assets/members/alejandro_rivera.jpeg";
 import agentKImage from "@/assets/agfou_banner_k.png";
 
 interface TeamMember {
@@ -40,11 +41,12 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Alejandro Rivera",
-    role: "",
+    role: "Operations & Automation Strategist",
     company: "Agents & Founders",
     groupRole: "Growth Lead",
-    image: "",
+    image: alejandroImage,
     linkedin: "https://www.linkedin.com/in/alejandro-rivera-96aba4206/",
+    bio: "Systems Engineer dedicated to building automation that works in the real world. I specialize in turning complex operational challenges into streamlined, scalable systems that deliver value beyond the demo.",
   },
 ];
 
@@ -176,11 +178,6 @@ const About = () => {
                   <p className="text-sm font-medium text-primary mb-3">
                     {member.groupRole}
                   </p>
-                  {member.bio && (
-                    <p className="text-sm text-muted-foreground mb-4 italic">
-                      "{member.bio}"
-                    </p>
-                  )}
                   {member.linkedin && (
                     <a
                       href={member.linkedin}
@@ -193,6 +190,11 @@ const About = () => {
                       </svg>
                       LinkedIn
                     </a>
+                  )}
+                  {member.bio && (
+                    <p className="text-sm text-muted-foreground mb-4 italic">
+                      "{member.bio}"
+                    </p>
                   )}
                 </CardContent>
               </Card>

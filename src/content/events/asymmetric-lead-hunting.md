@@ -1,6 +1,6 @@
 ---
 id: asymmetric-lead-hunting
-title: "Asymmetric Lead Hunting"
+title: "Lead Hunting"
 type: webinar
 date: "2026-02-24T18:00:00"
 tags: ["#Automation", "#Sales", "#N8N"]
