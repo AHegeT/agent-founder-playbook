@@ -14,7 +14,7 @@ import agentKImage from "@/assets/agfou_banner_k.png";
 interface TeamMember {
   name: string;
   role: string;
-  company: string;
+  company?: string;
   groupRole: string;
   image: string;
   linkedin?: string;
@@ -42,7 +42,6 @@ const teamMembers: TeamMember[] = [
   {
     name: "Alejandro Rivera",
     role: "Operations & Automation Consultant",
-    company: "Agents & Founders",
     groupRole: "Growth Lead",
     image: alejandroImage,
     linkedin: "https://www.linkedin.com/in/alejandro-rivera-96aba4206/",
@@ -172,7 +171,7 @@ const About = () => {
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                   {member.role && (
                     <p className="text-sm text-muted-foreground mb-1">
-                      {member.role} @ {member.company}
+                      {member.role}{member.company && '@ ' + member.company}
                     </p>
                   )}
                   <p className="text-sm font-medium text-primary mb-3">
