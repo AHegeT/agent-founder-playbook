@@ -5,7 +5,8 @@ description: The AI honeymoon phase is over — let's talk about what's actually
 nextSession: "Next session: Jul 8th, 2026"
 duration: 120 minutes
 location: Siroco Pizza
-meetupUrl: https://www.meetup.com/agents-and-founders
+meetupUrl: https://www.meetup.com/agents-and-founders/events/315534770
+image: /roundtables/state-of-ai-2026.jpeg
 published: true
 date: 2026-07-08
 ---

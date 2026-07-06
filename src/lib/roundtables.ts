@@ -12,6 +12,7 @@ export interface RoundtableMetadata {
   location?: string;
   meetupUrl?: string;
   slidoUrl?: string;
+  image?: string;
   published: boolean;
   date: string;
 }

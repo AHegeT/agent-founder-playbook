@@ -109,7 +109,16 @@ const Roundtables = () => {
               {nextSession && (
                 <div className="space-y-6 mb-20">
                   <h2 className="text-2xl md:text-4xl font-bold text-center">Next Session</h2>
-                  <Card className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all">
+                  <Card className="border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-xl transition-all overflow-hidden">
+                    {nextSession.image && (
+                      <Link to={`/events/roundtables/${nextSession.slug}`} className="block aspect-video overflow-hidden">
+                        <img
+                          src={nextSession.image}
+                          alt={nextSession.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </Link>
+                    )}
                     <CardHeader className="space-y-4">
                       <div className="space-y-2">
                         <CardTitle className="text-xl md:text-2xl">{nextSession.title}</CardTitle>

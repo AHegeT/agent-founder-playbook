@@ -78,6 +78,15 @@ const RoundtableDetail = () => {
             <p className="text-xl text-muted-foreground leading-relaxed">
               {roundtable.description}
             </p>
+            {roundtable.image && (
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src={roundtable.image}
+                  alt={roundtable.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>

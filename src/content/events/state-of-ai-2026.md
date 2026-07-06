@@ -4,9 +4,10 @@ title: "The State of AI in 2026: The Friction, the Sweet Spot and the Future"
 type: roundtable
 date: "2026-07-08T19:00:00"
 tags: ["#AI", "#Agents", "#Roundtable"]
-rsvpUrl: "https://www.meetup.com/agents-and-founders"
+rsvpUrl: "https://www.meetup.com/agents-and-founders/events/315534770"
 location: "Siroco Pizza"
 description: "The AI honeymoon phase is over — let's talk about what's actually failing, what's driving ROI, and what's next."
+image: "/roundtables/state-of-ai-2026.jpeg"
 highlight: true
 published: true
 ---
