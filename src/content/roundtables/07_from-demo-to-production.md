@@ -2,12 +2,13 @@
 id: from-demo-to-production
 title: "From Demo to Production: Taking What You Built From One User to Many"
 description: It worked perfectly when it was just you testing it. Let's talk about what breaks, what security holes open up, and what to design in from day one.
-nextSession: "Next session: Aug 5th, 2026"
+nextSession: "Next session: Aug 12th, 2026"
 duration: 90 minutes
 location: Interamerica Studios, Bahía de Corrientes 74
+meetupUrl: https://www.meetup.com/agents-and-founders/events/315940095/
 image: /roundtables/06_from_demo_to_production.png
 published: true
-date: 2026-08-05
+date: 2026-08-12
 ---
 
 # From Demo to Production: Taking What You Built From One User to Many
@@ -37,7 +38,7 @@ This is an interactive roundtable discussion where participants share experience
 
 ## Location & Time
 
-- **When**: Wednesday, August 5th, 2026, 7:00 PM - 8:30 PM
+- **When**: Wednesday, August 12th, 2026, 7:00 PM - 8:30 PM
 - **Duration**: 90 minutes
 - **Where**: Interamerica Studios, Bahía de Corrientes 74
 - **Format**: In-person roundtable discussion
