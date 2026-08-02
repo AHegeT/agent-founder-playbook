@@ -11,7 +11,7 @@ export const Spotlight = () => {
                     {/* Left: Photo */}
                     <div className="flex-shrink-0">
                         <img
-                            src="https://api.dicebear.com/9.x/micah/svg?seed=Aidnn?auto=format&fit=crop&q=80&w=300"
+                            src="https://api.dicebear.com/10.x/adventurer/svg?hairVariant=short19&detailsVariant=&eyebrowsVariant=variant10&mouthVariant=variant22&seed=2xymgtoj"
                             alt="Community Member"
                             className="w-full md:w-32 h-48 md:h-32 object-cover rounded-2xl"
                         />
@@ -19,10 +19,10 @@ export const Spotlight = () => {
 
                     {/* Middle: Content */}
                     <div className="flex-grow flex flex-col justify-center">
-                        <h3 className="text-2xl font-bold mb-1">Erik R.</h3>
-                        {/*<p className="text-base text-muted-foreground mb-4">Founder of ScaleAI</p>*/}
+                        <h3 className="text-2xl font-bold mb-1">Toku M.</h3>
+                        {/*<p className="text-base text-muted-foreground mb-4">Executive Coach</p>*/}
                         <blockquote className="text-sm italic border-l-4 border-orange-300 pl-3 mb-4">
-                            Erik proves you don't need a software engineering background to overhaul legacy systems. Seeing his trading company slowed down by outdated processes, he used Claude Code to rebuild operations from the ground up. He has since deployed a Telegram bot for vendor restocking and scripts that integrate directly with his ERP, successfully automating the manual grunt work that used to slow him down.
+                            Toku, an executive coach with a background as a Tibetan monk, is reinventing his coaching practice rather than replacing himself with AI. He extracts insights from his client sessions to build custom dashboards that track their progress and give them direct access to the frameworks he uses. His current challenge: making what he builds for one client accessible to all, securely and impactfully.
                         </blockquote>
                         {/*<Button variant="outline" className="self-start text-sm rounded-2xl border-orange-200 hover:bg-orange-50">
                             Read Her Story

@@ -5,6 +5,7 @@ import { Calendar, Users, Pizza, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import altataImage from "@/assets/altata.png";
 import sirocoImage from "@/assets/siroco.png";
+import interamericaImage from "@/assets/coming_soon.png";
 
 import { useTranslation } from "react-i18next";
 import { getLatestPastRoundtable, getNextUpcomingRoundtable, type Roundtable } from "@/lib/roundtables";
@@ -184,7 +185,7 @@ const Roundtables = () => {
           {/* Locations */}
           <div className="space-y-12 mb-20">
             <h2 className="text-2xl md:text-4xl font-bold text-center">{t('roundtables.locations.heading')}</h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
               <Card className="border-2 hover:border-primary transition-all hover:shadow-lg overflow-hidden">
                 <div className="aspect-video overflow-hidden">
                   <img
@@ -213,6 +214,22 @@ const Roundtables = () => {
                   <CardTitle>{t('roundtables.locations.siroco.name')}</CardTitle>
                   <CardDescription className="text-base">
                     {t('roundtables.locations.siroco.description')}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-2 hover:border-primary transition-all hover:shadow-lg overflow-hidden">
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={interamericaImage}
+                    alt="Interamerica Studios"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle>{t('roundtables.locations.interamerica.name')}</CardTitle>
+                  <CardDescription className="text-base">
+                    {t('roundtables.locations.interamerica.description')}
                   </CardDescription>
                 </CardHeader>
               </Card>

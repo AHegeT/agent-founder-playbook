@@ -107,6 +107,10 @@
             "siroco": {
                 "name": "Siroco Pizza",
                 "description": "Una deliciosa pizzería propiedad de uno de nuestros miembros: el lugar perfecto para compartir ideas y reunirse"
+            },
+            "interamerica": {
+                "name": "Interamerica Studios",
+                "description": "Un espacio de estudio creativo en el corazón de la ciudad, ideal para sesiones prácticas y construir juntos"
             }
         },
         "recentTopics": {

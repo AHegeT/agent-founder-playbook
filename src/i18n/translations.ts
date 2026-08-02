@@ -122,6 +122,10 @@ export const translations = {
         name: "Siroco Pizza",
         description: "A delicious pizzeria owned by one of our members - the perfect place to share ideas and come together",
       },
+      interamerica: {
+        name: "Interamerica Studios",
+        description: "A creative studio space in the heart of the city, great for hands-on sessions and building together",
+      },
     },
     recentTopics: {
       heading: "Recent Topics",
