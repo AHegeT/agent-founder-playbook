@@ -102,7 +102,7 @@ export const PlaybookContent = ({ content }: PlaybookContentProps) => {
 
         // Normal section - render as regular markdown
         return (
-          <div key={index} className="prose prose-lg prose-slate dark:prose-invert max-w-none">
+          <div key={index} className="prose prose-lg prose-slate dark:prose-invert max-w-none [&_:is(h1,h2,h3)]:scroll-mt-24">
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]}>
               {section.content}
             </ReactMarkdown>
