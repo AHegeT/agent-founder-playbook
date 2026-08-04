@@ -4,6 +4,7 @@ import {
   Target,
   Mail,
   MessageSquare,
+  Shield,
   Zap,
   type LucideIcon,
 } from 'lucide-react';
@@ -18,6 +19,7 @@ export const iconMap: Record<string, LucideIcon> = {
   Target,
   Mail,
   MessageSquare,
+  Shield,
   Zap,
 };
 
