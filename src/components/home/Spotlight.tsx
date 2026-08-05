@@ -22,7 +22,7 @@ export const Spotlight = () => {
                         <h3 className="text-2xl font-bold mb-1">Toku M.</h3>
                         {/*<p className="text-base text-muted-foreground mb-4">Executive Coach</p>*/}
                         <blockquote className="text-sm italic border-l-4 border-orange-300 pl-3 mb-4">
-                            Toku, an executive coach with a background as a Tibetan monk, is reinventing his coaching practice rather than replacing himself with AI. He extracts insights from his client sessions to build custom dashboards that track their progress and give them direct access to the frameworks he uses. His current challenge: making what he builds for one client accessible to all, securely and impactfully.
+                            Toku, an executive coach with a background as a Zen monk, is reinventing his coaching practice rather than replacing himself with AI. He extracts insights from his client sessions to build custom dashboards that track their progress and give them direct access to the frameworks he uses. His current challenge: making what he builds for one client accessible to all, securely and impactfully.
                         </blockquote>
                         {/*<Button variant="outline" className="self-start text-sm rounded-2xl border-orange-200 hover:bg-orange-50">
                             Read Her Story
