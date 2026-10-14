@@ -8,7 +8,7 @@ import {
 import { Users, Target, Rocket } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import alanImage from "@/assets/members/alan_hegewisch.jpeg";
-import alejandroImage from "@/assets/members/alejandro_rivera.jpeg";
+import lauImage from "@/assets/members/lauyumi_rojas.jpeg";
 import agentKImage from "@/assets/agfou_banner_k.png";
 
 interface TeamMember {
@@ -40,12 +40,13 @@ const teamMembers: TeamMember[] = [
     bio: "Ensuring the community stays friendly and the code stays clean.",
   },
   {
-    name: "Alejandro Rivera",
-    role: "Operations & Automation Consultant",
-    groupRole: "Growth Lead",
-    image: alejandroImage,
-    linkedin: "https://www.linkedin.com/in/alejandro-rivera-96aba4206/",
-    bio: "Systems Engineer dedicated to building automation that works in the real world. I specialize in turning complex operational challenges into streamlined, scalable systems that deliver value beyond the demo.",
+    name: "Lauyumi Rojas",
+    role: "Director of Recruiting Operations",
+    company: "Pearl Talent",
+    groupRole: "Operations & Talent Lead",
+    image: lauImage,
+    linkedin: "https://www.linkedin.com/in/lauyumiopsmx/",
+    bio: "I turn complex people and operations challenges into clear, scalable systems. With experience in remote teams, recruiting, and workflow automation, I bring a practical approach to helping founders connect the right talent, clear accountability, and measurable results.",
   },
 ];
 
@@ -171,7 +172,7 @@ const About = () => {
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                   {member.role && (
                     <p className="text-sm text-muted-foreground mb-1">
-                      {member.role}{member.company && '@ ' + member.company}
+                      {member.role}{member.company && ' @ ' + member.company}
                     </p>
                   )}
                   <p className="text-sm font-medium text-primary mb-3">
