@@ -41,8 +41,8 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Lauyumi Rojas",
-    role: "Director of Recruiting Operations",
-    company: "Pearl Talent",
+    role: "COO & Cofounder",
+    company: "WindHR & Operational Consultant",
     groupRole: "Operations & Talent Lead",
     image: lauImage,
     linkedin: "https://www.linkedin.com/in/lauyumiopsmx/",
