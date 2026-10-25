@@ -20,6 +20,7 @@ export type EventVote = {
 export type EventState = {
   activeQuestionIndex: number;
   pollStatus: PollStatus;
+  eventFinished: boolean;
   votes: EventVote[];
   revealedQuestionId: string | null;
   revealAll: boolean;
@@ -30,6 +31,13 @@ export type VoteCounts = { myth: number; reality: number; total: number };
 
 export const EVENT_STORAGE_KEY = "finding-right-talent-event-v1";
 export const EVENT_STATE_CHANGED = "finding-right-talent-state-changed";
+
+export const eventPanelists = [
+  { initials: "MM", name: "Mary Martínez", specialty: "Recursos Humanos", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Como líder de talento, explora nuevas formas de conectar personas con oportunidades en un mundo de trabajo cambiante.", linkedin: "https://www.linkedin.com/in/example-mary-martinez" },
+  { initials: "LR", name: "Lauyumi Rojas", specialty: "Operaciones", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Convierte retos operativos en sistemas claros y escalables para equipos y negocios en crecimiento.", linkedin: "https://www.linkedin.com/in/example-lauyumi-rojas" },
+  { initials: "AH", name: "Alan Hegewisch", specialty: "Tecnología", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Construye productos con IA y ayuda a founders a llevar ideas con agentes a soluciones prácticas.", linkedin: "https://www.linkedin.com/in/example-alan-hegewisch" },
+  { initials: "UV", name: "Uriel Valtierra", specialty: "Negocios", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Trabaja en estrategia comercial y crecimiento de negocios preparados para la era de los agentes.", linkedin: "https://www.linkedin.com/in/example-uriel-valtierra" },
+];
 
 export const eventQuestions: EventQuestion[] = [
   {
@@ -93,6 +101,7 @@ export const eventQuestions: EventQuestion[] = [
 const initialState: EventState = {
   activeQuestionIndex: 0,
   pollStatus: "open",
+  eventFinished: false,
   votes: [],
   revealedQuestionId: null,
   revealAll: false,
@@ -112,6 +121,7 @@ export function readEventState(): EventState {
         eventQuestions.length - 1,
       ),
       pollStatus: parsed.pollStatus ?? "open",
+      eventFinished: parsed.eventFinished ?? false,
       votes: Array.isArray(parsed.votes) ? parsed.votes : [],
       revealedQuestionId: parsed.revealedQuestionId ?? null,
       revealAll: parsed.revealAll ?? false,
@@ -130,6 +140,7 @@ export async function saveEventState(state: EventState) {
       .update({
         active_question_id: question.id,
         poll_status: state.pollStatus,
+        event_finished: state.eventFinished,
         revealed_question_id: state.revealedQuestionId,
         reveal_all: state.revealAll,
         updated_at: new Date().toISOString(),

@@ -12,6 +12,7 @@ type RemoteSnapshot = {
   singleton: boolean;
   active_question_id: string;
   poll_status: EventState["pollStatus"];
+  event_finished: boolean;
   revealed_question_id: string | null;
   reveal_all: boolean;
 };
@@ -71,6 +72,7 @@ export function useFindingTalentState() {
     setState({
       activeQuestionIndex: Math.max(0, activeQuestionIndex),
       pollStatus: remote.poll_status,
+      eventFinished: remote.event_finished ?? false,
       votes: [],
       revealedQuestionId: remote.revealed_question_id,
       revealAll: remote.reveal_all,

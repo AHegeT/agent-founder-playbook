@@ -82,15 +82,18 @@ export default function FindingTalentModerator() {
   const moveTo = (index: number) => update({
     ...state,
     activeQuestionIndex: index,
-    pollStatus: "closed",
+    pollStatus: "open",
+    eventFinished: false,
     revealedQuestionId: null,
     revealAll: false,
   });
   const closePoll = () => update({ ...state, pollStatus: "closed" });
-  const openPoll = () => update({ ...state, pollStatus: "open", revealedQuestionId: null, revealAll: false });
+  const openPoll = () => update({ ...state, pollStatus: "open", eventFinished: false, revealedQuestionId: null, revealAll: false });
   const revealQuestion = () => update({ ...state, pollStatus: "revealed", revealedQuestionId: question.id, revealAll: false });
   const revealAll = () => update({ ...state, pollStatus: "closed", revealedQuestionId: null, revealAll: true });
   const hideResults = () => update({ ...state, pollStatus: "closed", revealedQuestionId: null, revealAll: false });
+  const finishEvent = () => update({ ...state, eventFinished: true, pollStatus: "closed", revealedQuestionId: null, revealAll: false });
+  const resumeEvent = () => update({ ...state, eventFinished: false, pollStatus: "open", revealedQuestionId: null, revealAll: false });
 
   const signIn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -112,7 +115,7 @@ export default function FindingTalentModerator() {
   const resetLocalDemo = () => {
     if (window.confirm("¿Borrar los votos de demostración guardados en este navegador?")) {
       const fresh = readEventState();
-      void update({ ...fresh, activeQuestionIndex: 0, pollStatus: "open", votes: [], revealedQuestionId: null, revealAll: false });
+      void update({ ...fresh, activeQuestionIndex: 0, pollStatus: "open", eventFinished: false, votes: [], revealedQuestionId: null, revealAll: false });
     }
   };
 
@@ -161,7 +164,7 @@ export default function FindingTalentModerator() {
         <div className="ft-moderator-layout">
           <section className="ft-stage-card">
             <div className="ft-stage-topline"><span className={`ft-status-dot ${state.pollStatus}`} />
-              <span>{state.pollStatus === "open" ? "VOTACIÓN ABIERTA" : state.pollStatus === "closed" ? "VOTACIÓN CERRADA" : "RESULTADOS REVELADOS"}</span>
+              <span>{state.eventFinished ? "EVENTO FINALIZADO" : state.pollStatus === "open" ? "VOTACIÓN ABIERTA" : state.pollStatus === "closed" ? "VOTACIÓN CERRADA" : "RESULTADOS REVELADOS"}</span>
               <span className="ft-question-count">{activeQuestionIndex + 1} / {eventQuestions.length}</span>
             </div>
             <div className="ft-stage-question">
@@ -183,7 +186,7 @@ export default function FindingTalentModerator() {
                 <div className="ft-result-label"><span>Realidad</span><b>{results.realityPercent}%</b></div><div className="ft-result-track reality"><i style={{ width: `${results.realityPercent}%` }} /></div>
               </div>
             ) : null}
-            <div className="ft-stage-controls">
+            {!state.eventFinished && <div className="ft-stage-controls">
               <button className="ft-control-button" onClick={() => void moveTo(Math.max(0, activeQuestionIndex - 1))} disabled={activeQuestionIndex === 0 || busy}><ArrowLeft size={16} /> Anterior</button>
               {state.pollStatus === "open" ? (
                 <button className="ft-control-button ft-control-warn" onClick={() => void closePoll()} disabled={busy}><LockKeyhole size={16} /> Cerrar voto</button>
@@ -191,8 +194,8 @@ export default function FindingTalentModerator() {
                 <button className="ft-control-button ft-control-primary" onClick={() => void openPoll()} disabled={busy}><UnlockKeyhole size={16} /> Abrir voto</button>
               )}
               <button className="ft-control-button ft-control-primary" onClick={() => void moveTo(Math.min(eventQuestions.length - 1, activeQuestionIndex + 1))} disabled={activeQuestionIndex === eventQuestions.length - 1 || busy}>Siguiente <ArrowRight size={16} /></button>
-            </div>
-            {state.pollStatus !== "open" && (
+            </div>}
+            {!state.eventFinished && state.pollStatus !== "open" && (
               <div className="ft-reveal-controls">
                 <button className="ft-control-button" onClick={() => void revealQuestion()} disabled={busy}><Eye size={15} /> Revelar esta pregunta</button>
                 <button className="ft-control-button" onClick={() => void revealAll()} disabled={busy}><Eye size={15} /> Revelar todas las votaciones</button>
@@ -210,6 +213,11 @@ export default function FindingTalentModerator() {
             </section>
             <section className="ft-side-card"><span className="ft-eyebrow">Afirmación asignada</span><h2>{question.assigned}</h2><p>La audiencia vota primero; revela el resultado después de cerrar el voto.</p></section>
             <section className="ft-side-card ft-side-agenda"><span className="ft-eyebrow">Ritmo de la ronda</span><p>0:30 Leer · 1:00 votar · 0:30 revelar · 2:00 panelista · 2:00 público · 3:00 debate</p></section>
+            {state.eventFinished ? (
+              <button className="ft-control-button ft-control-primary ft-finish-event" onClick={() => void resumeEvent()} disabled={busy}><Play size={15} /> Reabrir evento y votación</button>
+            ) : (
+              <button className="ft-control-button ft-control-warn ft-finish-event" onClick={() => void finishEvent()} disabled={busy}><LockKeyhole size={15} /> Finalizar evento</button>
+            )}
             {!isRemote && <button className="ft-reset-button" onClick={resetLocalDemo}><RotateCcw size={14} /> Reiniciar datos de esta demo</button>}
           </aside>
         </div>

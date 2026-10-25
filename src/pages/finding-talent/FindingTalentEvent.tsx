@@ -1,38 +1,8 @@
 import { ArrowRight, CalendarDays, Clock3, Linkedin, MapPin, Radio } from "lucide-react";
 import { Link } from "react-router-dom";
 import { EventHeader } from "@/components/finding-talent/EventHeader";
+import { eventPanelists } from "@/lib/findingTalent";
 import "./FindingTalentEvent.css";
-
-const panelists = [
-  {
-    initials: "MM",
-    name: "Mary Martínez",
-    specialty: "Recursos Humanos",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Como líder de talento, explora nuevas formas de conectar personas con oportunidades en un mundo de trabajo cambiante.",
-    linkedin: "https://www.linkedin.com/in/example-mary-martinez",
-  },
-  {
-    initials: "LR",
-    name: "Lauyumi Rojas",
-    specialty: "Operaciones",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Convierte retos operativos en sistemas claros y escalables para equipos y negocios en crecimiento.",
-    linkedin: "https://www.linkedin.com/in/example-lauyumi-rojas",
-  },
-  {
-    initials: "AH",
-    name: "Alan Hegewisch",
-    specialty: "Tecnología",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Construye productos con IA y ayuda a founders a llevar ideas con agentes a soluciones prácticas.",
-    linkedin: "https://www.linkedin.com/in/example-alan-hegewisch",
-  },
-  {
-    initials: "UV",
-    name: "Uriel Valtierra",
-    specialty: "Negocios",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Trabaja en estrategia comercial y crecimiento de negocios preparados para la era de los agentes.",
-    linkedin: "https://www.linkedin.com/in/example-uriel-valtierra",
-  },
-];
 
 const agenda = [
   ["00:00", "Apertura", "Bienvenida y voto de calentamiento", "7 min"],
@@ -77,7 +47,7 @@ export default function FindingTalentEvent() {
             <p>Biografías y enlaces de demostración.<br />Actualizaremos estos datos antes del evento.</p>
           </div>
           <div className="ft-panelist-grid">
-            {panelists.map((person) => (
+            {eventPanelists.map((person) => (
               <article className="ft-panelist-card" key={person.name}>
                 <div className="ft-avatar">{person.initials}</div>
                 <div className="ft-specialty">{person.specialty}</div>

@@ -13,11 +13,28 @@ where participant_id is null;
 
 alter table public.finding_talent_participants
   alter column participant_id set not null,
-  alter column user_id drop not null,
   alter column display_name drop not null;
 
+-- The live project may have a different primary-key name/column than migration 002.
+-- Drop whichever PK is currently present before making user_id nullable.
+do $$
+declare
+  primary_key_name text;
+begin
+  select c.conname into primary_key_name
+  from pg_constraint c
+  where c.conrelid = 'public.finding_talent_participants'::regclass
+    and c.contype = 'p';
+
+  if primary_key_name is not null then
+    execute format('alter table public.finding_talent_participants drop constraint %I', primary_key_name);
+  end if;
+end;
+$$;
+
 alter table public.finding_talent_participants
-  drop constraint if exists finding_talent_participants_pkey;
+  alter column user_id drop not null;
+
 alter table public.finding_talent_participants
   add constraint finding_talent_participants_pkey primary key (participant_id);
 
@@ -185,3 +202,5 @@ grant execute on function public.check_finding_talent_attendee(text) to anon, au
 grant execute on function public.register_finding_talent_participant(text, text, text, text, text) to anon, authenticated;
 grant execute on function public.has_finding_talent_voted(text, text) to anon, authenticated;
 grant execute on function public.cast_finding_talent_vote(text, text, text) to anon, authenticated;
+
+notify pgrst, 'reload schema';

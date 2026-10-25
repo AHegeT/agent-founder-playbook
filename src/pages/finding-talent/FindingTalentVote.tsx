@@ -1,9 +1,10 @@
-import { Check, Clock3, Radio } from "lucide-react";
+import { Check, Clock3, Linkedin, Radio } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 import { EventHeader } from "@/components/finding-talent/EventHeader";
 import {
   EVENT_STORAGE_KEY,
   eventQuestions,
+  eventPanelists,
   getQuestionResults,
   getVoterId,
   submitEventVote,
@@ -183,6 +184,33 @@ export default function FindingTalentVote() {
 
   if (stateError) {
     return <main className="ft-page ft-voter-page"><div className="ft-container ft-voter-container"><EventHeader section="Votación en vivo" compact /><div className="ft-form-error">No se pudo cargar la pregunta del evento: {stateError}</div></div></main>;
+  }
+
+  if (state.eventFinished) {
+    return (
+      <main className="ft-page ft-voter-page ft-thanks-page">
+        <div className="ft-container ft-voter-container">
+          <EventHeader section="Gracias por acompañarnos" compact />
+          <section className="ft-thanks-card">
+            <div className="ft-voter-brand">AGENTS <span>&</span> FOUNDERS <Radio size={15} /></div>
+            <span className="ft-eyebrow">Finding the right talent in the agentic era</span>
+            <h1>¡Gracias por ser parte de la conversación!</h1>
+            <p>Esperamos que te lleves nuevas ideas para encontrar y desarrollar talento en la era de los agentes.</p>
+            <h2>Conecta con los ponentes</h2>
+            <div className="ft-thanks-speakers">
+              {eventPanelists.map((person) => (
+                <a key={person.name} href={person.linkedin} target="_blank" rel="noreferrer" className="ft-thanks-speaker">
+                  <span className="ft-avatar">{person.initials}</span>
+                  <span><strong>{person.name}</strong><small>{person.specialty}</small></span>
+                  <Linkedin size={18} />
+                </a>
+              ))}
+            </div>
+            <p className="ft-thanks-note">Los enlaces de LinkedIn son de demostración; actualízalos en el perfil de ponentes antes del evento.</p>
+          </section>
+        </div>
+      </main>
+    );
   }
 
   if (isSupabaseConfigured && (!attendeeReady || stage !== "vote")) {
