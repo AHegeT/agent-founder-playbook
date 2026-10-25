@@ -19,14 +19,14 @@ export default function FindingTalentVote() {
   const [session, setSession] = useState<Session | null>(null);
   const [profileReady, setProfileReady] = useState(!isSupabaseConfigured);
   const [identityLoading, setIdentityLoading] = useState(isSupabaseConfigured);
-  const [identityStep, setIdentityStep] = useState<"email" | "code" | "profile">("email");
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
+  const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const [role, setRole] = useState("");
   const [organization, setOrganization] = useState("");
   const [eventIntent, setEventIntent] = useState("");
   const [identityError, setIdentityError] = useState("");
+  const [identityNotice, setIdentityNotice] = useState("");
   const [identityBusy, setIdentityBusy] = useState(false);
   const [selected, setSelected] = useState<VoteChoice | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -48,13 +48,12 @@ export default function FindingTalentVote() {
       setIdentityError("");
       if (!nextSession) {
         setProfileReady(false);
-        setIdentityStep("email");
         setIdentityLoading(false);
         return;
       }
       const { data, error } = await supabase
         .from("finding_talent_participants")
-        .select("display_name,role,organization,event_intent")
+        .select("display_name,organization,event_intent")
         .eq("user_id", nextSession.user.id)
         .maybeSingle();
       if (!alive) return;
@@ -64,13 +63,11 @@ export default function FindingTalentVote() {
         setIdentityStep("profile");
       } else if (data) {
         setDisplayName(data.display_name);
-        setRole(data.role);
         setOrganization(data.organization ?? "");
         setEventIntent(data.event_intent ?? "");
         setProfileReady(true);
       } else {
         setEmail(nextSession.user.email ?? "");
-        setIdentityStep("profile");
         setProfileReady(false);
       }
       setIdentityLoading(false);
@@ -85,24 +82,27 @@ export default function FindingTalentVote() {
     };
   }, []);
 
-  const sendCode = async (event: FormEvent<HTMLFormElement>) => {
+  const authenticate = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!supabase) return;
     setIdentityBusy(true);
     setIdentityError("");
-    const { error } = await supabase.auth.signInWithOtp({ email: email.trim(), options: { shouldCreateUser: true } });
-    if (error) setIdentityError(error.message);
-    else setIdentityStep("code");
-    setIdentityBusy(false);
-  };
-
-  const verifyCode = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!supabase) return;
-    setIdentityBusy(true);
-    setIdentityError("");
-    const { error } = await supabase.auth.verifyOtp({ email: email.trim(), token: code.trim(), type: "email" });
-    if (error) setIdentityError(error.message);
+    setIdentityNotice("");
+    if (authMode === "login") {
+      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      if (error) setIdentityError(error.message);
+    } else {
+      const { data, error } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: { emailRedirectTo: `${window.location.origin}/events/finding-right-talent/vote` },
+      });
+      if (error) setIdentityError(error.message);
+      else if (!data.session) {
+        setIdentityNotice("Cuenta creada. Revisa tu correo si Supabase solicita confirmar la dirección; después inicia sesión con tu contraseña.");
+        setAuthMode("login");
+      }
+    }
     setIdentityBusy(false);
   };
 
@@ -115,7 +115,6 @@ export default function FindingTalentVote() {
       user_id: session.user.id,
       email: session.user.email,
       display_name: displayName.trim(),
-      role,
       organization: organization.trim() || null,
       event_intent: eventIntent.trim() || null,
       updated_at: new Date().toISOString(),
@@ -192,34 +191,28 @@ export default function FindingTalentVote() {
           <EventHeader section="Votación en vivo" compact />
           <section className="ft-auth-card ft-attendee-card">
             <span className="ft-eyebrow">Acceso al evento</span>
-            {!session && identityStep === "email" && <>
-              <h1>Registra tu voto con tu correo.</h1>
-              <p>Usa el correo de tu registro del evento. Si necesitas registrar otro correo, también puedes hacerlo. Te enviaremos un código para verificarlo.</p>
-              <form onSubmit={sendCode} className="ft-auth-form">
+            {!session && <>
+              <h1>{authMode === "login" ? "Entra para registrar tu voto." : "Crea tu acceso al evento."}</h1>
+              <p>Usa el correo con el que te registraste al evento, o crea una cuenta con otro correo.</p>
+              <form onSubmit={authenticate} className="ft-auth-form">
                 <label>Correo electrónico<input type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} /></label>
-                <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Enviando…" : "Enviar código"}</button>
+                <label>Contraseña<input type="password" autoComplete={authMode === "login" ? "current-password" : "new-password"} required minLength={6} value={password} onChange={(event) => setPassword(event.target.value)} /></label>
+                <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Un momento…" : authMode === "login" ? "Iniciar sesión" : "Crear cuenta"}</button>
               </form>
-            </>}
-            {!session && identityStep === "code" && <>
-              <h1>Confirma tu correo.</h1><p>Escribe el código de verificación que enviamos a {email}.</p>
-              <form onSubmit={verifyCode} className="ft-auth-form">
-                <label>Código de verificación<input inputMode="numeric" autoComplete="one-time-code" required minLength={6} value={code} onChange={(event) => setCode(event.target.value)} /></label>
-                <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Verificando…" : "Verificar correo"}</button>
-                <button type="button" className="ft-text-link" onClick={() => setIdentityStep("email")}>Usar otro correo</button>
-              </form>
+              <button type="button" className="ft-text-link ft-auth-toggle" onClick={() => { setAuthMode(authMode === "login" ? "signup" : "login"); setIdentityError(""); setIdentityNotice(""); }}>{authMode === "login" ? "¿Primera vez? Crea una cuenta" : "¿Ya tienes cuenta? Inicia sesión"}</button>
             </>}
             {session && !profileReady && <>
               <h1>Cuéntanos un poco de ti.</h1><p>Esto nos ayuda a entender quiénes están en la conversación. Solo usaremos estos datos para el evento.</p>
               <form onSubmit={saveProfile} className="ft-auth-form">
                 <label>Nombre<input autoComplete="name" required maxLength={100} value={displayName} onChange={(event) => setDisplayName(event.target.value)} /></label>
-                <label>¿Cuál describe mejor tu rol?<select required value={role} onChange={(event) => setRole(event.target.value)}><option value="">Selecciona una opción</option><option>Reclutamiento / RH</option><option>Founder / liderazgo</option><option>Operaciones</option><option>Tecnología</option><option>Candidato/a</option><option>Otro</option></select></label>
                 <label>Organización <span>(opcional)</span><input autoComplete="organization" maxLength={120} value={organization} onChange={(event) => setOrganization(event.target.value)} /></label>
                 <label>¿Qué te gustaría llevarte del evento? <span>(opcional)</span><textarea maxLength={240} rows={3} value={eventIntent} onChange={(event) => setEventIntent(event.target.value)} /></label>
                 <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Guardando…" : "Continuar a la votación"}</button>
               </form>
             </>}
             {identityError && <div className="ft-form-error">{identityError}</div>}
-            <p className="ft-auth-help">Al verificar el correo, cada persona puede votar una vez por pregunta.</p>
+            {identityNotice && <div className="ft-auth-notice">{identityNotice}</div>}
+            <p className="ft-auth-help">Cada cuenta puede votar una vez por pregunta.</p>
           </section>
         </div>
       </main>

@@ -4,12 +4,14 @@ create table if not exists public.finding_talent_participants (
   user_id uuid primary key references auth.users(id) on delete cascade,
   email text not null,
   display_name text not null,
-  role text not null,
   organization text,
   event_intent text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Safe for projects where the earlier draft of this migration was already applied.
+alter table public.finding_talent_participants drop column if exists role;
 
 alter table public.finding_talent_votes
   add column if not exists user_id uuid references auth.users(id) on delete set null;

@@ -113,6 +113,8 @@
 .ft-attendee-card { margin-top: 3vh; }
 .ft-voter-account { align-self: flex-start; margin-top: 8px; padding: 0; border: 0; background: none; color: hsl(20 6% 48%); font-size: 10px; text-decoration: underline; cursor: pointer; }
 .ft-auth-help { margin-bottom: 0; font-size: 10px!important; }
+.ft-auth-toggle { margin-top: 12px; }
+.ft-auth-notice { margin: 12px 0; padding: 11px 13px; border: 1px solid hsl(155 45% 45% / .24); border-radius: 10px; background: hsl(155 45% 45% / .07); color: hsl(155 45% 28%); font-size: 11px; line-height: 1.5; }
 .ft-form-error { margin: 12px 0; padding: 11px 13px; border: 1px solid hsl(0 84% 60% / .2); border-radius: 10px; background: hsl(0 84% 60% / .06); color: hsl(0 65% 42%); font-size: 11px; line-height: 1.5; }
 .ft-action-error { margin: 0 0 15px; }
 .ft-page-message { margin-top: 10vh; color: hsl(20 6% 40%); text-align: center; }
