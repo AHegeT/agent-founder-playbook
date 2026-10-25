@@ -51,6 +51,10 @@ export default function FindingTalentVote() {
         setIdentityLoading(false);
         return;
       }
+      // If the email matches an imported RSVP, link this auth account to that roster entry.
+      // Accounts not in the RSVP list remain allowed, as the event can accept new registrations.
+      await supabase.rpc("claim_finding_talent_attendee");
+      if (!alive) return;
       const { data, error } = await supabase
         .from("finding_talent_participants")
         .select("display_name,organization,event_intent")

@@ -32,4 +32,19 @@ The moderator view controls the active question, voting open/closed state, and w
 
 After the event schema is in place, run [`migrations/202610250002_attendee_registration.sql`](migrations/202610250002_attendee_registration.sql) in the SQL Editor. This adds private attendee profiles and changes voting to require an authenticated account. Participants create an account or sign in with email and password, then fill out a short profile (name, optional organization, and optional event expectation). Role is omitted because it is already collected on the event registration page. Each account can vote once per question; the database enforces the limit even if someone clears browser storage or changes devices.
 
-In **Authentication → URL Configuration**, add the deployed event URL to the allowed redirect/site URLs. In **Authentication → Providers → Email**, keep email/password sign-in enabled. If email confirmations are enabled, Supabase may also send its standard confirmation link after account creation; this flow does not use one-time passcodes. The registration screen accepts the email used for the event or another email, but does not compare it against an imported Luma attendee list. There is no attendee list in this repository yet; to restrict access to that roster, import it into Supabase and add an email-allowlist check before enabling voting.
+In **Authentication → URL Configuration**, add the deployed event URL to the allowed redirect/site URLs. In **Authentication → Providers → Email**, keep email/password sign-in enabled. If email confirmations are enabled, Supabase may also send its standard confirmation link after account creation; this flow does not use one-time passcodes. Participants may use the email from event registration or create an account with another email.
+
+## Import the RSVP attendee list
+
+Run [`migrations/202610250003_attendee_roster.sql`](migrations/202610250003_attendee_roster.sql) in the Supabase SQL Editor, then run [`attendees_seed.sql`](attendees_seed.sql). The import is safe to rerun: it updates RSVP name/status by email and preserves an attendee's linked auth account. The source's `Going` and `Not Going` statuses are both kept. When someone creates an account using a listed email, the app links that Supabase Auth user to the roster row. New emails are still allowed to register and vote.
+
+To add one attendee such as Luis Derechin, run this in the SQL Editor after the roster migration:
+
+```sql
+insert into public.finding_talent_attendees (full_name, email, rsvp_status)
+values ('Luis Derechin', 'ld@nir-yu.com', 'going')
+on conflict (email) do update
+set full_name = excluded.full_name,
+    rsvp_status = excluded.rsvp_status,
+    updated_at = now();
+```
