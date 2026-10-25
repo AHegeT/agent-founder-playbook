@@ -1,3 +1,5 @@
+import { supabase } from "@/lib/supabase";
+
 export type VoteChoice = "myth" | "reality";
 export type PollStatus = "open" | "closed" | "revealed";
 
@@ -19,7 +21,12 @@ export type EventState = {
   activeQuestionIndex: number;
   pollStatus: PollStatus;
   votes: EventVote[];
+  revealedQuestionId: string | null;
+  revealAll: boolean;
+  voteResults: Record<string, VoteCounts>;
 };
+
+export type VoteCounts = { myth: number; reality: number; total: number };
 
 export const EVENT_STORAGE_KEY = "finding-right-talent-event-v1";
 export const EVENT_STATE_CHANGED = "finding-right-talent-state-changed";
@@ -87,6 +94,9 @@ const initialState: EventState = {
   activeQuestionIndex: 0,
   pollStatus: "open",
   votes: [],
+  revealedQuestionId: null,
+  revealAll: false,
+  voteResults: {},
 };
 
 export function readEventState(): EventState {
@@ -103,15 +113,53 @@ export function readEventState(): EventState {
       ),
       pollStatus: parsed.pollStatus ?? "open",
       votes: Array.isArray(parsed.votes) ? parsed.votes : [],
+      revealedQuestionId: parsed.revealedQuestionId ?? null,
+      revealAll: parsed.revealAll ?? false,
+      voteResults: {},
     };
   } catch {
     return initialState;
   }
 }
 
-export function saveEventState(state: EventState) {
+export async function saveEventState(state: EventState) {
+  if (supabase) {
+    const question = eventQuestions[state.activeQuestionIndex];
+    const { error } = await supabase
+      .from("finding_talent_state")
+      .update({
+        active_question_id: question.id,
+        poll_status: state.pollStatus,
+        revealed_question_id: state.revealedQuestionId,
+        reveal_all: state.revealAll,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("singleton", true);
+    if (error) throw error;
+    return;
+  }
+
   window.localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(state));
   window.dispatchEvent(new Event(EVENT_STATE_CHANGED));
+}
+
+export async function submitEventVote(questionId: string, voterId: string, choice: VoteChoice) {
+  if (supabase) {
+    const { error } = await supabase.from("finding_talent_votes").insert({
+      question_id: questionId,
+      voter_id: voterId,
+      choice,
+    });
+    if (error) throw error;
+    return;
+  }
+
+  const state = readEventState();
+  if (state.pollStatus !== "open") throw new Error("La votación ya está cerrada.");
+  if (state.votes.some((vote) => vote.questionId === questionId && vote.voterId === voterId)) {
+    throw new Error("Ya registraste tu voto en esta pregunta.");
+  }
+  saveEventState({ ...state, votes: [...state.votes, { questionId, voterId, choice }] });
 }
 
 export function getVoterId() {
@@ -120,13 +168,24 @@ export function getVoterId() {
   if (!voterId) {
     voterId = typeof crypto !== "undefined" && "randomUUID" in crypto
       ? crypto.randomUUID()
-      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (char) => {
+          const random = Math.random() * 16 | 0;
+          return (char === "x" ? random : (random & 0x3 | 0x8)).toString(16);
+        });
     window.localStorage.setItem(key, voterId);
   }
   return voterId;
 }
 
 export function getQuestionResults(state: EventState, questionId: string) {
+  const savedCounts = state.voteResults[questionId];
+  if (savedCounts) {
+    return {
+      ...savedCounts,
+      mythPercent: savedCounts.total ? Math.round((savedCounts.myth / savedCounts.total) * 100) : 0,
+      realityPercent: savedCounts.total ? Math.round((savedCounts.reality / savedCounts.total) * 100) : 0,
+    };
+  }
   const questionVotes = state.votes.filter((vote) => vote.questionId === questionId);
   const myth = questionVotes.filter((vote) => vote.choice === "myth").length;
   const reality = questionVotes.filter((vote) => vote.choice === "reality").length;
