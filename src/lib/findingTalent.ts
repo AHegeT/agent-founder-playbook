@@ -143,16 +143,16 @@ export async function saveEventState(state: EventState) {
   window.dispatchEvent(new Event(EVENT_STATE_CHANGED));
 }
 
-export async function submitEventVote(questionId: string, voterId: string, choice: VoteChoice, userId?: string) {
+export async function submitEventVote(questionId: string, voterId: string, choice: VoteChoice, attendeeEmail?: string) {
   if (supabase) {
-    if (!userId) throw new Error("Verifica tu correo antes de votar.");
-    const { error } = await supabase.from("finding_talent_votes").insert({
-      question_id: questionId,
-      voter_id: voterId,
-      user_id: userId,
-      choice,
+    if (!attendeeEmail) throw new Error("Ingresa tu correo antes de votar.");
+    const { data, error } = await supabase.rpc("cast_finding_talent_vote", {
+      p_question_id: questionId,
+      p_voter_email: attendeeEmail,
+      p_choice: choice,
     });
     if (error) throw error;
+    if (!data) throw new Error("Este correo ya registró un voto o la votación se cerró.");
     return;
   }
 

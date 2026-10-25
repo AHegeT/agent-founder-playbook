@@ -30,13 +30,13 @@ The moderator view controls the active question, voting open/closed state, and w
 
 ## Attendee registration and voting identity
 
-After the event schema is in place, run [`migrations/202610250002_attendee_registration.sql`](migrations/202610250002_attendee_registration.sql) in the SQL Editor. This adds private attendee profiles and changes voting to require an authenticated account. Participants create an account or sign in with email and password, then fill out a short profile (name, optional organization, and optional event expectation). Role is omitted because it is already collected on the event registration page. Each account can vote once per question; the database enforces the limit even if someone clears browser storage or changes devices.
+For the attendee experience, run migrations `202610250002`, `202610250003`, and `202610250004` in order in the SQL Editor, then run [`attendees_seed.sql`](attendees_seed.sql). The audience enters an email only. Emails marked `Going` in the roster continue directly; an email not found in the roster is asked for a role or LinkedIn (at least one is required), with organization and company website optional. Votes are limited to one per entered email and question in the database. Moderator access still uses a Supabase Auth email/password account and the moderator allowlist described above.
 
-In **Authentication → URL Configuration**, add the deployed event URL to the allowed redirect/site URLs. In **Authentication → Providers → Email**, keep email/password sign-in enabled. If email confirmations are enabled, Supabase may also send its standard confirmation link after account creation; this flow does not use one-time passcodes. Participants may use the email from event registration or create an account with another email.
+Email-only access does not prove mailbox ownership. Someone could enter a listed attendee's email and vote as them, so use this flow when a fast roster check is the desired tradeoff. Requiring a magic link, OTP, or password would be needed to verify control of the address.
 
 ## Import the RSVP attendee list
 
-Run [`migrations/202610250003_attendee_roster.sql`](migrations/202610250003_attendee_roster.sql) in the Supabase SQL Editor, then run [`attendees_seed.sql`](attendees_seed.sql). The import is safe to rerun: it updates RSVP name/status by email and preserves an attendee's linked auth account. The source's `Going` and `Not Going` statuses are both kept. When someone creates an account using a listed email, the app links that Supabase Auth user to the roster row. New emails are still allowed to register and vote.
+The roster migration creates a private table. The seed import is safe to rerun: it updates RSVP name/status by email. The source's `Going` and `Not Going` statuses are both kept. `Not Going` records are retained but are not admitted through the roster check; they would need to complete the unlisted-email profile flow to continue.
 
 To add one attendee such as Luis Derechin, run this in the SQL Editor after the roster migration:
 

@@ -1,6 +1,5 @@
 import { Check, Clock3, Radio } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
-import type { Session } from "@supabase/supabase-js";
 import { EventHeader } from "@/components/finding-talent/EventHeader";
 import {
   EVENT_STORAGE_KEY,
@@ -14,19 +13,22 @@ import { useFindingTalentState } from "@/lib/useFindingTalentState";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import "./FindingTalentEvent.css";
 
+const ATTENDEE_EMAIL_KEY = `${EVENT_STORAGE_KEY}-attendee-email`;
+
 export default function FindingTalentVote() {
   const { state, loading, error: stateError } = useFindingTalentState();
-  const [session, setSession] = useState<Session | null>(null);
-  const [profileReady, setProfileReady] = useState(!isSupabaseConfigured);
-  const [identityLoading, setIdentityLoading] = useState(isSupabaseConfigured);
-  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [attendeeEmail, setAttendeeEmail] = useState(() => window.localStorage.getItem(ATTENDEE_EMAIL_KEY) ?? "");
+  const [email, setEmail] = useState(() => window.localStorage.getItem(ATTENDEE_EMAIL_KEY) ?? "");
+  const [stage, setStage] = useState<"email" | "profile" | "vote">("email");
+  const [attendeeName, setAttendeeName] = useState("");
+  const [checkingAttendee, setCheckingAttendee] = useState(false);
+  const [identityLoading, setIdentityLoading] = useState(false);
+  const [attendeeReady, setAttendeeReady] = useState(false);
+  const [role, setRole] = useState("");
+  const [companyUrl, setCompanyUrl] = useState("");
   const [organization, setOrganization] = useState("");
-  const [eventIntent, setEventIntent] = useState("");
+  const [linkedinUrl, setLinkedinUrl] = useState("");
   const [identityError, setIdentityError] = useState("");
-  const [identityNotice, setIdentityNotice] = useState("");
   const [identityBusy, setIdentityBusy] = useState(false);
   const [selected, setSelected] = useState<VoteChoice | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -39,113 +41,108 @@ export default function FindingTalentVote() {
   const results = getQuestionResults(state, question.id);
 
   useEffect(() => {
-    if (!supabase) return;
+    if (!isSupabaseConfigured || !attendeeEmail) return;
     let alive = true;
-    const loadIdentity = async (nextSession: Session | null) => {
+    setIdentityLoading(true);
+    void supabase?.rpc("check_finding_talent_attendee", { p_email: attendeeEmail }).then(({ data, error }) => {
       if (!alive) return;
-      setIdentityLoading(true);
-      setSession(nextSession);
-      setIdentityError("");
-      if (!nextSession) {
-        setProfileReady(false);
-        setIdentityLoading(false);
-        return;
-      }
-      // If the email matches an imported RSVP, link this auth account to that roster entry.
-      // Accounts not in the RSVP list remain allowed, as the event can accept new registrations.
-      await supabase.rpc("claim_finding_talent_attendee");
-      if (!alive) return;
-      const { data, error } = await supabase
-        .from("finding_talent_participants")
-        .select("display_name,organization,event_intent")
-        .eq("user_id", nextSession.user.id)
-        .maybeSingle();
-      if (!alive) return;
-      if (error) {
-        setIdentityError(error.message);
-        setProfileReady(false);
-        setIdentityStep("profile");
-      } else if (data) {
-        setDisplayName(data.display_name);
-        setOrganization(data.organization ?? "");
-        setEventIntent(data.event_intent ?? "");
-        setProfileReady(true);
-      } else {
-        setEmail(nextSession.user.email ?? "");
-        setProfileReady(false);
+      if (error) setIdentityError(error.message);
+      else {
+        const result = data as { registered: boolean; display_name?: string | null };
+        if (result.registered) {
+          setAttendeeReady(true);
+          setAttendeeName(result.display_name ?? "");
+          setStage("vote");
+        } else {
+          setAttendeeReady(false);
+          setStage("profile");
+        }
       }
       setIdentityLoading(false);
-    };
-    void supabase.auth.getSession().then(({ data }) => void loadIdentity(data.session));
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
-      void loadIdentity(nextSession);
     });
-    return () => {
-      alive = false;
-      authListener.subscription.unsubscribe();
-    };
+    return () => { alive = false; };
   }, []);
 
-  const authenticate = async (event: FormEvent<HTMLFormElement>) => {
+  const checkEmail = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!supabase) return;
-    setIdentityBusy(true);
+    const normalizedEmail = email.trim().toLowerCase();
     setIdentityError("");
-    setIdentityNotice("");
-    if (authMode === "login") {
-      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
-      if (error) setIdentityError(error.message);
+    setCheckingAttendee(true);
+    if (!supabase) {
+      setAttendeeEmail(normalizedEmail);
+      setAttendeeReady(true);
+      setStage("vote");
+      setCheckingAttendee(false);
+      return;
+    }
+    const { data, error } = await supabase.rpc("check_finding_talent_attendee", { p_email: normalizedEmail });
+    if (error) {
+      setIdentityError(error.message);
     } else {
-      const { data, error } = await supabase.auth.signUp({
-        email: email.trim(),
-        password,
-        options: { emailRedirectTo: `${window.location.origin}/events/finding-right-talent/vote` },
-      });
-      if (error) setIdentityError(error.message);
-      else if (!data.session) {
-        setIdentityNotice("Cuenta creada. Revisa tu correo si Supabase solicita confirmar la dirección; después inicia sesión con tu contraseña.");
-        setAuthMode("login");
+      const result = data as { registered: boolean; rostered: boolean; display_name?: string | null };
+      setAttendeeEmail(normalizedEmail);
+      if (result.registered) {
+        setAttendeeName(result.display_name ?? "");
+        setAttendeeReady(true);
+        setStage("vote");
+        window.localStorage.setItem(ATTENDEE_EMAIL_KEY, normalizedEmail);
+      } else {
+        setStage("profile");
       }
     }
-    setIdentityBusy(false);
+    setCheckingAttendee(false);
   };
 
   const saveProfile = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!supabase || !session?.user.email) return;
+    if (!supabase) {
+      setAttendeeEmail(email.trim().toLowerCase());
+      setAttendeeReady(true);
+      setStage("vote");
+      return;
+    }
     setIdentityBusy(true);
     setIdentityError("");
-    const { error } = await supabase.from("finding_talent_participants").upsert({
-      user_id: session.user.id,
-      email: session.user.email,
-      display_name: displayName.trim(),
-      organization: organization.trim() || null,
-      event_intent: eventIntent.trim() || null,
-      updated_at: new Date().toISOString(),
+    const { error } = await supabase.rpc("register_finding_talent_participant", {
+      p_email: attendeeEmail,
+      p_role: role,
+      p_organization: organization,
+      p_company_url: companyUrl,
+      p_linkedin_url: linkedinUrl,
     });
     if (error) setIdentityError(error.message);
-    else setProfileReady(true);
+    else {
+      setAttendeeReady(true);
+      setStage("vote");
+      window.localStorage.setItem(ATTENDEE_EMAIL_KEY, attendeeEmail);
+    }
     setIdentityBusy(false);
   };
 
-  const signOut = async () => {
-    if (!supabase) return;
-    await supabase.auth.signOut();
-    setProfileReady(false);
+  const changeEmail = () => {
+    setAttendeeReady(false);
+    setStage("email");
+    setEmail("");
+    setAttendeeEmail("");
+    setAttendeeName("");
+    setRole("");
+    setCompanyUrl("");
+    setOrganization("");
+    setLinkedinUrl("");
     setSubmittedQuestions({});
+    window.localStorage.removeItem(ATTENDEE_EMAIL_KEY);
   };
 
   useEffect(() => {
     setSelected(null);
     setVoteError("");
-    if (supabase && session?.user.id) {
+    if (supabase && attendeeReady && attendeeEmail) {
       let alive = true;
-      void supabase.from("finding_talent_votes").select("question_id")
-        .eq("question_id", question.id).eq("user_id", session.user.id).maybeSingle()
+      void supabase.rpc("has_finding_talent_voted", { p_question_id: question.id, p_email: attendeeEmail })
         .then(({ data, error }) => {
           if (!alive) return;
           if (error) setVoteError(error.message);
-          setSubmittedQuestions((current) => ({ ...current, [question.id]: Boolean(data) }));
+          setSubmittedQuestions((current) => ({ ...current, [question.id]: data === true }));
         });
       return () => { alive = false; };
     }
@@ -153,15 +150,15 @@ export default function FindingTalentVote() {
       ...current,
       [question.id]: current[question.id] || (!isSupabaseConfigured && window.localStorage.getItem(`${EVENT_STORAGE_KEY}-cast-${question.id}`) === "1"),
     }));
-  }, [question.id, session?.user.id]);
+  }, [question.id, attendeeEmail, attendeeReady]);
 
   const sendVote = async () => {
     if (!selected || existingVote || state.pollStatus !== "open") return;
     setSubmitting(true);
     setVoteError("");
     try {
-      await submitEventVote(question.id, voterId, selected, session?.user.id);
-      window.localStorage.setItem(`${EVENT_STORAGE_KEY}-cast-${question.id}`, "1");
+      await submitEventVote(question.id, voterId, selected, attendeeEmail);
+      if (!supabase) window.localStorage.setItem(`${EVENT_STORAGE_KEY}-cast-${question.id}`, "1");
       setSubmittedQuestions((current) => ({ ...current, [question.id]: true }));
     } catch (error) {
       const message = error instanceof Error ? error.message : "No se pudo guardar el voto.";
@@ -188,35 +185,35 @@ export default function FindingTalentVote() {
     return <main className="ft-page ft-voter-page"><div className="ft-container ft-voter-container"><EventHeader section="Votación en vivo" compact /><div className="ft-form-error">No se pudo cargar la pregunta del evento: {stateError}</div></div></main>;
   }
 
-  if (isSupabaseConfigured && (!session || !profileReady)) {
+  if (isSupabaseConfigured && (!attendeeReady || stage !== "vote")) {
     return (
       <main className="ft-page ft-voter-page">
         <div className="ft-container ft-voter-container">
           <EventHeader section="Votación en vivo" compact />
           <section className="ft-auth-card ft-attendee-card">
             <span className="ft-eyebrow">Acceso al evento</span>
-            {!session && <>
-              <h1>{authMode === "login" ? "Entra para registrar tu voto." : "Crea tu acceso al evento."}</h1>
-              <p>Usa el correo con el que te registraste al evento, o crea una cuenta con otro correo.</p>
-              <form onSubmit={authenticate} className="ft-auth-form">
+            {stage === "email" && <>
+              <h1>Entra con tu correo.</h1>
+              <p>Escribe el correo con el que te registraste al evento.</p>
+              <form onSubmit={checkEmail} className="ft-auth-form">
                 <label>Correo electrónico<input type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} /></label>
-                <label>Contraseña<input type="password" autoComplete={authMode === "login" ? "current-password" : "new-password"} required minLength={6} value={password} onChange={(event) => setPassword(event.target.value)} /></label>
-                <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Un momento…" : authMode === "login" ? "Iniciar sesión" : "Crear cuenta"}</button>
+                <button className="ft-button ft-button-primary" disabled={checkingAttendee}>{checkingAttendee ? "Revisando…" : "Continuar"}</button>
               </form>
-              <button type="button" className="ft-text-link ft-auth-toggle" onClick={() => { setAuthMode(authMode === "login" ? "signup" : "login"); setIdentityError(""); setIdentityNotice(""); }}>{authMode === "login" ? "¿Primera vez? Crea una cuenta" : "¿Ya tienes cuenta? Inicia sesión"}</button>
             </>}
-            {session && !profileReady && <>
-              <h1>Cuéntanos un poco de ti.</h1><p>Esto nos ayuda a entender quiénes están en la conversación. Solo usaremos estos datos para el evento.</p>
+            {stage === "profile" && <>
+              <h1>Completa tu perfil.</h1>
+              <p><strong>{attendeeEmail}</strong> no aparece en la lista actual. Comparte tu rol o LinkedIn para continuar.</p>
               <form onSubmit={saveProfile} className="ft-auth-form">
-                <label>Nombre<input autoComplete="name" required maxLength={100} value={displayName} onChange={(event) => setDisplayName(event.target.value)} /></label>
+                <label>Rol <span>(obligatorio si no agregas LinkedIn)</span><input maxLength={120} value={role} onChange={(event) => setRole(event.target.value)} /></label>
+                <label>LinkedIn <span>(obligatorio si no agregas tu rol)</span><input type="url" placeholder="https://linkedin.com/in/..." value={linkedinUrl} onChange={(event) => setLinkedinUrl(event.target.value)} /></label>
                 <label>Organización <span>(opcional)</span><input autoComplete="organization" maxLength={120} value={organization} onChange={(event) => setOrganization(event.target.value)} /></label>
-                <label>¿Qué te gustaría llevarte del evento? <span>(opcional)</span><textarea maxLength={240} rows={3} value={eventIntent} onChange={(event) => setEventIntent(event.target.value)} /></label>
-                <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Guardando…" : "Continuar a la votación"}</button>
+                <label>Sitio web de tu empresa <span>(opcional)</span><input type="url" placeholder="https://..." value={companyUrl} onChange={(event) => setCompanyUrl(event.target.value)} /></label>
+                <button className="ft-button ft-button-primary" disabled={identityBusy || (!role.trim() && !linkedinUrl.trim())}>{identityBusy ? "Guardando…" : "Continuar a la votación"}</button>
               </form>
+              <button type="button" className="ft-text-link ft-auth-toggle" onClick={changeEmail}>Cambiar correo</button>
             </>}
             {identityError && <div className="ft-form-error">{identityError}</div>}
-            {identityNotice && <div className="ft-auth-notice">{identityNotice}</div>}
-            <p className="ft-auth-help">Cada cuenta puede votar una vez por pregunta.</p>
+            <p className="ft-auth-help">Cada correo puede votar una vez por pregunta.</p>
           </section>
         </div>
       </main>
@@ -230,7 +227,7 @@ export default function FindingTalentVote() {
         <div className="ft-phone-card">
           <div className="ft-voter-brand">AGENTS <span>&</span> FOUNDERS <Radio size={15} /></div>
           <div className="ft-voter-event">FINDING THE RIGHT TALENT <span>·</span> {state.activeQuestionIndex + 1}/{eventQuestions.length}</div>
-          {session && <button className="ft-voter-account" onClick={() => void signOut()}>{session.user.email} · Cambiar cuenta</button>}
+          {attendeeEmail && <button className="ft-voter-account" onClick={changeEmail}>{attendeeName || attendeeEmail} · Cambiar correo</button>}
           <div className="ft-vote-status">
             <span className={`ft-status-dot ${state.pollStatus}`} />
             {state.pollStatus === "open" ? "Votación abierta" : state.pollStatus === "closed" ? "Voto cerrado" : "Resultados"}
@@ -248,7 +245,7 @@ export default function FindingTalentVote() {
                 </div>
                 <button className="ft-button ft-button-primary ft-submit-vote" onClick={() => void sendVote()} disabled={!selected || submitting}>{submitting ? "Enviando…" : "Enviar mi voto"}</button>
                 {voteError && <p className="ft-vote-error">{voteError}</p>}
-                <p className="ft-anonymous-note">Un voto por correo verificado y pregunta.</p>
+                <p className="ft-anonymous-note">Un voto por correo y pregunta.</p>
               </>
             )
           ) : showGlobalResults ? (
