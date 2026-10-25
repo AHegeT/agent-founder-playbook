@@ -1,0 +1,38 @@
+.lau-connect-page {
+  min-height: 100svh;
+  padding: clamp(36px, 7vh, 72px) 22px 26px;
+  background: radial-gradient(ellipse at 50% 0%, #f4e9e1 0%, #f7f3ee 55%, #f7f3ee 100%);
+  display: flex;
+  justify-content: center;
+}
+.lau-connect-card { width: min(100%, 560px); display: flex; flex-direction: column; }
+.lau-connect-header { text-align: center; }
+.lau-connect-portrait { display: block; width: 84px; height: 84px; margin: 0 auto 16px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 5px rgba(255,255,255,.72); }
+.lau-connect-eyebrow { color: #946451; font: 11px/1.5 var(--font-mono, monospace); text-transform: uppercase; letter-spacing: .12em; }
+.lau-connect-header h1 { margin-top: 13px; color: #45332c; font-family: inherit; font-size: clamp(43px, 9vw, 68px); font-weight: 700; line-height: .98; letter-spacing: -.05em; }
+.lau-connect-header h1 em { color: #a96c50; font-style: normal; font-weight: 500; }
+.lau-connect-intro { max-width: 440px; margin: 18px auto 0; color: #71645e; font-size: 15px; line-height: 1.65; }
+.lau-connect-options { display: grid; gap: 11px; margin-top: 30px; }
+.lau-connect-option { min-height: 78px; padding: 14px 16px; display: grid; grid-template-columns: 42px 1fr 20px; align-items: center; gap: 13px; border: 1px solid #e7dcd4; border-radius: 10px; background: rgba(255,253,250,.92); box-shadow: 0 3px 12px rgba(68,48,38,.04); text-decoration: none; transition: transform .15s, border-color .15s, box-shadow .15s; }
+.lau-connect-option:hover { transform: translateY(-2px); border-color: #c9a895; box-shadow: 0 8px 22px rgba(68,48,38,.1); }
+.lau-connect-option:focus-visible { outline: 3px solid #a96c50; outline-offset: 3px; }
+.lau-connect-option.primary { background: #49372f; border-color: #49372f; }
+.lau-connect-icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: #f1e6df; color: #98634b; }
+.lau-connect-icon svg { width: 20px; height: 20px; stroke-width: 1.8; }
+.lau-linkedin-mark { font-family: Arial, sans-serif; font-size: 16px; font-weight: 700; }
+.lau-connect-option.primary .lau-connect-icon { background: #e8c5ae; color: #49372f; }
+.lau-connect-copy { display: grid; gap: 4px; }
+.lau-connect-copy strong { color: #49372f; font-size: 15px; line-height: 1.25; }
+.lau-connect-copy small { color: #786b64; font-size: 12px; line-height: 1.45; }
+.lau-connect-option.primary .lau-connect-copy strong { color: #fff; }
+.lau-connect-option.primary .lau-connect-copy small { color: #e3d4ca; }
+.lau-connect-arrow { justify-self: end; width: 18px; color: #a96c50; }
+.lau-connect-option.primary .lau-connect-arrow { color: #e8c5ae; }
+.lau-connect-footer { margin-top: auto; padding-top: 28px; text-align: center; color: #8c7a70; font: 10px var(--font-mono, monospace); }
+@media (max-width: 420px) {
+  .lau-connect-page { padding-right: 16px; padding-left: 16px; }
+  .lau-connect-option { grid-template-columns: 36px 1fr 16px; gap: 10px; padding: 13px 12px; }
+  .lau-connect-icon { width: 36px; height: 36px; }
+  .lau-connect-copy strong { font-size: 14px; }
+  .lau-connect-copy small { font-size: 11px; }
+}
