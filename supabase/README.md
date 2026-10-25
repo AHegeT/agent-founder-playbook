@@ -27,3 +27,9 @@ In the Supabase project used by Vercel, open **SQL Editor**, paste and run [`mig
 3. Open `/events/finding-right-talent/moderator` on the deployed site and sign in with that account.
 
 The moderator view controls the active question, voting open/closed state, and whether the audience sees the active question's results or aggregate results for all questions. The audience uses `/events/finding-right-talent/vote`; one QR can remain on screen for the entire session.
+
+## Attendee registration and voting identity
+
+After the event schema is in place, run [`migrations/202610250002_attendee_registration.sql`](migrations/202610250002_attendee_registration.sql) in the SQL Editor. This adds private attendee profiles and changes voting to require an authenticated account. A participant verifies control of an email with Supabase's one-time email code, then fills out a short profile (name, role, optional organization, and optional event expectation). Each verified account can vote once per question; the database enforces the limit even if someone clears browser storage or changes devices.
+
+In **Authentication → URL Configuration**, add the deployed event URL to the allowed redirect/site URLs. In **Authentication → Providers → Email**, keep email sign-in enabled and configure the one-time code email template/delivery for your project. The registration screen accepts the email used for the event or another email, but does not compare it against an imported Luma attendee list. There is no attendee list in this repository yet; to restrict access to that roster, import it into Supabase and add an email-allowlist check before enabling voting.

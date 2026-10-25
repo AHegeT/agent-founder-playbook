@@ -1,5 +1,6 @@
 import { Check, Clock3, Radio } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import type { Session } from "@supabase/supabase-js";
 import { EventHeader } from "@/components/finding-talent/EventHeader";
 import {
   EVENT_STORAGE_KEY,
@@ -10,11 +11,23 @@ import {
   type VoteChoice,
 } from "@/lib/findingTalent";
 import { useFindingTalentState } from "@/lib/useFindingTalentState";
-import { isSupabaseConfigured } from "@/lib/supabase";
+import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import "./FindingTalentEvent.css";
 
 export default function FindingTalentVote() {
   const { state, loading, error: stateError } = useFindingTalentState();
+  const [session, setSession] = useState<Session | null>(null);
+  const [profileReady, setProfileReady] = useState(!isSupabaseConfigured);
+  const [identityLoading, setIdentityLoading] = useState(isSupabaseConfigured);
+  const [identityStep, setIdentityStep] = useState<"email" | "code" | "profile">("email");
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [role, setRole] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [eventIntent, setEventIntent] = useState("");
+  const [identityError, setIdentityError] = useState("");
+  const [identityBusy, setIdentityBusy] = useState(false);
   const [selected, setSelected] = useState<VoteChoice | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [voteError, setVoteError] = useState("");
@@ -22,30 +35,135 @@ export default function FindingTalentVote() {
   const question = eventQuestions[state.activeQuestionIndex];
   const voterId = getVoterId();
   const localVote = state.votes.find((vote) => vote.questionId === question.id && vote.voterId === voterId);
-  const existingVote = localVote || submittedQuestions[question.id];
+  const existingVote = isSupabaseConfigured ? submittedQuestions[question.id] : localVote || submittedQuestions[question.id];
   const results = getQuestionResults(state, question.id);
+
+  useEffect(() => {
+    if (!supabase) return;
+    let alive = true;
+    const loadIdentity = async (nextSession: Session | null) => {
+      if (!alive) return;
+      setIdentityLoading(true);
+      setSession(nextSession);
+      setIdentityError("");
+      if (!nextSession) {
+        setProfileReady(false);
+        setIdentityStep("email");
+        setIdentityLoading(false);
+        return;
+      }
+      const { data, error } = await supabase
+        .from("finding_talent_participants")
+        .select("display_name,role,organization,event_intent")
+        .eq("user_id", nextSession.user.id)
+        .maybeSingle();
+      if (!alive) return;
+      if (error) {
+        setIdentityError(error.message);
+        setProfileReady(false);
+        setIdentityStep("profile");
+      } else if (data) {
+        setDisplayName(data.display_name);
+        setRole(data.role);
+        setOrganization(data.organization ?? "");
+        setEventIntent(data.event_intent ?? "");
+        setProfileReady(true);
+      } else {
+        setEmail(nextSession.user.email ?? "");
+        setIdentityStep("profile");
+        setProfileReady(false);
+      }
+      setIdentityLoading(false);
+    };
+    void supabase.auth.getSession().then(({ data }) => void loadIdentity(data.session));
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      void loadIdentity(nextSession);
+    });
+    return () => {
+      alive = false;
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
+  const sendCode = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!supabase) return;
+    setIdentityBusy(true);
+    setIdentityError("");
+    const { error } = await supabase.auth.signInWithOtp({ email: email.trim(), options: { shouldCreateUser: true } });
+    if (error) setIdentityError(error.message);
+    else setIdentityStep("code");
+    setIdentityBusy(false);
+  };
+
+  const verifyCode = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!supabase) return;
+    setIdentityBusy(true);
+    setIdentityError("");
+    const { error } = await supabase.auth.verifyOtp({ email: email.trim(), token: code.trim(), type: "email" });
+    if (error) setIdentityError(error.message);
+    setIdentityBusy(false);
+  };
+
+  const saveProfile = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!supabase || !session?.user.email) return;
+    setIdentityBusy(true);
+    setIdentityError("");
+    const { error } = await supabase.from("finding_talent_participants").upsert({
+      user_id: session.user.id,
+      email: session.user.email,
+      display_name: displayName.trim(),
+      role,
+      organization: organization.trim() || null,
+      event_intent: eventIntent.trim() || null,
+      updated_at: new Date().toISOString(),
+    });
+    if (error) setIdentityError(error.message);
+    else setProfileReady(true);
+    setIdentityBusy(false);
+  };
+
+  const signOut = async () => {
+    if (!supabase) return;
+    await supabase.auth.signOut();
+    setProfileReady(false);
+    setSubmittedQuestions({});
+  };
 
   useEffect(() => {
     setSelected(null);
     setVoteError("");
+    if (supabase && session?.user.id) {
+      let alive = true;
+      void supabase.from("finding_talent_votes").select("question_id")
+        .eq("question_id", question.id).eq("user_id", session.user.id).maybeSingle()
+        .then(({ data, error }) => {
+          if (!alive) return;
+          if (error) setVoteError(error.message);
+          setSubmittedQuestions((current) => ({ ...current, [question.id]: Boolean(data) }));
+        });
+      return () => { alive = false; };
+    }
     setSubmittedQuestions((current) => ({
       ...current,
-      [question.id]: current[question.id] || window.localStorage.getItem(`${EVENT_STORAGE_KEY}-cast-${question.id}`) === "1",
+      [question.id]: current[question.id] || (!isSupabaseConfigured && window.localStorage.getItem(`${EVENT_STORAGE_KEY}-cast-${question.id}`) === "1"),
     }));
-  }, [question.id]);
+  }, [question.id, session?.user.id]);
 
   const sendVote = async () => {
     if (!selected || existingVote || state.pollStatus !== "open") return;
     setSubmitting(true);
     setVoteError("");
     try {
-      await submitEventVote(question.id, voterId, selected);
+      await submitEventVote(question.id, voterId, selected, session?.user.id);
       window.localStorage.setItem(`${EVENT_STORAGE_KEY}-cast-${question.id}`, "1");
       setSubmittedQuestions((current) => ({ ...current, [question.id]: true }));
     } catch (error) {
       const message = error instanceof Error ? error.message : "No se pudo guardar el voto.";
       setVoteError(message.includes("duplicate") || message.includes("unique")
-        ? "Este dispositivo ya registró un voto para esta pregunta."
+        ? "Este correo ya registró un voto para esta pregunta."
         : message);
     } finally {
       setSubmitting(false);
@@ -59,8 +177,53 @@ export default function FindingTalentVote() {
     return <main className="ft-page ft-voter-page"><div className="ft-container ft-voter-container"><EventHeader section="Votación en vivo" compact /><p className="ft-page-message">Conectando con el evento…</p></div></main>;
   }
 
+  if (isSupabaseConfigured && identityLoading) {
+    return <main className="ft-page ft-voter-page"><div className="ft-container ft-voter-container"><EventHeader section="Votación en vivo" compact /><p className="ft-page-message">Verificando tu acceso…</p></div></main>;
+  }
+
   if (stateError) {
     return <main className="ft-page ft-voter-page"><div className="ft-container ft-voter-container"><EventHeader section="Votación en vivo" compact /><div className="ft-form-error">No se pudo cargar la pregunta del evento: {stateError}</div></div></main>;
+  }
+
+  if (isSupabaseConfigured && (!session || !profileReady)) {
+    return (
+      <main className="ft-page ft-voter-page">
+        <div className="ft-container ft-voter-container">
+          <EventHeader section="Votación en vivo" compact />
+          <section className="ft-auth-card ft-attendee-card">
+            <span className="ft-eyebrow">Acceso al evento</span>
+            {!session && identityStep === "email" && <>
+              <h1>Registra tu voto con tu correo.</h1>
+              <p>Usa el correo de tu registro del evento. Si necesitas registrar otro correo, también puedes hacerlo. Te enviaremos un código para verificarlo.</p>
+              <form onSubmit={sendCode} className="ft-auth-form">
+                <label>Correo electrónico<input type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} /></label>
+                <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Enviando…" : "Enviar código"}</button>
+              </form>
+            </>}
+            {!session && identityStep === "code" && <>
+              <h1>Confirma tu correo.</h1><p>Escribe el código de verificación que enviamos a {email}.</p>
+              <form onSubmit={verifyCode} className="ft-auth-form">
+                <label>Código de verificación<input inputMode="numeric" autoComplete="one-time-code" required minLength={6} value={code} onChange={(event) => setCode(event.target.value)} /></label>
+                <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Verificando…" : "Verificar correo"}</button>
+                <button type="button" className="ft-text-link" onClick={() => setIdentityStep("email")}>Usar otro correo</button>
+              </form>
+            </>}
+            {session && !profileReady && <>
+              <h1>Cuéntanos un poco de ti.</h1><p>Esto nos ayuda a entender quiénes están en la conversación. Solo usaremos estos datos para el evento.</p>
+              <form onSubmit={saveProfile} className="ft-auth-form">
+                <label>Nombre<input autoComplete="name" required maxLength={100} value={displayName} onChange={(event) => setDisplayName(event.target.value)} /></label>
+                <label>¿Cuál describe mejor tu rol?<select required value={role} onChange={(event) => setRole(event.target.value)}><option value="">Selecciona una opción</option><option>Reclutamiento / RH</option><option>Founder / liderazgo</option><option>Operaciones</option><option>Tecnología</option><option>Candidato/a</option><option>Otro</option></select></label>
+                <label>Organización <span>(opcional)</span><input autoComplete="organization" maxLength={120} value={organization} onChange={(event) => setOrganization(event.target.value)} /></label>
+                <label>¿Qué te gustaría llevarte del evento? <span>(opcional)</span><textarea maxLength={240} rows={3} value={eventIntent} onChange={(event) => setEventIntent(event.target.value)} /></label>
+                <button className="ft-button ft-button-primary" disabled={identityBusy}>{identityBusy ? "Guardando…" : "Continuar a la votación"}</button>
+              </form>
+            </>}
+            {identityError && <div className="ft-form-error">{identityError}</div>}
+            <p className="ft-auth-help">Al verificar el correo, cada persona puede votar una vez por pregunta.</p>
+          </section>
+        </div>
+      </main>
+    );
   }
 
   return (
@@ -70,6 +233,7 @@ export default function FindingTalentVote() {
         <div className="ft-phone-card">
           <div className="ft-voter-brand">AGENTS <span>&</span> FOUNDERS <Radio size={15} /></div>
           <div className="ft-voter-event">FINDING THE RIGHT TALENT <span>·</span> {state.activeQuestionIndex + 1}/{eventQuestions.length}</div>
+          {session && <button className="ft-voter-account" onClick={() => void signOut()}>{session.user.email} · Cambiar cuenta</button>}
           <div className="ft-vote-status">
             <span className={`ft-status-dot ${state.pollStatus}`} />
             {state.pollStatus === "open" ? "Votación abierta" : state.pollStatus === "closed" ? "Voto cerrado" : "Resultados"}
@@ -87,7 +251,7 @@ export default function FindingTalentVote() {
                 </div>
                 <button className="ft-button ft-button-primary ft-submit-vote" onClick={() => void sendVote()} disabled={!selected || submitting}>{submitting ? "Enviando…" : "Enviar mi voto"}</button>
                 {voteError && <p className="ft-vote-error">{voteError}</p>}
-                <p className="ft-anonymous-note">Un voto por dispositivo y pregunta.</p>
+                <p className="ft-anonymous-note">Un voto por correo verificado y pregunta.</p>
               </>
             )
           ) : showGlobalResults ? (

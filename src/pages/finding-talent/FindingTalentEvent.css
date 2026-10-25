@@ -107,7 +107,11 @@
 .ft-auth-card > p { color: hsl(20 6% 40%); font-size: 12px; line-height: 1.6; }
 .ft-auth-form { display: grid; gap: 13px; margin-top: 19px; }
 .ft-auth-form label { display: grid; gap: 6px; color: hsl(20 6% 30%); font-size: 11px; font-weight: 700; }
-.ft-auth-form input { min-height: 42px; padding: 9px 11px; border: 1px solid hsl(210 20% 84%); border-radius: 10px; font: inherit; }
+.ft-auth-form input, .ft-auth-form select, .ft-auth-form textarea { width: 100%; min-height: 42px; padding: 9px 11px; border: 1px solid hsl(210 20% 84%); border-radius: 10px; background: white; color: inherit; font: inherit; }
+.ft-auth-form textarea { resize: vertical; }
+.ft-auth-form label span { color: hsl(20 6% 55%); font-weight: 500; }
+.ft-attendee-card { margin-top: 3vh; }
+.ft-voter-account { align-self: flex-start; margin-top: 8px; padding: 0; border: 0; background: none; color: hsl(20 6% 48%); font-size: 10px; text-decoration: underline; cursor: pointer; }
 .ft-auth-help { margin-bottom: 0; font-size: 10px!important; }
 .ft-form-error { margin: 12px 0; padding: 11px 13px; border: 1px solid hsl(0 84% 60% / .2); border-radius: 10px; background: hsl(0 84% 60% / .06); color: hsl(0 65% 42%); font-size: 11px; line-height: 1.5; }
 .ft-action-error { margin: 0 0 15px; }

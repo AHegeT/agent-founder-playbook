@@ -143,11 +143,13 @@ export async function saveEventState(state: EventState) {
   window.dispatchEvent(new Event(EVENT_STATE_CHANGED));
 }
 
-export async function submitEventVote(questionId: string, voterId: string, choice: VoteChoice) {
+export async function submitEventVote(questionId: string, voterId: string, choice: VoteChoice, userId?: string) {
   if (supabase) {
+    if (!userId) throw new Error("Verifica tu correo antes de votar.");
     const { error } = await supabase.from("finding_talent_votes").insert({
       question_id: questionId,
       voter_id: voterId,
+      user_id: userId,
       choice,
     });
     if (error) throw error;
