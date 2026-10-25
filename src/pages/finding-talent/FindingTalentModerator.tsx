@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { ArrowLeft, ArrowRight, Eye, EyeOff, LockKeyhole, LogOut, Play, RotateCcw, UnlockKeyhole } from "lucide-react";
+import { ArrowLeft, ArrowRight, Eye, EyeOff, LockKeyhole, LogOut, Monitor, Play, QrCode, RotateCcw, UnlockKeyhole } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Session } from "@supabase/supabase-js";
 import { EventHeader } from "@/components/finding-talent/EventHeader";
@@ -87,9 +87,8 @@ export default function FindingTalentModerator() {
     revealedQuestionId: null,
     revealAll: false,
   });
-  const closePoll = () => update({ ...state, pollStatus: "closed" });
+  const closePoll = () => update({ ...state, pollStatus: "revealed", revealedQuestionId: question.id, revealAll: false });
   const openPoll = () => update({ ...state, pollStatus: "open", eventFinished: false, revealedQuestionId: null, revealAll: false });
-  const revealQuestion = () => update({ ...state, pollStatus: "revealed", revealedQuestionId: question.id, revealAll: false });
   const revealAll = () => update({ ...state, pollStatus: "closed", revealedQuestionId: null, revealAll: true });
   const hideResults = () => update({ ...state, pollStatus: "closed", revealedQuestionId: null, revealAll: false });
   const finishEvent = () => update({ ...state, eventFinished: true, pollStatus: "closed", revealedQuestionId: null, revealAll: false });
@@ -156,6 +155,8 @@ export default function FindingTalentModerator() {
           <div><span className="ft-eyebrow">Finding the right talent</span><h1>Control de la dinámica</h1>
             <p>{isRemote ? "Los cambios se sincronizan con la audiencia en vivo." : "Demo local: cambios guardados en este navegador."}</p></div>
           <div className="ft-moderator-heading-actions">
+            <Link to="/events/finding-right-talent/screen" className="ft-text-link"><Monitor size={16} /> Vista de proyección</Link>
+            <Link to="/events/finding-right-talent/qr" className="ft-text-link"><QrCode size={16} /> QR del evento</Link>
             {session && <button className="ft-text-link ft-logout-button" onClick={signOut}><LogOut size={15} /> Cerrar sesión</button>}
             <Link to="/events/finding-right-talent" className="ft-text-link"><ArrowLeft size={16} /> Página del evento</Link>
           </div>
@@ -189,7 +190,7 @@ export default function FindingTalentModerator() {
             {!state.eventFinished && <div className="ft-stage-controls">
               <button className="ft-control-button" onClick={() => void moveTo(Math.max(0, activeQuestionIndex - 1))} disabled={activeQuestionIndex === 0 || busy}><ArrowLeft size={16} /> Anterior</button>
               {state.pollStatus === "open" ? (
-                <button className="ft-control-button ft-control-warn" onClick={() => void closePoll()} disabled={busy}><LockKeyhole size={16} /> Cerrar voto</button>
+                <button className="ft-control-button ft-control-warn" onClick={() => void closePoll()} disabled={busy}><LockKeyhole size={16} /> Cerrar y revelar</button>
               ) : (
                 <button className="ft-control-button ft-control-primary" onClick={() => void openPoll()} disabled={busy}><UnlockKeyhole size={16} /> Abrir voto</button>
               )}
@@ -197,7 +198,6 @@ export default function FindingTalentModerator() {
             </div>}
             {!state.eventFinished && state.pollStatus !== "open" && (
               <div className="ft-reveal-controls">
-                <button className="ft-control-button" onClick={() => void revealQuestion()} disabled={busy}><Eye size={15} /> Revelar esta pregunta</button>
                 <button className="ft-control-button" onClick={() => void revealAll()} disabled={busy}><Eye size={15} /> Revelar todas las votaciones</button>
                 {(state.revealAll || state.revealedQuestionId) && <button className="ft-control-button" onClick={() => void hideResults()} disabled={busy}><EyeOff size={15} /> Ocultar resultados</button>}
               </div>
