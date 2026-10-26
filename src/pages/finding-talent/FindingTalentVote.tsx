@@ -199,14 +199,21 @@ export default function FindingTalentVote() {
             <h2>Conecta con los ponentes</h2>
             <div className="ft-thanks-speakers">
               {eventPanelists.map((person) => (
-                <a key={person.name} href={person.linkedin} target="_blank" rel="noreferrer" className="ft-thanks-speaker">
-                  <span className="ft-avatar">{person.initials}</span>
-                  <span><strong>{person.name}</strong><small>{person.specialty}</small></span>
-                  <Linkedin size={18} />
-                </a>
+                person.linkedin ? (
+                  <a key={person.name} href={person.linkedin} target="_blank" rel="noreferrer" className="ft-thanks-speaker">
+                    <img className="ft-avatar ft-avatar-photo" src={person.image} alt={person.name} />
+                    <span><strong>{person.name}</strong><small>{person.specialty}</small></span>
+                    <Linkedin size={18} />
+                  </a>
+                ) : (
+                  <div key={person.name} className="ft-thanks-speaker">
+                    <img className="ft-avatar ft-avatar-photo" src={person.image} alt={person.name} />
+                    <span><strong>{person.name}</strong><small>{person.specialty}</small></span>
+                  </div>
+                )
               ))}
             </div>
-            <p className="ft-thanks-note">Los enlaces de LinkedIn son de demostración; actualízalos en el perfil de ponentes antes del evento.</p>
+            <p className="ft-thanks-note">El perfil de Alan se agregará próximamente.</p>
           </section>
         </div>
       </main>

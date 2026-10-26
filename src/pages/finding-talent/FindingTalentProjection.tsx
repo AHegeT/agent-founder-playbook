@@ -40,9 +40,9 @@ export default function FindingTalentProjection() {
               <div className="ft-projection-speakers">
                 {eventPanelists.map((person) => (
                   <div key={person.name} className="ft-projection-speaker">
-                    <span className="ft-avatar">{person.initials}</span>
+                    <img className="ft-avatar ft-avatar-photo" src={person.image} alt={person.name} />
                     <span><strong>{person.name}</strong><small>{person.specialty}</small></span>
-                    <Linkedin size={20} />
+                    {person.linkedin && <Linkedin size={20} />}
                   </div>
                 ))}
               </div>

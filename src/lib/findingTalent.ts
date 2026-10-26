@@ -1,4 +1,8 @@
 import { supabase } from "@/lib/supabase";
+import maryImage from "@/assets/members/mary_martinez.png";
+import lauImage from "@/assets/members/lauyumi_rojas.jpeg";
+import alanImage from "@/assets/members/alan_hegewisch.jpeg";
+import urielImage from "@/assets/members/uriel_valtierra.jpeg";
 
 export type VoteChoice = "myth" | "reality";
 export type PollStatus = "open" | "closed" | "revealed";
@@ -33,10 +37,10 @@ export const EVENT_STORAGE_KEY = "finding-right-talent-event-v1";
 export const EVENT_STATE_CHANGED = "finding-right-talent-state-changed";
 
 export const eventPanelists = [
-  { initials: "MM", name: "Mary Martínez", specialty: "Recursos Humanos", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Como líder de talento, explora nuevas formas de conectar personas con oportunidades en un mundo de trabajo cambiante.", linkedin: "https://www.linkedin.com/in/example-mary-martinez" },
-  { initials: "LR", name: "Lauyumi Rojas", specialty: "Operaciones", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Convierte retos operativos en sistemas claros y escalables para equipos y negocios en crecimiento.", linkedin: "https://www.linkedin.com/in/example-lauyumi-rojas" },
-  { initials: "AH", name: "Alan Hegewisch", specialty: "Tecnología", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Construye productos con IA y ayuda a founders a llevar ideas con agentes a soluciones prácticas.", linkedin: "https://www.linkedin.com/in/example-alan-hegewisch" },
-  { initials: "UV", name: "Uriel Valtierra", specialty: "Negocios", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Trabaja en estrategia comercial y crecimiento de negocios preparados para la era de los agentes.", linkedin: "https://www.linkedin.com/in/example-uriel-valtierra" },
+  { initials: "MM", name: "Mary Martínez", specialty: "Recursos Humanos", bio: "Profesional de Recursos Humanos que aporta al panel su perspectiva sobre cómo la IA está cambiando la búsqueda y evaluación de talento.", linkedin: "https://www.linkedin.com/in/marymartinezhr/", image: maryImage },
+  { initials: "LR", name: "Lauyumi Rojas", specialty: "Operaciones · Talento", bio: "Ayuda a equipos y fundadores a convertir retos de personas y operaciones en sistemas claros que sí funcionan.", linkedin: "https://www.linkedin.com/in/lauyumiopsmx/", image: lauImage },
+  { initials: "AH", name: "Alan Hegewisch", specialty: "Tecnología", bio: "Biografía y perfil de LinkedIn próximamente.", image: alanImage },
+  { initials: "UV", name: "Uriel Valtierra", specialty: "Founder & CEO · Portofoly", bio: "Emprendedor con 15 años de experiencia construyendo negocios. Actualmente lidera Portofoly, una PropTech que conecta constructores, asesores inmobiliarios y compradores a través de un ecosistema B2B2C con soluciones SaaS, ERP y agentes de IA para transformar la comercialización inmobiliaria y la experiencia de compra.", linkedin: "https://www.linkedin.com/in/valtierrac/", image: urielImage },
 ];
 
 export const eventQuestions: EventQuestion[] = [

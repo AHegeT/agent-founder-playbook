@@ -44,18 +44,18 @@ export default function FindingTalentEvent() {
         <section className="ft-section" id="panelistas">
           <div className="ft-section-heading">
             <div><span className="ft-eyebrow">Las voces del panel</span><h2>Conoce a los panelistas</h2></div>
-            <p>Biografías y enlaces de demostración.<br />Actualizaremos estos datos antes del evento.</p>
+            <p>Conoce la experiencia y las ideas que cada panelista aporta a la conversación.</p>
           </div>
           <div className="ft-panelist-grid">
             {eventPanelists.map((person) => (
               <article className="ft-panelist-card" key={person.name}>
-                <div className="ft-avatar">{person.initials}</div>
+                <img className="ft-avatar ft-avatar-photo" src={person.image} alt={person.name} />
                 <div className="ft-specialty">{person.specialty}</div>
                 <h3>{person.name}</h3>
                 <p>{person.bio}</p>
-                <a href={person.linkedin} target="_blank" rel="noreferrer">
-                  <Linkedin size={15} /> LinkedIn <span className="ft-dummy-label">(demo)</span>
-                </a>
+                {person.linkedin ? (
+                  <a href={person.linkedin} target="_blank" rel="noreferrer"><Linkedin size={15} /> LinkedIn</a>
+                ) : <span className="ft-panelist-pending">Perfil de LinkedIn próximamente</span>}
               </article>
             ))}
           </div>

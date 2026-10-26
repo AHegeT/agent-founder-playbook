@@ -8,6 +8,24 @@
 .lau-connect-card { width: min(100%, 560px); display: flex; flex-direction: column; }
 .lau-connect-header { text-align: center; }
 .lau-connect-portrait { display: block; width: 84px; height: 84px; margin: 0 auto 16px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 5px rgba(255,255,255,.72); }
+.luis-connect-page { background: #f7f7f5; }
+.luis-connect-page .lau-connect-eyebrow,
+.luis-connect-page .lau-connect-arrow { color: rgb(125, 165, 181); }
+.luis-connect-page .lau-connect-header h1 em { color: rgb(181, 81, 42); }
+.luis-connect-page .lau-connect-header h1 { color: rgb(24, 29, 37); }
+.luis-connect-page .lau-connect-intro { color: #59616b; }
+.luis-connect-page .lau-connect-option { background: #fff; border-color: #e0e2e4; }
+.luis-connect-page .lau-connect-option.primary { background: rgb(24, 29, 37); border-color: rgb(24, 29, 37); }
+.luis-connect-page .lau-connect-icon { background: #eaf1f4; color: rgb(125, 165, 181); }
+.luis-connect-page .lau-connect-option.primary .lau-connect-icon { background: rgb(181, 81, 42); color: #fff; }
+.luis-connect-page .lau-connect-copy strong { color: rgb(24, 29, 37); }
+.luis-connect-page .lau-connect-copy small { color: #59616b; }
+.luis-connect-page .lau-connect-option.primary .lau-connect-copy small { color: #fff; }
+.luis-connect-page .lau-connect-option.primary .lau-connect-copy strong,
+.luis-connect-page .lau-connect-option.primary .lau-connect-arrow { color: #fff; }
+.luis-connect-page .lau-connect-footer { color: #737b84; }
+.luis-connect-page .lau-connect-option:hover { border-color: rgb(125, 165, 181); }
+.luis-connect-page .lau-connect-option:focus-visible { outline-color: rgb(125, 165, 181); }
 .lau-connect-eyebrow { color: #946451; font: 11px/1.5 var(--font-mono, monospace); text-transform: uppercase; letter-spacing: .12em; }
 .lau-connect-header h1 { margin-top: 13px; color: #45332c; font-family: inherit; font-size: clamp(43px, 9vw, 68px); font-weight: 700; line-height: .98; letter-spacing: -.05em; }
 .lau-connect-header h1 em { color: #a96c50; font-style: normal; font-weight: 500; }

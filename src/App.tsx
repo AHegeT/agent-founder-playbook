@@ -15,6 +15,7 @@ import Webinars from "./pages/Webinars";
 import Workshops from "./pages/Workshops";
 import About from "./pages/About";
 import LauConnect from "./pages/connect/LauConnect";
+import LuisGerardoConnect from "./pages/connect/LuisGerardoConnect";
 import FindingTalentEvent from "./pages/finding-talent/FindingTalentEvent";
 import FindingTalentModerator from "./pages/finding-talent/FindingTalentModerator";
 import FindingTalentVote from "./pages/finding-talent/FindingTalentVote";
@@ -26,7 +27,7 @@ const queryClient = new QueryClient();
 
 const SiteNavbar = () => {
   const { pathname } = useLocation();
-  return pathname === "/connect/lau" || pathname.startsWith("/events/finding-right-talent") ? null : <Navbar />;
+  return pathname.startsWith("/connect/") || pathname.startsWith("/events/finding-right-talent") ? null : <Navbar />;
 };
 
 const App = () => (
@@ -53,6 +54,7 @@ const App = () => (
           <Route path="/apply" element={<Apply />} />
           <Route path="/about" element={<About />} />
           <Route path="/connect/lau" element={<LauConnect />} />
+          <Route path="/connect/luis-gerardo" element={<LuisGerardoConnect />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
