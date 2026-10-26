@@ -38,8 +38,8 @@ export const EVENT_STATE_CHANGED = "finding-right-talent-state-changed";
 
 export const eventPanelists = [
   { initials: "MM", name: "Mary Martínez", specialty: "Recursos Humanos", bio: "Profesional de Recursos Humanos que aporta al panel su perspectiva sobre cómo la IA está cambiando la búsqueda y evaluación de talento.", linkedin: "https://www.linkedin.com/in/marymartinezhr/", image: maryImage },
-  { initials: "LR", name: "Lauyumi Rojas", specialty: "Operaciones · Talento", bio: "Ayuda a equipos y fundadores a convertir retos de personas y operaciones en sistemas claros que sí funcionan.", linkedin: "https://www.linkedin.com/in/lauyumiopsmx/", image: lauImage },
-  { initials: "AH", name: "Alan Hegewisch", specialty: "Tecnología", bio: "Biografía y perfil de LinkedIn próximamente.", image: alanImage },
+  { initials: "LR", name: "Lauyumi Rojas", specialty: "COO & Co-Founder · WIND HR", bio: "Líder de operaciones, COO y Co-Founder de WIND HR, con experiencia escalando negocios, construyendo sistemas operativos y liderando equipos multidisciplinarios. Como consultora operacional, ayuda a startups y empresas en crecimiento a optimizar procesos, implementar automatizaciones e inteligencia artificial, y desarrollar estructuras escalables que convierten el crecimiento desordenado en operaciones eficientes y sostenibles.", linkedin: "https://www.linkedin.com/in/lauyumiopsmx/", image: lauImage },
+  { initials: "AH", name: "Alan Hegewisch", specialty: "Tecnología", bio: "Biografía próximamente.", linkedin: "https://www.linkedin.com/in/alan-hegewisch/", image: alanImage },
   { initials: "UV", name: "Uriel Valtierra", specialty: "Founder & CEO · Portofoly", bio: "Emprendedor con 15 años de experiencia construyendo negocios. Actualmente lidera Portofoly, una PropTech que conecta constructores, asesores inmobiliarios y compradores a través de un ecosistema B2B2C con soluciones SaaS, ERP y agentes de IA para transformar la comercialización inmobiliaria y la experiencia de compra.", linkedin: "https://www.linkedin.com/in/valtierrac/", image: urielImage },
 ];
 

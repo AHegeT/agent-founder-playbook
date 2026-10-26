@@ -213,7 +213,7 @@ export default function FindingTalentVote() {
                 )
               ))}
             </div>
-            <p className="ft-thanks-note">El perfil de Alan se agregará próximamente.</p>
+            <p className="ft-thanks-note">La biografía de Alan se agregará próximamente.</p>
           </section>
         </div>
       </main>
