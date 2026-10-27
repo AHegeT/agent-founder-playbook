@@ -81,11 +81,6 @@ export default function FindingTalentEvent() {
             <p>Entra a la votación desde tu celular cuando la moderadora active cada afirmación.</p></div>
           <Link to="/events/finding-right-talent/vote" className="ft-button ft-button-light">Abrir votación <ArrowRight size={17} /></Link>
         </section>
-        <details className="ft-english-description">
-          <summary>Event description in English · copy for Luma</summary>
-          <p>AI agents are changing how we find talent—and how much one person can accomplish. Join recruiters, founders, and candidates for a Spanish-language, 90-minute panel on separating hype from reality and defining the skills teams need in the agentic era. Through live audience polls and a “Myth or Reality” discussion, four guests from HR, operations, technology, and business will explore how AI is reshaping hiring and work. Vote from your phone, hear the panel’s take, and join the conversation.</p>
-        </details>
-        <footer className="ft-footer"><span>Agents & Founders</span><span>Prototipo del evento · contenido en revisión</span></footer>
       </div>
     </main>
   );
