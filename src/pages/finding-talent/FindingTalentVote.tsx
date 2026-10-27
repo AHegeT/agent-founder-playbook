@@ -1,6 +1,7 @@
-import { Check, Clock3, Linkedin, Radio } from "lucide-react";
+import { Check, Clock3, Linkedin } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 import { EventHeader } from "@/components/finding-talent/EventHeader";
+import { SessionCommentsPanel } from "@/components/finding-talent/SessionCommentsPanel";
 import {
   EVENT_STORAGE_KEY,
   eventQuestions,
@@ -192,7 +193,6 @@ export default function FindingTalentVote() {
         <div className="ft-container ft-voter-container">
           <EventHeader section="Gracias por acompañarnos" compact />
           <section className="ft-thanks-card">
-            <div className="ft-voter-brand">AGENTS <span>&</span> FOUNDERS <Radio size={15} /></div>
             <span className="ft-eyebrow">Finding the right talent in the agentic era</span>
             <h1>¡Gracias por ser parte de la conversación!</h1>
             <p>Esperamos que te lleves nuevas ideas para encontrar y desarrollar talento en la era de los agentes.</p>
@@ -260,7 +260,6 @@ export default function FindingTalentVote() {
       <div className="ft-container ft-voter-container">
         <EventHeader section="Votación en vivo" compact />
         <div className="ft-phone-card">
-          <div className="ft-voter-brand">AGENTS <span>&</span> FOUNDERS <Radio size={15} /></div>
           <div className="ft-voter-event">FINDING THE RIGHT TALENT <span>·</span> {state.activeQuestionIndex + 1}/{eventQuestions.length}</div>
           {attendeeEmail && <button className="ft-voter-account" onClick={changeEmail}>{attendeeName || attendeeEmail} · Cambiar correo</button>}
           <div className="ft-vote-status">
@@ -280,7 +279,6 @@ export default function FindingTalentVote() {
                 </div>
                 <button className="ft-button ft-button-primary ft-submit-vote" onClick={() => void sendVote()} disabled={!selected || submitting}>{submitting ? "Enviando…" : "Enviar mi voto"}</button>
                 {voteError && <p className="ft-vote-error">{voteError}</p>}
-                <p className="ft-anonymous-note">Un voto por correo y pregunta.</p>
               </>
             )
           ) : showGlobalResults ? (
@@ -306,7 +304,7 @@ export default function FindingTalentVote() {
           ) : state.pollStatus === "revealed" || state.pollStatus === "closed" ? (
             <div className="ft-waiting-message"><Clock3 size={20} /><strong>{state.pollStatus === "closed" ? "Votación cerrada" : "Resultados ocultos"}</strong><p>Espera a que la moderadora avance o revele los resultados.</p></div>
           ) : null}
-          <footer className="ft-phone-footer">Opiniones distintas hacen mejores conversaciones.</footer>
+          <SessionCommentsPanel attendeeEmail={attendeeEmail} />
         </div>
         {!isSupabaseConfigured && <p className="ft-prototype-note">Modo local: los cambios solo se sincronizan en este navegador.</p>}
       </div>

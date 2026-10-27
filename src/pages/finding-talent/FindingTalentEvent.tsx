@@ -27,7 +27,7 @@ export default function FindingTalentEvent() {
               mito y qué es realidad.
             </p>
             <div className="ft-meta-row">
-              <span><CalendarDays size={16} /> 23 de octubre de 2026</span>
+              <span><CalendarDays size={16} /> 26 de octubre de 2026</span>
               <span><Clock3 size={16} /> 90 minutos</span>
               <span><MapPin size={16} /> Evento presencial</span>
             </div>
@@ -49,9 +49,13 @@ export default function FindingTalentEvent() {
           <div className="ft-panelist-grid">
             {eventPanelists.map((person) => (
               <article className="ft-panelist-card" key={person.name}>
-                <img className="ft-avatar ft-avatar-photo" src={person.image} alt={person.name} />
-                <div className="ft-specialty">{person.specialty}</div>
-                <h3>{person.name}</h3>
+                <div className="ft-panelist-heading">
+                  <div className="ft-panelist-heading-copy">
+                    <div className="ft-specialty">{person.specialty}</div>
+                    <h3>{person.name}</h3>
+                  </div>
+                  <img className="ft-avatar ft-avatar-photo" src={person.image} alt={person.name} />
+                </div>
                 <p>{person.bio}</p>
                 {person.linkedin ? (
                   <a href={person.linkedin} target="_blank" rel="noreferrer"><Linkedin size={15} /> LinkedIn</a>

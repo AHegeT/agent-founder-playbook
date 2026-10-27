@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Eye, EyeOff, LockKeyhole, LogOut, Monitor, Play,
 import { Link } from "react-router-dom";
 import type { Session } from "@supabase/supabase-js";
 import { EventHeader } from "@/components/finding-talent/EventHeader";
+import { SessionCommentsPanel } from "@/components/finding-talent/SessionCommentsPanel";
 import {
   eventQuestions,
   getQuestionResults,
@@ -211,8 +212,9 @@ export default function FindingTalentModerator() {
               <Link to="/events/finding-right-talent/vote" className="ft-button ft-button-primary">Abrir vista móvil <ArrowRight size={16} /></Link>
               <code>{voteUrl}</code>
             </section>
-            <section className="ft-side-card"><span className="ft-eyebrow">Afirmación asignada</span><h2>{question.assigned}</h2><p>La audiencia vota primero; revela el resultado después de cerrar el voto.</p></section>
+            <section className="ft-side-card"><span className="ft-eyebrow">Experto</span><h2>{question.assigned}</h2><p>La audiencia vota primero; revela el resultado después de cerrar el voto.</p></section>
             <section className="ft-side-card ft-side-agenda"><span className="ft-eyebrow">Ritmo de la ronda</span><p>0:30 Leer · 1:00 votar · 0:30 revelar · 2:00 panelista · 2:00 público · 3:00 debate</p></section>
+            <SessionCommentsPanel moderator />
             {state.eventFinished ? (
               <button className="ft-control-button ft-control-primary ft-finish-event" onClick={() => void resumeEvent()} disabled={busy}><Play size={15} /> Reabrir evento y votación</button>
             ) : (
@@ -221,13 +223,16 @@ export default function FindingTalentModerator() {
             {!isRemote && <button className="ft-reset-button" onClick={resetLocalDemo}><RotateCcw size={14} /> Reiniciar datos de esta demo</button>}
           </aside>
         </div>
-        <div className="ft-question-list"><h2>Preguntas del evento</h2><div>
-          {eventQuestions.map((item, index) => (
-            <button key={item.id} className={index === activeQuestionIndex ? "active" : ""} onClick={() => void moveTo(index)} disabled={busy}>
-              <span>{String(index + 1).padStart(2, "0")}</span>{item.statement}<Play size={13} />
-            </button>
-          ))}
-        </div></div>
+        <div className="ft-question-list"><h2>Preguntas del evento</h2>
+          {[...new Set(eventQuestions.map((item) => item.group))].map((group) => <section className="ft-question-group" key={group}>
+            <h3>{group}</h3>
+            <div>{eventQuestions.map((item, index) => item.group === group ? (
+              <button key={item.id} className={index === activeQuestionIndex ? "active" : ""} onClick={() => void moveTo(index)} disabled={busy}>
+                <span>{String(index + 1).padStart(2, "0")}</span>{item.statement}<Play size={13} />
+              </button>
+            ) : null)}</div>
+          </section>)}
+        </div>
       </div>
     </main>
   );

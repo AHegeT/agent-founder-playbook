@@ -10,6 +10,7 @@ export type PollStatus = "open" | "closed" | "revealed";
 export type EventQuestion = {
   id: string;
   block: string;
+  group: string;
   statement: string;
   assigned: string;
   kind: "warmup" | "discussion";
@@ -46,7 +47,8 @@ export const eventPanelists = [
 export const eventQuestions: EventQuestion[] = [
   {
     id: "warmup-opening",
-    block: "Voto inicial",
+    block: "Pregunta del evento",
+    group: "Pregunta del evento",
     statement: "La IA va a reemplazar a los humanos en los empleos.",
     assigned: "Voto del público · se retoma al cierre",
     kind: "warmup",
@@ -54,6 +56,7 @@ export const eventQuestions: EventQuestion[] = [
   {
     id: "block-1-1",
     block: "Bloque 1 · Cómo encontramos talento",
+    group: "Bloque 1 · Preguntas principales",
     statement: "La IA es más objetiva que un reclutador humano.",
     assigned: "Lauyumi Rojas y Mary Martínez",
     kind: "discussion",
@@ -61,6 +64,7 @@ export const eventQuestions: EventQuestion[] = [
   {
     id: "block-1-2",
     block: "Bloque 1 · Cómo encontramos talento",
+    group: "Bloque 1 · Preguntas principales",
     statement: "Si tu CV no tiene las palabras clave correctas, ningún humano lo va a ver.",
     assigned: "Mary Martínez",
     kind: "discussion",
@@ -68,13 +72,31 @@ export const eventQuestions: EventQuestion[] = [
   {
     id: "block-1-3",
     block: "Bloque 1 · Cómo encontramos talento",
+    group: "Bloque 1 · Preguntas principales",
     statement: "Usar IA para preparar tu CV o tu entrevista es trampa.",
     assigned: "Lauyumi Rojas y Uriel Valtierra",
     kind: "discussion",
   },
   {
+    id: "block-1-extra-1",
+    block: "Bloque 1 · Si hay tiempo",
+    group: "Bloque 1 · Si hay tiempo",
+    statement: "La IA puede detectar si mientes en una entrevista.",
+    assigned: "Pregunta extra",
+    kind: "discussion",
+  },
+  {
+    id: "block-1-extra-2",
+    block: "Bloque 1 · Si hay tiempo",
+    group: "Bloque 1 · Si hay tiempo",
+    statement: "Las empresas que no adopten IA en RH se van a quedar atrás.",
+    assigned: "Pregunta extra",
+    kind: "discussion",
+  },
+  {
     id: "block-2-1",
     block: "Bloque 2 · Qué talento buscamos",
+    group: "Bloque 2 · Preguntas principales",
     statement: "Si un agente puede hacer la tarea, ya no necesitas contratar a alguien para ella.",
     assigned: "Alan Hegewisch y Lauyumi Rojas",
     kind: "discussion",
@@ -82,6 +104,7 @@ export const eventQuestions: EventQuestion[] = [
   {
     id: "block-2-2",
     block: "Bloque 2 · Qué talento buscamos",
+    group: "Bloque 2 · Preguntas principales",
     statement: "Saber usar IA ya es más importante que tener experiencia.",
     assigned: "Uriel Valtierra",
     kind: "discussion",
@@ -89,13 +112,39 @@ export const eventQuestions: EventQuestion[] = [
   {
     id: "block-2-3",
     block: "Bloque 2 · Qué talento buscamos",
+    group: "Bloque 2 · Preguntas principales",
     statement: "Un perfil promedio con buenos agentes rinde más que un perfil brillante sin ellos.",
     assigned: "Alan Hegewisch",
     kind: "discussion",
   },
   {
+    id: "extra-1",
+    block: "Preguntas extra",
+    group: "Preguntas extra",
+    statement: "El talento del futuro no ejecuta, supervisa agentes.",
+    assigned: "Pregunta extra",
+    kind: "discussion",
+  },
+  {
+    id: "extra-2",
+    block: "Preguntas extra",
+    group: "Preguntas extra",
+    statement: "Si sabes usar IA, nunca te vas a quedar sin trabajo.",
+    assigned: "Pregunta extra",
+    kind: "discussion",
+  },
+  {
+    id: "extra-3",
+    block: "Preguntas extra",
+    group: "Preguntas extra",
+    statement: "Si la IA te ayudó a hacer el trabajo, no es realmente tuyo.",
+    assigned: "Pregunta extra",
+    kind: "discussion",
+  },
+  {
     id: "warmup-closing",
-    block: "Voto final",
+    block: "Cierre · se revisita la pregunta del evento",
+    group: "Cierre · se revisita la pregunta del evento",
     statement: "La IA va a reemplazar a los humanos en los empleos.",
     assigned: "Compara el resultado con el voto inicial",
     kind: "warmup",
