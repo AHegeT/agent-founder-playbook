@@ -4,6 +4,10 @@
 
 A private community for entrepreneurs leveraging AI to scale their business.
 
+## Archived modules
+
+- [Finding the right talent event](archive/finding-talent-event/README.md) — archived interactive implementation for reference. The current public recap is at `/events/finding-right-talent`.
+
 ## How can I edit this code?
 
 There are several ways of editing your application.

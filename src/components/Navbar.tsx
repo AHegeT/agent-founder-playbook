@@ -80,6 +80,19 @@ const Navbar = () => {
                           </Link>
                         </NavigationMenuLink>
                       </li>
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/events/finding-right-talent"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10"
+                          >
+                            <div className="text-sm font-semibold leading-none">Event recap</div>
+                            <p className="text-sm leading-snug text-muted-foreground">
+                              Finding the right talent in the agentic era.
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
                       {/* Hidden for now - uncomment when ready
                       <li>
                         <NavigationMenuLink asChild>
@@ -176,6 +189,13 @@ const Navbar = () => {
                       className="block px-8 py-2 text-sm hover:bg-primary/10 transition-colors"
                     >
                       Webinars
+                    </Link>
+                    <Link
+                      to="/events/finding-right-talent"
+                      onClick={closeMobileMenu}
+                      className="block px-8 py-2 text-sm hover:bg-primary/10"
+                    >
+                      Event recap: Finding the right talent
                     </Link>
                     {/* Hidden for now - uncomment when ready
                     <Link

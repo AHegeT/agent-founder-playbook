@@ -16,18 +16,14 @@ import Workshops from "./pages/Workshops";
 import About from "./pages/About";
 import LauConnect from "./pages/connect/LauConnect";
 import LuisGerardoConnect from "./pages/connect/LuisGerardoConnect";
-import FindingTalentEvent from "./pages/finding-talent/FindingTalentEvent";
-import FindingTalentModerator from "./pages/finding-talent/FindingTalentModerator";
-import FindingTalentVote from "./pages/finding-talent/FindingTalentVote";
-import FindingTalentQr from "./pages/finding-talent/FindingTalentQr";
-import FindingTalentProjection from "./pages/finding-talent/FindingTalentProjection";
+import FindingTalentRecap from "./pages/FindingTalentRecap";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const SiteNavbar = () => {
   const { pathname } = useLocation();
-  return pathname.startsWith("/connect/") || pathname.startsWith("/events/finding-right-talent") ? null : <Navbar />;
+  return pathname.startsWith("/connect/") ? null : <Navbar />;
 };
 
 const App = () => (
@@ -46,11 +42,7 @@ const App = () => (
           <Route path="/events/masterminds" element={<Masterminds />} />
           <Route path="/events/webinars" element={<Webinars />} />
           <Route path="/events/workshops" element={<Workshops />} />
-          <Route path="/events/finding-right-talent" element={<FindingTalentEvent />} />
-          <Route path="/events/finding-right-talent/moderator" element={<FindingTalentModerator />} />
-          <Route path="/events/finding-right-talent/vote" element={<FindingTalentVote />} />
-          <Route path="/events/finding-right-talent/qr" element={<FindingTalentQr />} />
-          <Route path="/events/finding-right-talent/screen" element={<FindingTalentProjection />} />
+          <Route path="/events/finding-right-talent" element={<FindingTalentRecap />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/about" element={<About />} />
           <Route path="/connect/lau" element={<LauConnect />} />

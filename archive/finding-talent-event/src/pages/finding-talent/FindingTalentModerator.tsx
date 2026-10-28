@@ -19,6 +19,10 @@ function messageFor(error: unknown) {
   return error instanceof Error ? error.message : "No se pudo completar la acción.";
 }
 
+const moderatorQuestionIndices = eventQuestions
+  .map((item, index) => item.group === "Bloque 1 · Si hay tiempo" ? -1 : index)
+  .filter((index) => index >= 0);
+
 export default function FindingTalentModerator() {
   const { state, loading, error: stateError, isRemote } = useFindingTalentState();
   const [session, setSession] = useState<Session | null>(null);
@@ -84,11 +88,13 @@ export default function FindingTalentModerator() {
     };
   }, []);
 
-  const activeQuestionIndex = state.activeQuestionIndex;
+  const activeQuestionIndex = moderatorQuestionIndices.includes(state.activeQuestionIndex)
+    ? state.activeQuestionIndex
+    : moderatorQuestionIndices[0];
+  const moderatorState = { ...state, activeQuestionIndex };
+  const activeQuestionPosition = moderatorQuestionIndices.indexOf(activeQuestionIndex);
   const question = eventQuestions[activeQuestionIndex];
   const results = getQuestionResults(state, question.id);
-  const voteUrl = `${window.location.origin}/events/finding-right-talent/vote`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=2&data=${encodeURIComponent(voteUrl)}`;
 
   const update = async (nextState: EventState) => {
     setActionError("");
@@ -106,19 +112,19 @@ export default function FindingTalentModerator() {
     }
   };
   const moveTo = (index: number) => update({
-    ...state,
+    ...moderatorState,
     activeQuestionIndex: index,
     pollStatus: "open",
     eventFinished: false,
     revealedQuestionId: null,
     revealAll: false,
   });
-  const closePoll = () => update({ ...state, pollStatus: "revealed", revealedQuestionId: question.id, revealAll: false });
-  const openPoll = () => update({ ...state, pollStatus: "open", eventFinished: false, revealedQuestionId: null, revealAll: false });
-  const revealAll = () => update({ ...state, pollStatus: "closed", revealedQuestionId: null, revealAll: true });
-  const hideResults = () => update({ ...state, pollStatus: "closed", revealedQuestionId: null, revealAll: false });
-  const finishEvent = () => update({ ...state, eventFinished: true, pollStatus: "closed", revealedQuestionId: null, revealAll: false });
-  const resumeEvent = () => update({ ...state, eventFinished: false, pollStatus: "open", revealedQuestionId: null, revealAll: false });
+  const closePoll = () => update({ ...moderatorState, pollStatus: "revealed", revealedQuestionId: question.id, revealAll: false });
+  const openPoll = () => update({ ...moderatorState, pollStatus: "open", eventFinished: false, revealedQuestionId: null, revealAll: false });
+  const revealAll = () => update({ ...moderatorState, pollStatus: "closed", revealedQuestionId: null, revealAll: true });
+  const hideResults = () => update({ ...moderatorState, pollStatus: "closed", revealedQuestionId: null, revealAll: false });
+  const finishEvent = () => update({ ...moderatorState, eventFinished: true, pollStatus: "closed", revealedQuestionId: null, revealAll: false });
+  const resumeEvent = () => update({ ...moderatorState, eventFinished: false, pollStatus: "open", revealedQuestionId: null, revealAll: false });
 
   const signIn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -192,7 +198,7 @@ export default function FindingTalentModerator() {
           <section className="ft-stage-card">
             <div className="ft-stage-topline"><span className={`ft-status-dot ${state.pollStatus}`} />
               <span>{state.eventFinished ? "EVENTO FINALIZADO" : state.pollStatus === "open" ? "VOTACIÓN ABIERTA" : state.pollStatus === "closed" ? "VOTACIÓN CERRADA" : "RESULTADOS REVELADOS"}</span>
-              <span className="ft-question-count">{activeQuestionIndex + 1} / {eventQuestions.length}</span>
+              <span className="ft-question-count">{activeQuestionPosition + 1} / {moderatorQuestionIndices.length}</span>
             </div>
             <div className="ft-stage-question">
               <p>{question.block}</p><h2>{question.statement}</h2>
@@ -214,13 +220,13 @@ export default function FindingTalentModerator() {
               </div>
             ) : null}
             {!state.eventFinished && <div className="ft-stage-controls">
-              <button className="ft-control-button" onClick={() => void moveTo(Math.max(0, activeQuestionIndex - 1))} disabled={activeQuestionIndex === 0 || busy}><ArrowLeft size={16} /> Anterior</button>
+              <button className="ft-control-button" onClick={() => void moveTo(moderatorQuestionIndices[Math.max(0, activeQuestionPosition - 1)])} disabled={activeQuestionPosition === 0 || busy}><ArrowLeft size={16} /> Anterior</button>
               {state.pollStatus === "open" ? (
                 <button className="ft-control-button ft-control-warn" onClick={() => void closePoll()} disabled={busy}><LockKeyhole size={16} /> Cerrar y revelar</button>
               ) : (
                 <button className="ft-control-button ft-control-primary" onClick={() => void openPoll()} disabled={busy}><UnlockKeyhole size={16} /> Abrir voto</button>
               )}
-              <button className="ft-control-button ft-control-primary" onClick={() => void moveTo(Math.min(eventQuestions.length - 1, activeQuestionIndex + 1))} disabled={activeQuestionIndex === eventQuestions.length - 1 || busy}>Siguiente <ArrowRight size={16} /></button>
+              <button className="ft-control-button ft-control-primary" onClick={() => void moveTo(moderatorQuestionIndices[Math.min(moderatorQuestionIndices.length - 1, activeQuestionPosition + 1)])} disabled={activeQuestionPosition === moderatorQuestionIndices.length - 1 || busy}>Siguiente <ArrowRight size={16} /></button>
             </div>}
             {!state.eventFinished && state.pollStatus !== "open" && (
               <div className="ft-reveal-controls">
@@ -230,14 +236,6 @@ export default function FindingTalentModerator() {
             )}
           </section>
           <aside className="ft-moderator-sidebar">
-            <section className="ft-side-card ft-screen-view-card">
-              <span className="ft-eyebrow"><Monitor size={14} /> Contenido de /screen</span>
-              <p>Elige qué se muestra en la pantalla de proyección.</p>
-              <div className="ft-screen-view-actions">
-                <button className={`ft-control-button ${state.screenView === "landing" ? "ft-control-primary" : ""}`} onClick={() => void update({ ...state, screenView: "landing" })} disabled={busy}>Landing del evento</button>
-                <button className={`ft-control-button ${state.screenView === "questions" ? "ft-control-primary" : ""}`} onClick={() => void update({ ...state, screenView: "questions" })} disabled={busy}>Preguntas</button>
-              </div>
-            </section>
             <section className={`ft-side-card ft-moderator-timer ${secondsLeft === 0 ? "critical" : secondsLeft <= 10 ? "warning" : timerRunning ? "running" : ""}`}>
               <span className="ft-eyebrow">Timer del moderador</span>
               <div className="ft-timer-display" role="timer" aria-live="off">{formatTime(secondsLeft)}</div>
@@ -252,13 +250,6 @@ export default function FindingTalentModerator() {
                 <button className="ft-control-button" onClick={() => { setTimerRunning(false); setSecondsLeft(timerDuration); }}><RotateCcw size={14} /> Reiniciar</button>
               </div>
             </section>
-            <section className="ft-side-card ft-vote-link-card">
-              <span className="ft-eyebrow">Acceso del público</span><h2>Escanea para votar</h2>
-              <p>El mismo QR sirve toda la sesión; muestra la pregunta activa.</p>
-              <img className="ft-vote-qr" src={qrUrl} alt="Código QR para abrir la votación en el celular" />
-              <Link to="/events/finding-right-talent/vote" className="ft-button ft-button-primary">Abrir vista móvil <ArrowRight size={16} /></Link>
-              <code>{voteUrl}</code>
-            </section>
             <section className="ft-side-card"><span className="ft-eyebrow">Experto</span><h2>{question.assigned}</h2><p>La audiencia vota primero; revela el resultado después de cerrar el voto.</p></section>
             <section className="ft-side-card ft-side-agenda"><span className="ft-eyebrow">Ritmo de la ronda</span><p>0:30 Leer · 1:00 votar · 0:30 revelar · 2:00 panelista · 2:00 público · 3:00 debate</p></section>
             <SessionCommentsPanel moderator />
@@ -271,13 +262,16 @@ export default function FindingTalentModerator() {
           </aside>
         </div>
         <div className="ft-question-list"><h2>Preguntas del evento</h2>
-          {[...new Set(eventQuestions.map((item) => item.group))].map((group) => <section className="ft-question-group" key={group}>
+          {[...new Set(moderatorQuestionIndices.map((index) => eventQuestions[index].group))].map((group) => <section className="ft-question-group" key={group}>
             <h3>{group}</h3>
-            <div>{eventQuestions.map((item, index) => item.group === group ? (
-              <button key={item.id} className={index === activeQuestionIndex ? "active" : ""} onClick={() => void moveTo(index)} disabled={busy}>
-                <span>{String(index + 1).padStart(2, "0")}</span>{item.statement}<Play size={13} />
-              </button>
-            ) : null)}</div>
+            <div>{moderatorQuestionIndices.filter((index) => eventQuestions[index].group === group).map((index) => {
+              const item = eventQuestions[index];
+              return (
+                <button key={item.id} className={index === activeQuestionIndex ? "active" : ""} onClick={() => void moveTo(index)} disabled={busy}>
+                  <span>{String(moderatorQuestionIndices.indexOf(index) + 1).padStart(2, "0")}</span>{item.statement}<Play size={13} />
+                </button>
+              );
+            })}</div>
           </section>)}
         </div>
       </div>
