@@ -96,6 +96,10 @@ export default function FindingTalentModerator() {
     try {
       await saveEventState(nextState);
     } catch (error) {
+      console.error("[finding-talent] Moderator action failed", {
+        questionId: eventQuestions[nextState.activeQuestionIndex]?.id,
+        error,
+      });
       setActionError(messageFor(error));
     } finally {
       setBusy(false);
@@ -226,7 +230,7 @@ export default function FindingTalentModerator() {
             )}
           </section>
           <aside className="ft-moderator-sidebar">
-            <section className={`ft-side-card ft-moderator-timer ${secondsLeft <= 10 ? "critical" : secondsLeft <= 20 ? "warning" : ""}`}>
+            <section className={`ft-side-card ft-moderator-timer ${secondsLeft === 0 ? "critical" : secondsLeft <= 10 ? "warning" : timerRunning ? "running" : ""}`}>
               <span className="ft-eyebrow">Timer del moderador</span>
               <div className="ft-timer-display" role="timer" aria-live="off">{formatTime(secondsLeft)}</div>
               <label className="ft-timer-config">Tiempo (segundos)

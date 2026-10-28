@@ -101,6 +101,8 @@
 .ft-side-agenda p { font-size: 10px; }
 .ft-moderator-timer { transition: background-color .2s, border-color .2s, color .2s; }
 .ft-timer-display { margin: 8px 0 12px; color: hsl(214 30% 18%); font-size: clamp(38px, 5vw, 54px); font-variant-numeric: tabular-nums; font-weight: 750; letter-spacing: -.05em; line-height: 1; }
+.ft-moderator-timer.running { border-color: hsl(142 55% 42%); background: hsl(140 55% 95%); }
+.ft-moderator-timer.running .ft-timer-display { color: hsl(142 65% 30%); }
 .ft-moderator-timer.warning { border-color: hsl(43 90% 54%); background: hsl(48 100% 95%); }
 .ft-moderator-timer.warning .ft-timer-display { color: hsl(35 90% 38%); }
 .ft-moderator-timer.critical { border-color: hsl(0 76% 58%); background: hsl(0 100% 96%); }

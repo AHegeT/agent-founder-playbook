@@ -199,7 +199,21 @@ export async function saveEventState(state: EventState) {
         updated_at: new Date().toISOString(),
       })
       .eq("singleton", true);
-    if (error) throw error;
+    if (error) {
+      // PostgREST errors carry useful fields beyond Error.message (for example
+      // the SQLSTATE code, details, and hint). Log them so moderator update
+      // failures can be diagnosed from the browser console.
+      console.error("[finding-talent] Failed to save event state", {
+        questionId: question.id,
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        status: error.status,
+        name: error.name,
+      });
+      throw error;
+    }
     return;
   }
 
