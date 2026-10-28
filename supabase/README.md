@@ -28,6 +28,8 @@ In the Supabase project used by Vercel, open **SQL Editor**, paste and run [`mig
 
 The moderator view controls the active question, voting open/closed state, and whether the audience sees the active question's results or aggregate results for all questions. The audience uses `/events/finding-right-talent/vote`; one QR can remain on screen for the entire session.
 
+To let the moderator switch `/screen` between the event landing view and the active question, apply [`migrations/202610270001_event_screen_view.sql`](migrations/202610270001_event_screen_view.sql) in the SQL Editor. `/screen` also displays the provided Wi-Fi QR image alongside the voting or panelist QR.
+
 ## Attendee registration and voting identity
 
 For the attendee experience, run migrations `202610250002`, `202610250003`, and `202610250004` in order in the SQL Editor, then run [`attendees_seed.sql`](attendees_seed.sql). Apply [`202610260001_session_comments.sql`](migrations/202610260001_session_comments.sql) and [`202610260002_event_question_groups.sql`](migrations/202610260002_event_question_groups.sql) after those migrations. The audience enters an email only. Emails marked `Going` in the roster continue directly; an email not found in the roster is asked for a role or LinkedIn (at least one is required), with organization and company website optional. Votes are limited to one per entered email and question in the database, and one vote per comment. Comments are session-wide, update in real time, and are removed from the active list when dismissed by a moderator. Moderator access still uses a Supabase Auth email/password account and the moderator allowlist described above.

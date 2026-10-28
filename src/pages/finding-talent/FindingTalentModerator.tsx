@@ -230,6 +230,14 @@ export default function FindingTalentModerator() {
             )}
           </section>
           <aside className="ft-moderator-sidebar">
+            <section className="ft-side-card ft-screen-view-card">
+              <span className="ft-eyebrow"><Monitor size={14} /> Contenido de /screen</span>
+              <p>Elige qué se muestra en la pantalla de proyección.</p>
+              <div className="ft-screen-view-actions">
+                <button className={`ft-control-button ${state.screenView === "landing" ? "ft-control-primary" : ""}`} onClick={() => void update({ ...state, screenView: "landing" })} disabled={busy}>Landing del evento</button>
+                <button className={`ft-control-button ${state.screenView === "questions" ? "ft-control-primary" : ""}`} onClick={() => void update({ ...state, screenView: "questions" })} disabled={busy}>Preguntas</button>
+              </div>
+            </section>
             <section className={`ft-side-card ft-moderator-timer ${secondsLeft === 0 ? "critical" : secondsLeft <= 10 ? "warning" : timerRunning ? "running" : ""}`}>
               <span className="ft-eyebrow">Timer del moderador</span>
               <div className="ft-timer-display" role="timer" aria-live="off">{formatTime(secondsLeft)}</div>

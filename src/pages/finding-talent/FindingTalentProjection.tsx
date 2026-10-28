@@ -1,4 +1,5 @@
 import { ArrowUpRight, Linkedin, Radio } from "lucide-react";
+import wifiQr from "@/assets/qr-code.png";
 import { EventHeader } from "@/components/finding-talent/EventHeader";
 import { eventPanelists, eventQuestions, getQuestionResults } from "@/lib/findingTalent";
 import { useFindingTalentState } from "@/lib/useFindingTalentState";
@@ -17,6 +18,7 @@ export default function FindingTalentProjection() {
     ? `${window.location.origin}/events/finding-right-talent#panelistas`
     : `${window.location.origin}/events/finding-right-talent/vote`;
   const qrUrl = qrFor(destination);
+  const showLanding = state.screenView === "landing";
 
   if (loading || error) {
     return (
@@ -30,9 +32,16 @@ export default function FindingTalentProjection() {
   return (
     <main className={`ft-projection-page ${state.eventFinished ? "finished" : ""}`}>
       <header className="ft-projection-brand">AGENTS <span>&</span> FOUNDERS <Radio size={18} /></header>
-      <div className="ft-projection-layout">
+      <div className={`ft-projection-layout ${showLanding ? "landing" : "questions"}`}>
         <section className="ft-projection-content">
-          {state.eventFinished ? (
+          {showLanding ? (
+            <>
+              <span className="ft-eyebrow"><Radio size={15} /> Panel en vivo · En español</span>
+              <h1>Finding the right talent in the <em>agentic era</em></h1>
+              <p className="ft-projection-subtitle">Los agentes de IA están cambiando cómo encontramos talento y cuánto puede lograr una persona. Cuatro voces de Recursos Humanos, operaciones, tecnología y negocios conversan sobre qué es mito y qué es realidad.</p>
+              <div className="ft-projection-landing-meta"><span>26 de octubre de 2026</span><span>90 minutos</span><span>Evento presencial</span></div>
+            </>
+          ) : state.eventFinished ? (
             <>
               <span className="ft-eyebrow">Finding the right talent in the agentic era</span>
               <h1>¡Gracias por ser parte de la conversación!</h1>
@@ -53,7 +62,6 @@ export default function FindingTalentProjection() {
               <h1>{question.statement}</h1>
               {state.pollStatus === "open" ? (
                 <>
-                  <p className="ft-projection-subtitle">Escanea y vota: ¿mito o realidad?</p>
                   <div className="ft-projection-choices"><span>MITO</span><span>REALIDAD</span></div>
                 </>
               ) : isRevealed ? (
@@ -70,11 +78,18 @@ export default function FindingTalentProjection() {
             </>
           )}
         </section>
-        <aside className="ft-projection-qr">
-          <img src={qrUrl} alt={state.eventFinished ? "Código QR para conocer a los ponentes" : "Código QR para votar desde el celular"} />
-          <strong>{state.eventFinished ? "Conoce a los ponentes" : "Escanea para participar"}</strong>
-          <span>{state.eventFinished ? "Perfiles y enlaces de LinkedIn" : "La pregunta se actualizará en tu celular"}</span>
-          {state.eventFinished && <a href={destination} target="_blank" rel="noreferrer">Abrir detalles <ArrowUpRight size={15} /></a>}
+        <aside className="ft-projection-qr-list">
+          <div className="ft-projection-qr">
+            <img src={wifiQr} alt="Código QR para conectarse al Wi-Fi del evento" />
+            <strong>Conéctate al Wi-Fi</strong>
+            <span>Escanea el código para unirte a INFINITUM6995</span>
+          </div>
+          <div className="ft-projection-qr">
+            <img src={qrUrl} alt={state.eventFinished ? "Código QR para conocer a los ponentes" : "Código QR para votar desde el celular"} />
+            <strong>{state.eventFinished ? "Conoce a los ponentes" : "Escanea para participar"}</strong>
+            <span>{state.eventFinished ? "Perfiles y enlaces de LinkedIn" : "La pregunta se actualizará en tu celular"}</span>
+            {state.eventFinished && <a href={destination} target="_blank" rel="noreferrer">Abrir detalles <ArrowUpRight size={15} /></a>}
+          </div>
         </aside>
       </div>
       <footer className="ft-projection-footer">

@@ -11,6 +11,7 @@ import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 type RemoteSnapshot = {
   singleton: boolean;
   active_question_id: string;
+  screen_view: EventState["screenView"];
   poll_status: EventState["pollStatus"];
   event_finished: boolean;
   revealed_question_id: string | null;
@@ -71,6 +72,7 @@ export function useFindingTalentState() {
     );
     setState({
       activeQuestionIndex: Math.max(0, activeQuestionIndex),
+      screenView: remote.screen_view === "landing" ? "landing" : "questions",
       pollStatus: remote.poll_status,
       eventFinished: remote.event_finished ?? false,
       votes: [],

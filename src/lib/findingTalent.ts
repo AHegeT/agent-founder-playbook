@@ -24,6 +24,7 @@ export type EventVote = {
 
 export type EventState = {
   activeQuestionIndex: number;
+  screenView: "landing" | "questions";
   pollStatus: PollStatus;
   eventFinished: boolean;
   votes: EventVote[];
@@ -153,6 +154,7 @@ export const eventQuestions: EventQuestion[] = [
 
 const initialState: EventState = {
   activeQuestionIndex: 0,
+  screenView: "questions",
   pollStatus: "open",
   eventFinished: false,
   votes: [],
@@ -173,6 +175,7 @@ export function readEventState(): EventState {
         Math.max(0, parsed.activeQuestionIndex ?? 0),
         eventQuestions.length - 1,
       ),
+      screenView: parsed.screenView === "landing" ? "landing" : "questions",
       pollStatus: parsed.pollStatus ?? "open",
       eventFinished: parsed.eventFinished ?? false,
       votes: Array.isArray(parsed.votes) ? parsed.votes : [],
@@ -192,6 +195,7 @@ export async function saveEventState(state: EventState) {
       .from("finding_talent_state")
       .update({
         active_question_id: question.id,
+        screen_view: state.screenView,
         poll_status: state.pollStatus,
         event_finished: state.eventFinished,
         revealed_question_id: state.revealedQuestionId,
