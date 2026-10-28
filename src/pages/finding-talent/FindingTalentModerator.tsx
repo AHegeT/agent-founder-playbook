@@ -29,6 +29,27 @@ export default function FindingTalentModerator() {
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [timerDuration, setTimerDuration] = useState(120);
+  const [secondsLeft, setSecondsLeft] = useState(120);
+  const [timerRunning, setTimerRunning] = useState(false);
+
+  useEffect(() => {
+    if (!timerRunning) return;
+    const interval = window.setInterval(() => setSecondsLeft((remaining) => Math.max(0, remaining - 1)), 1000);
+    return () => window.clearInterval(interval);
+  }, [timerRunning]);
+
+  useEffect(() => {
+    if (secondsLeft === 0) setTimerRunning(false);
+  }, [secondsLeft]);
+
+  const configureTimer = (value: number) => {
+    const duration = Math.max(1, Math.min(5999, Math.round(value || 1)));
+    setTimerDuration(duration);
+    setSecondsLeft(duration);
+    setTimerRunning(false);
+  };
+  const formatTime = (value: number) => `${Math.floor(value / 60)}:${String(value % 60).padStart(2, "0")}`;
 
   useEffect(() => {
     if (!supabase) return;
@@ -205,6 +226,20 @@ export default function FindingTalentModerator() {
             )}
           </section>
           <aside className="ft-moderator-sidebar">
+            <section className={`ft-side-card ft-moderator-timer ${secondsLeft <= 10 ? "critical" : secondsLeft <= 20 ? "warning" : ""}`}>
+              <span className="ft-eyebrow">Timer del moderador</span>
+              <div className="ft-timer-display" role="timer" aria-live="off">{formatTime(secondsLeft)}</div>
+              <label className="ft-timer-config">Tiempo (segundos)
+                <input type="number" min="1" max="5999" value={timerDuration} onChange={(event) => configureTimer(Number(event.target.value))} disabled={timerRunning} />
+              </label>
+              <div className="ft-timer-actions">
+                <button className="ft-control-button ft-control-primary" onClick={() => setTimerRunning((running) => secondsLeft > 0 && !running)} disabled={timerRunning || secondsLeft === 0}>
+                  <Play size={15} /> Iniciar
+                </button>
+                <button className="ft-control-button" onClick={() => setTimerRunning(false)} disabled={!timerRunning}>Pausar</button>
+                <button className="ft-control-button" onClick={() => { setTimerRunning(false); setSecondsLeft(timerDuration); }}><RotateCcw size={14} /> Reiniciar</button>
+              </div>
+            </section>
             <section className="ft-side-card ft-vote-link-card">
               <span className="ft-eyebrow">Acceso del público</span><h2>Escanea para votar</h2>
               <p>El mismo QR sirve toda la sesión; muestra la pregunta activa.</p>
